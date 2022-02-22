@@ -1,13 +1,17 @@
-if (!F.URL.online) {
-  $(".local").each((i, e) => {
-    e.href += ".html";
-  });
-  $(".local.index").each((i, e) => {
-    e.href = location.href.split("/").slice(0, -1).join("/") + "/index.html";
-  });
+function load() {
+  if (!F.URL.online) {
+    $(".local").each((i, e) => {
+      e.href += ".html";
+    });
+    $(".local.index").each((i, e) => {
+      e.href = location.href.split("/").slice(0, -1).join("/") + "/index.html";
+    });
+  }
+
+  init();
 }
 
-function init() {
+function init() {  
   ls.check();
   console.log(language.get("console"));
   header.init();
