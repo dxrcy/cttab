@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <!-- Thanks for using CTTab v3.0 - By Darcy :) -->
+
+  <head>
+    <title>About - CTTab</title>
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/fortissimo.js"></script>
+    <script type="text/javascript" src="./script.js" defer></script>
+
+    <link rel="shortcut icon" type="image/png" href="image/favicon.png">
+  </head>
+
+  <body>
+    <main class="about">
+      <h1>CTTab - About</h1>
+      <a href="./" class="local index">Back</a>
+
+      <section class="info">
+        <h2>How to set up</h2>
+
+        <details>
+          <summary>Chrome</summary>
+          <h3>Open on new tab</h3>
+          <ol>
+            <li>
+              Download '<a
+                href="https://chrome.google.com/webstore/detail/new-tab-redirect/icpgjfneehieebagbmdbhnlpiopdcmna">New
+                Tab Redirect</a>' from Chrome Web Store
+            </li>
+            <li>Click on the icon and press 'Options'</li>
+            <li>
+              Type the url ('https://epicwebsite.bruh.international/p/cttab') in
+              the text box
+            </li>
+            <br />
+          </ol>
+          <h3>Use offline</h3>
+          <ol>
+            <li>Press the ⋮ menu button</li>
+            Click on 'More Tools' and then 'Save page as'
+            <li>Then choose a location to save it</li>
+            <li>
+              See above to open on new tab, but use your own location instead
+            </li>
+          </ol>
+        </details>
+
+        <details>
+          <summary>Firefox <i class="fa fa-star star" title="Used by your's truly"></i></summary>
+          <h3>Open on new window <i class="fa fa-star star" title="Used by your's truly"></i></h3>
+          <ol>
+            <li>
+              Open Firefox and click the ☰ hamburger icon in the top right
+            </li>
+            <li>Click 'Options' from the drop-down menu</li>
+            <li>Select 'Home' on the left panel</li>
+            <li>
+              Beside 'Homepage and new windows', select 'Custom URLs' from the
+              list.
+            </li>
+            <li>
+              Input 'https://epicwebsite.bruh.international/p/cttab' in the text
+              box
+            </li>
+            <br />
+          </ol>
+
+          <h3>Open on new tab (Online)</h3>
+          <ol>
+            <li>
+              Download '<a href="https://addons.mozilla.org/en-US/firefox/addon/custom-new-tab-page/">New Tab
+                Redirect</a>' from Firefox addons
+            </li>
+            <li>Click the ☰ hamburger icon in the top right</li>
+            <li>Press 'Addons and Themes' from the drop-down menu</li>
+            <li>Find and click 'Custom New Tab Page' from the list</li>
+            <li>Click 'Options' on the top bar under the name</li>
+            <li>
+              Input 'https://epicwebsite.bruh.international/p/cttab' in the text
+              box
+            </li>
+            <li>Scroll down and press 'Save'</li>
+            <br />
+          </ol>
+
+          <h3>Open on new tab (Local File) <i class="fa fa-star star" title="Used by your's truly"></i></h3>
+          <h4>Ok. This is a weird one.</h4>
+          <ol>
+            <li>
+              Create a text file one your Desktop and name it <code>autoconfig.cfg</code>
+            </li>
+            <li>
+              Insert this code:
+              <blockcode>
+                // First line must be comment! Do not delete this line!
+                <br>
+                var {classes:Cc,interfaces:Ci,utils:Cu} = Components;
+                <br>
+                try {
+                Cu.import("resource:///modules/AboutNewTab.jsm");
+                <br>
+                var newTabURL = "file:///C:/Users/yourname/yourfile.html";
+                <br>
+                AboutNewTab.newTabURL = newTabURL;
+                <br>
+                } catch(e){Cu.reportError(e);} // report errors in the Browser Console
+              </blockcode>
+            </li>
+            <li>
+              Replace <code>file:///C:/Users/yourname/yourfile.html</code> with the path to the local file. Example:
+              <code>file:///C:/Users/gangstaperson/Documents/new-tab.html</code>
+            </li>
+            <li>
+              Save the file and Copy and Paste it into the root Firefox program folder. It is most likely
+              <code>C:\Program Files\Mozilla Firefox</code>. You need to copy / paste because the folder usually has
+              permissions that restrict editing of files.
+            </li>
+            <li>
+              Create a new file called <code>autoconfig.js</code> and save it to Desktop
+            </li>
+            <li>
+              Insert this code:
+              <blockcode>
+                // First line must be comment! Do not delete this line!
+                <br>
+                pref("general.config.filename", "autoconfig.cfg");
+                <br>
+                pref("general.config.obscure_value", 0);
+                <br>
+                pref("general.config.sandbox_enabled", false);
+              </blockcode>
+            </li>
+            <li>
+              Copy and Paste that file into <code>defaults/pref</code> in the Firefox program folder used before.
+            </li>
+            <li>
+              Disable any extensions that interfere with the tabs
+            </li>
+            <li>
+              Then restart Firefox.
+            </li>
+          </ol>
+        </details>
+
+        <details>
+          <summary>Chromium Browsers (Edge, Brave, ect)</summary>
+          <p>
+            Try the method for Google Chrome, possibly using a ported extension.
+          </p>
+        </details>
+
+        <details>
+          <summary>Internet explorer</summary>
+          <h3>Please use a different browser</h3>
+        </details>
+
+        <details>
+          <summary>Other browsers</summary>
+
+          <h3>idk :( sorry</h3>
+        </details>
+
+      </section>
+    </main>
+
+    <a class="footer" href="https://github.com/darccyy">
+      Made by <span title="That is me!">Darcy</span>
+    </a>
+  </body>
+
+</html>

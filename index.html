@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <!-- Thanks for using CTTab v3.0 - By Darcy :) -->
+
+  <head>
+    <title>CTTab</title>
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+
+    <link rel="stylesheet" href="./css/style.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/fortissimo.js"></script>
+    <script type="text/javascript" src="./lang.js"></script>
+    <script type="text/javascript" src="./script.js" defer></script>
+
+    <link rel="shortcut icon" type="image/png" href="image/favicon.png" />
+  </head>
+
+  <body onload="init()">
+    <header
+      onclick="header.edit()"
+      title="[header_title]"
+      class="lang-tofill"
+      tabindex="9"
+      onkeydown="header.edit(event)"
+    >
+      <h1 id="header" class="lang-tofill"></h1>
+    </header>
+
+    <left>
+      <span class="seperated">
+        <item>
+          <a onclick="notes.add()" tabindex="1">
+            <span title="[top_note_title]" class="lang-tofill">[top_note]</span>
+          </a>
+        </item>
+
+        <item>
+          <a onclick="bg.edit()" tabindex="2">
+            <span title="[top_bg_title]" class="lang-tofill">[top_bg]</span>
+          </a>
+        </item>
+
+        <item>
+          <a onclick="language.switch()" tabindex="3">
+            <span title="[top_lang_title]" class="lang-tofill ignore-text">
+              🌐<span id="lang_display">--</span>
+            </span>
+          </a>
+        </item>
+      </span>
+    </left>
+
+    <right>
+      <span class="seperated">
+        <item>
+          <a tabindex="4">
+            <input type="file" id="ls-file" onchange="ls.import()" />
+            <span title="[top_import_title]" class="lang-tofill"
+              >[top_import]</span
+            >
+          </a>
+        </item>
+
+        <item>
+          <a onclick="ls.export()" tabindex="5">
+            <span title="[top_export_title]" class="lang-tofill"
+              >[top_export]</span
+            >
+          </a>
+        </item>
+
+        <item>
+          <a onclick="ls.resetConfirm()" tabindex="6">
+            <span title="[top_reset_title]" class="lang-tofill"
+              >[top_reset]</span
+            >
+          </a>
+        </item>
+
+        <item>
+          <a href="about" class="local about" tabindex="7">
+            <span title="[top_about_title]" class="lang-tofill"
+              >[top_about]</span
+            >
+          </a>
+        </item>
+      </span>
+
+      <item>
+        <a
+          onclick="confettiHandler.start()"
+          tabindex="8"
+          class="icon"
+          id="confetti"
+        >
+          <span title="🎉">🎉</span>
+        </a>
+      </item>
+    </right>
+
+    <button onclick="notes.focus()" class="skip">Skip focus to notes</button>
+
+    <main>
+      <contain id="shortcuts"></contain>
+
+      <contain id="notes"></contain>
+    </main>
+
+    <a class="footer" href="https://github.com/darccyy">
+      <span class="lang-tofill">[footer_main]</span>
+      <span title="[footer_name_title]" class="lang-tofill">[footer_name]</span>
+    </a>
+  </body>
+</html>
+
+<contain style="display: none; visibility: hidden">
+  <template name="shortcut">
+    <article class="shortcut {empty}" number="{number}">
+      <a
+        href="{href}"
+        title='[sc_title {"title": "{title}", "href": "{href}"}]'
+        class="lang-canfill ignore-text"
+      >
+        <img
+          src="{imageHref}"
+          class="{imgClass}"
+          onerror="sc.imageError({number})"
+        />
+        <span>{title}</span>
+      </a>
+      <button
+        onclick="sc.edit({number})"
+        title="[sc_edit_title]"
+        class="lang-canfill"
+      >
+        <icon class="fa fa-edit"></icon>
+      </button>
+    </article>
+  </template>
+
+  <template name="note">
+    <article class="note" number="{number}">
+      <textarea
+        placeholder="[note_placeholder]"
+        title="[note_title]"
+        oninput="notes.edit({number})"
+        class="lang-canfill"
+      >
+{text}</textarea
+      >
+      <button onclick="notes.delete({number})">
+        <icon
+          class="fa fa-trash lang-canfill"
+          title="[note_delete_title]"
+        ></icon>
+      </button>
+    </article>
+  </template>
+</contain>
