@@ -403,7 +403,7 @@ confettiHandler.show = function () {
 };
 
 // Background
-const bg = {};
+const bg = {default: "#202038"};
 
 bg.init = function () {
   if (!ls.all.bg) {
@@ -455,6 +455,9 @@ bg.init = function () {
         : colors.length === 1
         ? colors[0]
         : F.randomChoice(colors);
+    if (color === "$") {
+      color = bg.default;
+    }
 
     // Parse random color
     if (isRandom) {
@@ -492,7 +495,7 @@ bg.init = function () {
     }
   }
 
-  bg.current = color || "#202038";
+  bg.current = color || bg.default;
   document.body.style.backgroundColor = bg.current;
 
   // Add image
@@ -526,7 +529,7 @@ bg.edit = function () {
   var value;
   var typeName = [null, "color", "image"][type];
   if (typeName === "color") {
-    value = prompt(language.get("bg_color"), ls.all.bg.color || "#202038");
+    value = prompt(language.get("bg_color"), ls.all.bg.color || bg.default);
   } else if (typeName === "image") {
     value = prompt(
       language.get("bg_image"),
