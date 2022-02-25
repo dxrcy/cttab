@@ -1,16 +1,16 @@
+// Only on full reload
 function load() {
-  if (!F.URL.online) {
-    $(".local").each((i, e) => {
-      e.href += ".html";
-    });
-    $(".local.index").each((i, e) => {
-      e.href = location.href.split("/").slice(0, -1).join("/") + "/index.html";
+  // Change link if online
+  if (F.URL.online) {
+    $(".about").each((i, e) => {
+      e.href = "https://github.com/darccyy/cttab#setup";
     });
   }
 
   init();
 }
 
+// Quick reload
 function init() {
   ls.check();
   console.log(language.get("console"));
@@ -21,6 +21,7 @@ function init() {
   language.init();
 }
 
+// Format template element in html
 function getTemplate(name, values) {
   return F.format(
     $(`template[name=${name}]`)
