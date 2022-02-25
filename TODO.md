@@ -1,9 +1,9 @@
 # TODO
 
 - Make README better
-- Make top bar work with tab
 - Add issue templates
 
 ## Completed
 
+- Make top bar work with tab
 - Move about page to README

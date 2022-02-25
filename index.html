@@ -22,89 +22,86 @@
   </head>
 
   <body onload="load()">
-    <header
-      onclick="header.edit()"
-      title="[header_title]"
-      class="lang-tofill"
-      tabindex="9"
-      onkeydown="header.edit(event)"
-    >
-      <h1 id="header" class="lang-tofill"></h1>
+    <header>
+      <left>
+        <span class="seperated">
+          <item>
+            <button onclick="notes.add()">
+              <span title="[top_note_title]" class="lang-tofill"
+                >[top_note]</span
+              >
+            </button>
+          </item>
+
+          <item>
+            <button onclick="bg.edit()">
+              <span title="[top_bg_title]" class="lang-tofill">[top_bg]</span>
+            </button>
+          </item>
+
+          <item>
+            <button onclick="language.switch()">
+              <span title="[top_lang_title]" class="lang-tofill ignore-text">
+                🌐<span id="lang_display">--</span>
+              </span>
+            </button>
+          </item>
+        </span>
+      </left>
+
+      <button
+        id="header"
+        onclick="header.edit()"
+        title="[header_title]"
+        class="lang-tofill"
+        onclick="header.edit(event)"
+      ></button>
+
+      <right>
+        <span class="seperated">
+          <item>
+            <button tabindex="-1">
+              <input type="file" id="ls-file" onchange="ls.import()" />
+              <span title="[top_import_title]" class="lang-tofill focus"
+                >[top_import]</span
+              >
+            </button>
+          </item>
+
+          <item>
+            <button onclick="ls.export()">
+              <span title="[top_export_title]" class="lang-tofill"
+                >[top_export]</span
+              >
+            </button>
+          </item>
+
+          <item>
+            <button onclick="ls.resetConfirm()">
+              <span title="[top_reset_title]" class="lang-tofill"
+                >[top_reset]</span
+              >
+            </button>
+          </item>
+
+          <item>
+            <a href="README.md#setup" class="about">
+              <span title="[top_about_title]" class="lang-tofill"
+                >[top_about]</span
+              >
+            </a>
+          </item>
+        </span>
+
+        <item>
+          <button onclick="confettiHandler.start()" class="icon" id="confetti">
+            <span title="🎉">🎉</span>
+          </button>
+        </item>
+      </right>
+
+      <button onclick="notes.focus()" class="skip">Skip focus to notes</button>
     </header>
-
-    <left>
-      <span class="seperated">
-        <item>
-          <a onclick="notes.add()" tabindex="1">
-            <span title="[top_note_title]" class="lang-tofill">[top_note]</span>
-          </a>
-        </item>
-
-        <item>
-          <a onclick="bg.edit()" tabindex="2">
-            <span title="[top_bg_title]" class="lang-tofill">[top_bg]</span>
-          </a>
-        </item>
-
-        <item>
-          <a onclick="language.switch()" tabindex="3">
-            <span title="[top_lang_title]" class="lang-tofill ignore-text">
-              🌐<span id="lang_display">--</span>
-            </span>
-          </a>
-        </item>
-      </span>
-    </left>
-
-    <right>
-      <span class="seperated">
-        <item>
-          <a tabindex="4">
-            <input type="file" id="ls-file" onchange="ls.import()" />
-            <span title="[top_import_title]" class="lang-tofill"
-              >[top_import]</span
-            >
-          </a>
-        </item>
-
-        <item>
-          <a onclick="ls.export()" tabindex="5">
-            <span title="[top_export_title]" class="lang-tofill"
-              >[top_export]</span
-            >
-          </a>
-        </item>
-
-        <item>
-          <a onclick="ls.resetConfirm()" tabindex="6">
-            <span title="[top_reset_title]" class="lang-tofill"
-              >[top_reset]</span
-            >
-          </a>
-        </item>
-
-        <item>
-          <a href="README.md#setup" class="about" tabindex="7">
-            <span title="[top_about_title]" class="lang-tofill"
-              >[top_about]</span
-            >
-          </a>
-        </item>
-      </span>
-
-      <item>
-        <a
-          onclick="confettiHandler.start()"
-          tabindex="8"
-          class="icon"
-          id="confetti"
-        >
-          <span title="🎉">🎉</span>
-        </a>
-      </item>
-    </right>
-
-    <button onclick="notes.focus()" class="skip">Skip focus to notes</button>
 
     <main>
       <contain id="shortcuts"></contain>
