@@ -11,7 +11,7 @@ function load() {
   init();
 }
 
-function init() {  
+function init() {
   ls.check();
   console.log(language.get("console"));
   header.init();
@@ -412,19 +412,59 @@ bg.init = function () {
     });
   }
 
-  if (ls.all.bg.color) {
-    var color = ls.all.bg.color;
+  var string = ls.all.bg.color;
 
-    // Get random colour
-    if (color === "?") {
-      color = F.randomHex();
-    } else if (color.startsWith("?")) {
-      var params = color.split(" ");
+  if (string) {
+    // Parse color string
+    var bracket = false;
+    var current = "";
+    var colors = [];
+    var isRandom = false;
+    var random = [];
+    for (var i in string) {
+      var char = string[i];
+      if (!bracket && char === " ") {
+        if (current) {
+          isRandom ? random.push(current) : colors.push(current);
+          current = "";
+        }
+        continue;
+      }
+      if (char === "?") {
+        isRandom = true;
+        continue;
+      }
+
+      if (char === "(") {
+        bracket = true;
+      } else if (char === ")") {
+        bracket = false;
+      }
+
+      current += char;
+    }
+    if (current) {
+      isRandom ? random.push(current) : colors.push(current);
+      current = "";
+    }
+
+    // Select random color from array
+    var color =
+      !colors || colors.length === 0
+        ? null
+        : colors.length === 1
+        ? colors[0]
+        : F.randomChoice(colors);
+
+    // Parse random color
+    if (isRandom) {
       var settings = { h0: 0, h1: 360, s0: 0, s1: 100, v0: 0, v1: 100 };
-
-      for (var i = 1; i < params.length; i++) {
-        var param = params[i];
-        if ("hsv".includes(param[0])) {
+      var weight = 1;
+      for (var i in random) {
+        var param = random[i];
+        if (param[0] === "w") {
+          weight = parseFloat(param.slice(1));
+        } else if ("hsv".includes(param[0])) {
           var num = parseInt(param.slice(2));
           if (param[1] === "=") {
             settings[param[0] + "0"] = num;
@@ -437,16 +477,23 @@ bg.init = function () {
         }
       }
 
-      color = F.hsv2hex(
-        F.randomInt(settings.h0, Math.max(settings.h0, settings.h1)),
-        F.randomInt(settings.s0, Math.max(settings.s0, settings.s1)),
-        F.randomInt(settings.v0, Math.max(settings.v0, settings.v1)),
-      );
+      // Create random color if weight is selected
+      if (
+        !colors ||
+        colors.length === 0 ||
+        Math.random() > weight / (colors.length + 1)
+      ) {
+        color = F.hsv2hex(
+          F.randomInt(settings.h0, Math.max(settings.h0, settings.h1)),
+          F.randomInt(settings.s0, Math.max(settings.s0, settings.s1)),
+          F.randomInt(settings.v0, Math.max(settings.v0, settings.v1)),
+        );
+      }
     }
-    document.body.style.backgroundColor = color;
-  } else {
-    document.body.style.backgroundColor = "#202038";
   }
+
+  bg.current = color || "#202038";
+  document.body.style.backgroundColor = bg.current;
 
   // Add image
   document.body.style.backgroundImage = "";
@@ -468,6 +515,11 @@ bg.edit = function () {
     return;
   }
   if (!type) {
+    return;
+  }
+
+  if (type === "3") {
+    prompt(language.get("bg_copy"), bg.current);
     return;
   }
 

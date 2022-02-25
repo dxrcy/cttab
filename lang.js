@@ -41,10 +41,11 @@ const language = {
       ls_import: "Press CTRL + V to paste JSON string",
       ls_export: "Press CTRL + C to copy JSON string",
 
-      bg_edit: "What style to change?\n   0 - Reset all\n   1 - Solid colour (Or background of transparent image)\n   2 - Local or online image",
+      bg_edit: "What style to change?\n   0 - Reset all\n   1 - Solid colour (Or background of transparent image)\n   2 - Local or online image\n   3 - Copy current colour",
       bg_reset: "Are you sure you want to reset background?",
       bg_color: "What colour? (CSS Compatible)\nLeave blank to reset colour",
       bg_image: "What is the link?\nLeave blank to remove image",
+      bg_copy: "Press CTRL + C to copy colour",
     },
 
     eo: {
@@ -88,10 +89,11 @@ const language = {
       ls_import: "Alklaku CTRL + V por almeti JSON tekston",
       ls_export: "Alklaku CTRL + C por kapti JSON tekston",
 
-      bg_edit: "Kion stilon ŝanĝu?\n   0 - Restarigi ĉion\n   1 - Solidan koloron (Aŭ fonon de travidebla bildo)\n   2 - Lokon aŭ enretan bildon",
+      bg_edit: "Kion stilon ŝanĝu?\n   0 - Restarigi ĉion\n   1 - Solidan koloron (Aŭ fonon de travidebla bildo)\n   2 - Lokon aŭ enretan bildon\n   3 - Alklaku nune koloron",
       bg_reset: "Ĉu vi ja volas restarigi fonon?",
       bg_color: "Kiun koloroa? (CSS Kongrua)\nResti malplenan por restarigi koloron",
       bg_image: "Kiu estas la ligilo?\nResti malplenan por foriri bildon",
+      bg_copy: "Alklaku CTRL + C por almeti koloran",
     },
   },
 };
