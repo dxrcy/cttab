@@ -1,22 +1,112 @@
 # CTTab
 
-Custom new tab page for the browser
+The easiest Custom New Tab page for the browser!
 
-The 'CT' in the name stands for 'Custom Tab'
-
-[TODO List](./TODO.md)
+The '*CT*' in the name stands for '*Custom Tab*' :)
 
 # Features
 
 ## Shortcuts
 
+Fully customizable shortcuts to commonly visited sites!
+
+- Click the Edit button to change the link and title of each shortcut
+- Remove by entering blank text into the URL input box
+- Change the amount of shortcuts shown in the top bar '*Change shortcuts*'
+
 ## Quick Notes
 
-## Custom Background Color & Image
+Easy notepads for taking short notes in an instant!
+
+- Create a new note in the top bar '*Add note*'
+- Type some text
+- Delete the note with the trash icon
+- Create multiple notes at once!
+
+## Custom Background Colour & Image
+
+Create any sort of dynamic background, with random colours and images!
+
+- Open the background editor in the top bar '*Change background*'
+- Choose how to change the background
+
+### Reset all (`0`)
+
+Change all the background to default solid colour `#202038`
+
+### Solid colour (Or background of transparent image) (`1`)
+
+- Change the solid background color
+- If an image is enabled with a transparent background, the colour will be the background
+- Add any CSS compatible colour, hex codes (`#XXXXXX`), rgb (`rgb(xx, xx, xx)`), or hsl (`hsl(xx, xx, xx)`, **NOT** `hsv`), 
+- Add `$` to represent default colour
+- Add multiple colours by seperating by space - Colour will be chosen randomly each load
+- Add randomly generated colour with `?`
+- - Any text after the `?` will be used as parameters, as follows
+- - To change the HSV requirements, use `a=n`, `a<n`, `a>n` syntax, with `a` being a letter of `h` (hue), `s` (saturation), or `v` (value), and `n` being a number between `0-360` for hue, or `0-100` for saturation and value
+- - To change the weight (chance) of the generated colour being chosen, use `w=n` or `W=n` with `n` being a number from `0-Infinity` - `w` (Lowercase) represents weight relative to the amount of other colours given, whereas `W` (Uppercase) represents absolute weight
+
+### Local or online image (`2`)
+
+Add the URL of a local image file, or an online link to an image
+
+### Copy current colour (`3`)
+
+If you like a randomly generated colour, you can use this option to select the current background colour (Also works with custom colours)
 
 ## Custom Title & Header
 
+Change the Header bar and the Title (Seen in Tabs, Bookmarks, ect.)!
+
+- Click the header to edit, very easy and simple!
+
+## Confetti
+
+Instant confetti celebration with one simple click!
+
+This is a secret feature, can you find it?
+
 ## Import & Export Settings
+
+Save and load settings to a JSON file on your computer! Back up your shortcuts!
+
+- Export settings and save to `cttab-data.json` in the top bar '*Export*'
+- Import settings from a file in the top bar '*Import*'
+- Settings are saved to `localStorage`
+
+## Change Language
+
+Choose between **TWO** languages!
+
+If you can translate into more languages, please consider [contributing](#contributing) to to this project!
+
+# Contributing
+
+Make sure you have [Git](https://git-scm.com/downloads) installed.
+
+This has been tested in Windows 10 with PowerShell, but it should work for other systems and command interfaces.
+
+If you run into any problems, create a new issue for this repo and I will try to help.
+
+```powershell
+# Clone repository into ./cttab
+git clone https://github.com/darccyy/react-express-template.git
+
+# ... make changes to files...
+
+# Add and commit files
+git add .
+git commit -m "detailed commit message"
+
+# Create pull request
+git push -u origin main
+```
+
+# Issues
+
+[Submit an Issue](https://github.com/darccyy/cttab/issues/new)
+
+[TODO List](./TODO.md)
 
 # Setup
 
@@ -93,7 +183,7 @@ Try the method for Google Chrome, possibly using a ported extension.
 
 ## Internet Explorer
 
-### Please use a different browser
+**Please use a different browser**, this is not 2010
 
 ## Other Browsers
 

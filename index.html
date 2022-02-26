@@ -66,18 +66,18 @@
       <right>
         <span class="seperated">
           <item>
-            <button tabindex="-1">
-              <input type="file" id="ls-file" onchange="ls.import()" />
-              <span title="[top_import_title]" class="lang-tofill focus"
-                >[top_import]</span
+            <button onclick="ls.export()">
+              <span title="[top_export_title]" class="lang-tofill"
+                >[top_export]</span
               >
             </button>
           </item>
 
           <item>
-            <button onclick="ls.export()">
-              <span title="[top_export_title]" class="lang-tofill"
-                >[top_export]</span
+            <button tabindex="-1">
+              <input type="file" id="ls-file" onchange="ls.import()" />
+              <span title="[top_import_title]" class="lang-tofill focus"
+                >[top_import]</span
               >
             </button>
           </item>
