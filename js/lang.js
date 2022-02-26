@@ -22,7 +22,7 @@ const language = {
       top_reset: "Reset",
       top_reset_title: "Reset all settings",
       top_about: "About",
-      top_about_title: "About / Help page",
+      top_about_title: "About / help page\n{link}",
 
       sc_text_default: "Shortcut {number}",
       sc_title: "{title}\n{href}",
@@ -77,7 +77,7 @@ const language = {
       top_reset: "Restarigi",
       top_reset_title: "Restarigi ĉiojn fiksadojn",
       top_about: "Pri",
-      top_about_title: "Pri / Helpa paĝo",
+      top_about_title: "Pri / helpa paĝo\n{link}",
 
       sc_text_default: "Ligi {number}",
       sc_title: "{title}\n{href}",

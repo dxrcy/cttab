@@ -1,16 +1,4 @@
-// Only on full reload
-function load() {
-  // Change link if online
-  if (F.URL.online) {
-    $(".about").each((i, e) => {
-      e.href = "https://github.com/darccyy/cttab#setup";
-    });
-  }
-
-  init();
-}
-
-// Quick reload
+// Reload
 function init() {
   ls.check();
   console.log(language.get("console"));
