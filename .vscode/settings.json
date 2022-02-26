@@ -1,6 +1,0 @@
-{
-  "compile-hero.generate-minified-css": true,
-  "compile-hero.generate-minified-css-only": true,
-  "compile-hero.disable-compile-files-on-did-save-code": false,
-  "compile-hero.generate-minified-javascript": false
-}
