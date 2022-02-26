@@ -4,6 +4,13 @@ The easiest Custom New Tab page for the browser!
 
 The '_CT_' in the name stands for '_Custom Tab_' :)
 
+# Contents
+
+- [Features](#features) - Explains the Awesome Features!
+- [Setup](#setup) - How to set up on browser
+- [Contributing](#contributing) - How to contribute to the project
+- [Issues](#issues) - How to submit an issue
+
 # Features
 
 ## Shortcuts
@@ -79,34 +86,6 @@ Save and load settings to a JSON file on your computer! Back up your shortcuts!
 Choose between **TWO** languages!
 
 If you can translate into more languages, please consider [contributing](#contributing) to to this project!
-
-# Contributing
-
-Make sure you have [Git](https://git-scm.com/downloads) installed.
-
-This has been tested in Windows 10 with PowerShell, but it should work for other systems and command interfaces.
-
-If you run into any problems, [Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose) for this repo and I will try to help.
-
-```powershell
-# Clone repository into ./cttab
-git clone https://github.com/darccyy/react-express-template.git
-
-# ... make changes to files...
-
-# Add and commit files
-git add .
-git commit -m "detailed commit message"
-
-# Create pull request
-git push -u origin main
-```
-
-# Issues
-
-[Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose)
-
-[TODO List](./TODO.md)
 
 # Setup
 
@@ -187,6 +166,36 @@ Try the method for Google Chrome, possibly using a ported extension.
 
 ## Other Browsers
 
-If you are using a browser that is not supported, try the method with Chrome or Firefox. If it is not working, [Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose)
+If you are using a browser that is not supported, try the method with Chrome or Firefox. If it is not working, [Submit an Issue](#issues)
+
+# Contributing
+
+Make sure you have [Git](https://git-scm.com/downloads) installed.
+
+This has been tested in Windows 10 with PowerShell, but it should work for other systems and command interfaces.
+
+If you run into any problems, [Submit an Issue](#issues) for this repo and I will try to help.
+
+```powershell
+# Clone repository into ./cttab
+git clone https://github.com/darccyy/react-express-template.git
+
+# ... make changes to files...
+
+# Add and commit files
+git add .
+git commit -m "detailed commit message"
+
+# Create pull request
+git push -u origin main
+```
+
+# Issues
+
+[Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose) - Choose a template and follow the steps
+
+[TODO List](./TODO.md) - View issues being worked on
+
+---
 
 [Made by darcy](https://github.io/darccyy)
