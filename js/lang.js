@@ -30,8 +30,11 @@ const language = {
       sc_edit_url: "URL of Shortcut {number}",
       sc_edit_text: "Title of Shortcut {number}",
       sc_edit_text_default: `Shortcut {number}`,
-      sc_amount_text: "How many shortcuts?\nLeave blank to set to default ({default})\nType '0' to remove all",
-      sc_amount_invalid: "Can only set a positive integer or zero less than or equal to 60",
+      sc_amount_text:
+        "How many shortcuts?\nLeave blank to set to default ({default})\nType '0' to remove all",
+      sc_amount_invalid:
+        "Can only set a positive integer or zero less than or equal to 60",
+        skip_focus: "Skip focus to notes",
 
       note_placeholder: "Click to add notes...",
       note_title: "Click to add notes",
@@ -39,14 +42,15 @@ const language = {
       note_delete_confirm: "Are you sure you want to delete this note?",
 
       footer_main: "Made by",
-      footer_name: "Darcy",
+      footer_name: "darcy",
       footer_name_title: "That is me!",
 
       ls_reset: "Are you sure you want to reset all settings?",
       ls_import: "Press CTRL + V to paste JSON string",
       ls_export: "Press CTRL + C to copy JSON string",
 
-      bg_edit: "What style to change?\n   0 - Reset all\n   1 - Solid colour (Or background of transparent image)\n   2 - Local or online image\n   3 - Copy current colour",
+      bg_edit:
+        "What style to change?\n   0 - Reset all\n   1 - Solid colour (Or background of transparent image)\n   2 - Local or online image\n   3 - Copy current colour",
       bg_reset: "Are you sure you want to reset background?",
       bg_color: "What colour? (CSS Compatible)\nLeave blank to reset colour",
       bg_image: "What is the link?\nLeave blank to remove image",
@@ -78,6 +82,7 @@ const language = {
       top_reset_title: "Restarigi ĉiojn fiksadojn",
       top_about: "Pri",
       top_about_title: "Pri / helpa paĝo\n{link}",
+      skip_focus: "Salti fokuso al notoj",
 
       sc_text_default: "Ligi {number}",
       sc_title: "{title}\n{href}",
@@ -85,8 +90,10 @@ const language = {
       sc_edit_url: "URL de ligo {number}",
       sc_edit_text: "Titilo de ligo {number}",
       sc_edit_text_default: `ligo {number}`,
-      sc_amount_text: "Kiom da ligojn?\nResti malplenan por ŝanĝi al la defaŭlta ({default})\nTajpi '0' por foriri ĉiojn",
-      sc_amount_invalid: "Rajtas nur ŝanĝi al pozitiva entjero aŭ nulo malpli ol aŭ egala al 60",
+      sc_amount_text:
+        "Kiom da ligojn?\nResti malplenan por ŝanĝi al la defaŭlta ({default})\nTajpi '0' por foriri ĉiojn",
+      sc_amount_invalid:
+        "Rajtas nur ŝanĝi al pozitiva entjero aŭ nulo malpli ol aŭ egala al 60",
 
       note_placeholder: "Alklaki por aldoni al notoj...",
       note_title: "Alklaki por aldoni al notoj",
@@ -101,9 +108,11 @@ const language = {
       ls_import: "Alklaki CTRL + V por almeti JSON tekston",
       ls_export: "Alklaki CTRL + C por kapti JSON tekston",
 
-      bg_edit: "Kion stilon ŝanĝu?\n   0 - Restarigi ĉion\n   1 - Solidan koloron (Aŭ fonon de travidebla bildo)\n   2 - Lokon aŭ enretan bildon\n   3 - Alklaki nune koloron",
+      bg_edit:
+        "Kion stilon ŝanĝu?\n   0 - Restarigi ĉion\n   1 - Solidan koloron (Aŭ fonon de travidebla bildo)\n   2 - Lokon aŭ enretan bildon\n   3 - Alklaki nune koloron",
       bg_reset: "Ĉu vi ja volas restarigi fonon?",
-      bg_color: "Kiun koloroa? (CSS Kongrua)\nResti malplenan por restarigi koloron",
+      bg_color:
+        "Kiun koloroa? (CSS Kongrua)\nResti malplenan por restarigi koloron",
       bg_image: "Kiu estas la ligo?\nResti malplenan por foriri bildon",
       bg_copy: "Alklaki CTRL + C por almeti koloran",
 
