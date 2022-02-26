@@ -44,14 +44,6 @@
               <span title="[top_sc_title]" class="lang-tofill">[top_sc]</span>
             </button>
           </item>
-
-          <item>
-            <button onclick="language.switch()">
-              <span title="[top_lang_title]" class="lang-tofill ignore-text">
-                🌐<span id="lang_display">--</span>
-              </span>
-            </button>
-          </item>
         </span>
       </left>
 
@@ -65,6 +57,14 @@
 
       <right>
         <span class="seperated">
+          <item>
+            <button onclick="language.switch()">
+              <span title="[top_lang_title]" class="lang-tofill ignore-text">
+                🌐<span id="lang_display">--</span>
+              </span>
+            </button>
+          </item>
+
           <item>
             <button onclick="ls.export()">
               <span title="[top_export_title]" class="lang-tofill"
@@ -92,7 +92,9 @@
 
           <item>
             <a href="https://github.com/darccyy/cttab">
-              <span title='[top_about_title {"link": "https://github.com/darccyy/cttab"}]' class="lang-tofill"
+              <span
+                title='[top_about_title {"link": "https://github.com/darccyy/cttab"}]'
+                class="lang-tofill"
                 >[top_about]</span
               >
             </a>
@@ -106,7 +108,9 @@
         </item>
       </right>
 
-      <button onclick="notes.focus()" class="lang-tofill skip">[skip_focus]</button>
+      <button onclick="notes.focus()" class="lang-tofill skip">
+        [skip_focus]
+      </button>
     </header>
 
     <main>
@@ -137,6 +141,7 @@
         />
         <span>{title}</span>
       </a>
+
       <button
         onclick="sc.edit({number})"
         title="[sc_edit_title]"
@@ -157,6 +162,7 @@
       >
 {text}</textarea
       >
+
       <button onclick="notes.delete({number})">
         <icon
           class="fa fa-trash lang-canfill"

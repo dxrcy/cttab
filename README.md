@@ -11,6 +11,8 @@ The '_CT_' in the name stands for '_Custom Tab_' :)
 - [Contributing](#contributing) - How to contribute to the project
 - [Issues](#issues) - How to submit an issue
 
+<img src="./image/favicon.png" />
+
 # Features
 
 ## Shortcuts
