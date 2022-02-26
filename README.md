@@ -2,7 +2,7 @@
 
 The easiest Custom New Tab page for the browser!
 
-The '*CT*' in the name stands for '*Custom Tab*' :)
+The '_CT_' in the name stands for '_Custom Tab_' :)
 
 # Features
 
@@ -12,13 +12,13 @@ Fully customizable shortcuts to commonly visited sites!
 
 - Click the Edit button to change the link and title of each shortcut
 - Remove by entering blank text into the URL input box
-- Change the amount of shortcuts shown in the top bar '*Change shortcuts*'
+- Change the amount of shortcuts shown in the top bar '_Change shortcuts_'
 
 ## Quick Notes
 
 Easy notepads for taking short notes in an instant!
 
-- Create a new note in the top bar '*Add note*'
+- Create a new note in the top bar '_Add note_'
 - Type some text
 - Delete the note with the trash icon
 - Create multiple notes at once!
@@ -27,7 +27,7 @@ Easy notepads for taking short notes in an instant!
 
 Create any sort of dynamic background, with random colours and images!
 
-- Open the background editor in the top bar '*Change background*'
+- Open the background editor in the top bar '_Change background_'
 - Choose how to change the background
 
 ### Reset all (`0`)
@@ -38,7 +38,7 @@ Change all the background to default solid colour `#202038`
 
 - Change the solid background color
 - If an image is enabled with a transparent background, the colour will be the background
-- Add any CSS compatible colour, hex codes (`#XXXXXX`), rgb (`rgb(xx, xx, xx)`), or hsl (`hsl(xx, xx, xx)`, **NOT** `hsv`), 
+- Add any CSS compatible colour, hex codes (`#XXXXXX`), rgb (`rgb(xx, xx, xx)`), or hsl (`hsl(xx, xx, xx)`, **NOT** `hsv`),
 - Add `$` to represent default colour
 - Add multiple colours by seperating by space - Colour will be chosen randomly each load
 - Add randomly generated colour with `?`
@@ -70,8 +70,8 @@ This is a secret feature, can you find it?
 
 Save and load settings to a JSON file on your computer! Back up your shortcuts!
 
-- Export settings and save to `cttab-data.json` in the top bar '*Export*'
-- Import settings from a file in the top bar '*Import*'
+- Export settings and save to `cttab-data.json` in the top bar '_Export_'
+- Import settings from a file in the top bar '_Import_'
 - Settings are saved to `localStorage`
 
 ## Change Language
@@ -86,7 +86,7 @@ Make sure you have [Git](https://git-scm.com/downloads) installed.
 
 This has been tested in Windows 10 with PowerShell, but it should work for other systems and command interfaces.
 
-If you run into any problems, create a new issue for this repo and I will try to help.
+If you run into any problems, [Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose) for this repo and I will try to help.
 
 ```powershell
 # Clone repository into ./cttab
@@ -104,7 +104,7 @@ git push -u origin main
 
 # Issues
 
-[Submit an Issue](https://github.com/darccyy/cttab/issues/new)
+[Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose)
 
 [TODO List](./TODO.md)
 
@@ -187,6 +187,6 @@ Try the method for Google Chrome, possibly using a ported extension.
 
 ## Other Browsers
 
-If you are using a browser that is not supported, try the method with Chrome or Firefox. If it is not working, [Submit an Issue](https://github.com/darccyy/cttab/issues/new)
+If you are using a browser that is not supported, try the method with Chrome or Firefox. If it is not working, [Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose)
 
 [Made by darcy](https://github.io/darccyy)
