@@ -247,14 +247,12 @@ sc.init = function () {
     ls.all.sc.amount !== 0 &&
     (!ls.all.sc.amount || isNaN(ls.all.sc.amount))
   ) {
-    console.log(true);
     ls.set(all => {
       all.sc.amount = sc.default;
     });
   }
 
   var html = "";
-  console.log(ls.all.sc.amount);
   for (var i = 0; i < ls.all.sc.amount; i++) {
     var item = ls.all.sc.array[i] || {};
     html += getTemplate("shortcut", {
@@ -423,7 +421,7 @@ confettiHandler.start = function () {
     scalar: 1.7,
   });
 
-  console.log("Support 𝑩𝒐𝒍𝒔𝒂!");
+  console.log(language.get("support"));
 };
 
 confettiHandler.disable = function () {

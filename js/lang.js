@@ -51,6 +51,8 @@ const language = {
       bg_color: "What colour? (CSS Compatible)\nLeave blank to reset colour",
       bg_image: "What is the link?\nLeave blank to remove image",
       bg_copy: "Press CTRL + C to copy colour",
+
+      support: "Support 𝑩𝒐𝒍𝒔𝒂!",
     },
 
     eo: {
@@ -104,6 +106,8 @@ const language = {
       bg_color: "Kiun koloroa? (CSS Kongrua)\nResti malplenan por restarigi koloron",
       bg_image: "Kiu estas la ligo?\nResti malplenan por foriri bildon",
       bg_copy: "Alklaki CTRL + C por almeti koloran",
+
+      support: "Subtenu 𝑩𝒐𝒍𝒔𝒐!",
     },
   },
 };
