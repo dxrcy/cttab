@@ -1,4 +1,4 @@
-# CTTab
+# CTTab <img src="./image/icon/128.png" alt="Small pink and cyan icon reading 'CTTab'" style="height: 1em" />
 
 The easiest Custom New Tab page for the browser!
 
