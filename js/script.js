@@ -51,7 +51,7 @@ ls.check = function () {
 ls.reset = function () {
   localStorage.cttab = JSON.stringify({
     header: null,
-    sc: Array(24).fill([]),
+    sc: { amount: sc.default, array: {} },
     search: null,
     notes: [""],
     lang: "en",
@@ -179,10 +179,8 @@ language.change = function (element) {
 };
 
 language.get = function (code, format) {
-  return F.format(
-    language.data[ls.all?.lang || "en"]?.[code] || `[${code}]`,
-    format,
-  );
+  var string = language.data[ls.all?.lang || "en"]?.[code];
+  return F.format(string || string === "" ? string : `[${code}]`, format);
 };
 
 language.switch = function () {
@@ -243,26 +241,38 @@ header.edit = function (event) {
 };
 
 // Shortcuts
-const sc = {};
+const sc = { default: 24 };
 sc.init = function () {
+  if (
+    ls.all.sc.amount !== 0 &&
+    (!ls.all.sc.amount || isNaN(ls.all.sc.amount))
+  ) {
+    console.log(true);
+    ls.set(all => {
+      all.sc.amount = sc.default;
+    });
+  }
+
   var html = "";
-  for (var i = 0; i < ls.all.sc.length; i++) {
+  console.log(ls.all.sc.amount);
+  for (var i = 0; i < ls.all.sc.amount; i++) {
+    var item = ls.all.sc.array[i] || {};
     html += getTemplate("shortcut", {
       //? Add truncate
       title:
-        ls.all.sc[i][0] != undefined
-          ? ls.all.sc[i][0]
+        item[0] != undefined
+          ? item[0]
           : F.format(language.get("sc_text_default"), { number: i + 1 }),
-      href: ls.all.sc[i][1] || "https://epicwebsite.bruh.international",
-      imageHref: ls.all.sc[i][1]?.startsWith("file:")
+      href: item[1] || "https://epicwebsite.bruh.international",
+      imageHref: item[1]?.startsWith("file:")
         ? "./image/file.png"
-        : ls.all.sc[i][0] || ls.all.sc[i][1]
+        : item[0] || item[1]
         ? "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" +
-          (ls.all.sc[i][1] || "https://epicwebsite.bruh.international")
+          (item[1] || "https://epicwebsite.bruh.international")
         : "",
-      imgClass: ls.all.sc[i][0] || ls.all.sc[i][1] ? "" : "hide",
+      imgClass: item[0] || item[1] ? "" : "hide",
       number: i,
-      empty: ls.all.sc[i][0] != undefined && ls.all.sc[i][1] ? "" : "empty",
+      empty: item[0] != undefined && item[1] ? "" : "empty",
     });
   }
   $("#shortcuts").html(html);
@@ -272,11 +282,11 @@ sc.init = function () {
 sc.edit = function (number) {
   var href = prompt(
     F.format(language.get("sc_edit_url"), { number: number + 1 }),
-    ls.all.sc[number][1] || "https://epicwebsite.bruh.international",
+    ls.all.sc.array?.[number]?.[1] || "https://epicwebsite.bruh.international",
   );
   if (href === "") {
     ls.set(all => {
-      all.sc[number] = [];
+      all.sc.array[number] = [];
     });
     sc.init();
   }
@@ -286,8 +296,8 @@ sc.edit = function (number) {
 
   var title = prompt(
     F.format(language.get("sc_edit_text"), { number: number + 1 }),
-    ls.all.sc[number][0] != undefined
-      ? ls.all.sc[number][0]
+    ls.all.sc.array?.[number]?.[0] != undefined
+      ? ls.all.sc.array?.[number]?.[0]
       : F.format(language.get("sc_edit_text_default"), { number: number + 1 }),
   );
   if (title === undefined) {
@@ -295,13 +305,39 @@ sc.edit = function (number) {
   }
 
   ls.set(all => {
-    all.sc[number] = [title, formatURL(href)];
+    all.sc.array[number] = [title, formatURL(href)];
   });
   sc.init();
 };
 
 sc.imageError = function (number) {
   $(`.shortcut[number="${number}"] img`).attr("src", "./image/error.png");
+};
+
+sc.editAmount = function () {
+  var amount = prompt(
+    language.get("sc_amount_text", { default: sc.default }),
+    ls.all.sc.amount || ls.all.sc.amount === 0 ? ls.all.sc.amount : sc.default,
+  );
+
+  if (!amount) {
+    amount = sc.default;
+  } else {
+    amount = parseInt(amount);
+    if (isNaN(amount) || amount < 0) {
+      alert(language.get("sc_amount_invalid"));
+      return;
+    }
+    if (amount > 60) {
+      alert(language.get("sc_amount_max"));
+      return;
+    }
+  }
+
+  ls.set(all => {
+    all.sc.amount = amount;
+  });
+  sc.init();
 };
 
 function formatURL(string) {
@@ -348,6 +384,9 @@ notes.edit = function (number) {
 };
 
 notes.delete = function (number) {
+  if (ls.all.notes[number] && !confirm(language.get("note_delete_confirm"))) {
+    return;
+  }
   ls.set(all => {
     all.notes = [...all.notes.slice(0, number), ...all.notes.slice(number + 1)];
   });

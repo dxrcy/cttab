@@ -6,6 +6,18 @@ The 'CT' in the name stands for 'Custom Tab'
 
 [TODO List](./TODO.md)
 
+# Features
+
+## Shortcuts
+
+## Quick Notes
+
+## Custom Background Color & Image
+
+## Custom Title & Header
+
+## Import & Export Settings
+
 # Setup
 
 ## Firefox
@@ -31,7 +43,7 @@ The 'CT' in the name stands for 'Custom Tab'
 ### Open on new tab (Offline)
 
 1. Create a text file one your Desktop and name it `autoconfig.cfg`
-2. Insert this code: 
+2. Insert this code:
 
 ```
 // First line must be comment! Do not delete this line!
@@ -39,13 +51,13 @@ var {classes:Cc,interfaces:Ci,utils:Cu} = Components;
 try { Cu.import("resource:///modules/AboutNewTab.jsm");
 var newTabURL = "file:///C:/Users/yourname/yourfile.html";
 AboutNewTab.newTabURL = newTabURL;
-} catch(e){Cu.reportError(e);} // report errors in the Browser Console 
+} catch(e){Cu.reportError(e);} // report errors in the Browser Console
 ```
 
 3. Replace `file:///C:/Users/yourname/yourfile.html` with the path to the local file. Example: `file:///C:/Users/gangstaperson/Documents/new-tab.html`
 4. Save the file and Copy and Paste it into the root Firefox program folder. It is most likely `C:\Program Files\Mozilla Firefox`. You need to copy + paste because the folder usually has permissions that restrict editing of files.
 5. Create a new file called `autoconfig.js` and save it to Desktop
-6. Insert this code: 
+6. Insert this code:
 
 ```
 // First line must be comment! Do not delete this line!

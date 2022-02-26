@@ -2,6 +2,7 @@
 
 - Make README better
 - Add issue templates
+- Move top bar buttons, links
 
 ## Completed
 
