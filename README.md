@@ -4,6 +4,8 @@ The easiest Custom New Tab page for the browser!
 
 The '_CT_' in the name stands for '_Custom Tab_' :)
 
+**Check it out**: [CTTab Website](https://darccyy.github.io/cttab)
+
 # Contents
 
 - [Features](#features) - Explains the Awesome Features!
