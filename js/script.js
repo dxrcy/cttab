@@ -404,7 +404,7 @@ confettiHandler.show = function () {
 };
 
 // Background
-const bg = {default: "#202038"};
+const bg = { default: "#202038" };
 
 bg.init = function () {
   if (!ls.all.bg) {
@@ -456,6 +456,7 @@ bg.init = function () {
         : colors.length === 1
         ? colors[0]
         : F.randomChoice(colors);
+    // Select default color with dollar
     if (color === "$") {
       color = bg.default;
     }
@@ -464,10 +465,12 @@ bg.init = function () {
     if (isRandom) {
       var settings = { h0: 0, h1: 360, s0: 0, s1: 100, v0: 0, v1: 100 };
       var weight = 1;
+      var isAbsoluteWeight = false;
       for (var i in random) {
         var param = random[i];
-        if (param[0] === "w") {
+        if (param[0].toLocaleLowerCase() === "w") {
           weight = parseFloat(param.slice(1));
+          isAbsoluteWeight = param[0] === "W";
         } else if ("hsv".includes(param[0])) {
           var num = parseInt(param.slice(2));
           if (param[1] === "=") {
@@ -482,11 +485,8 @@ bg.init = function () {
       }
 
       // Create random color if weight is selected
-      if (
-        !colors ||
-        colors.length === 0 ||
-        Math.random() > weight / (colors.length + 1)
-      ) {
+      var weight = isAbsoluteWeight ? weight : weight / (colors.length + 1);
+      if (!colors || colors.length === 0 || Math.random() < weight) {
         color = F.hsv2hex(
           F.randomInt(settings.h0, Math.max(settings.h0, settings.h1)),
           F.randomInt(settings.s0, Math.max(settings.s0, settings.s1)),
