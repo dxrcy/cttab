@@ -54,6 +54,7 @@ ls.resetConfirm = function () {
     return;
   }
   ls.reset();
+  location.reload();
 };
 
 ls.__defineGetter__("all", () => {
