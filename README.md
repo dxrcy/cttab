@@ -196,7 +196,7 @@ pref("general.config.sandbox_enabled", false);
 8. Disable any extensions that interfere with the tabs
 9. Then restart Firefox.
 
-To open on a new window, follow the steps under the above guide, with the file path the same as the new tab path. ⭐
+To open on a new window, follow the steps under the above guide, with the file path the same as the new tab path.
 
 ## Chrome
 
