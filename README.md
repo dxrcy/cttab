@@ -10,7 +10,7 @@ Works on Firefox, Chrome, and possible more!
 
 <img src="./image/tutorial/main.png" alt="Screenshot of CTTab page" />
 
-# Contentsz
+# Contents
 
 - [Features](#features) - Explains the Awesome Features!
 - [Setup](#setup) - How to set up on browser
