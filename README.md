@@ -8,7 +8,9 @@ The '_CT_' in the name stands for '_Custom Tab_' :)
 
 Works on Firefox, Chrome, and possible more!
 
-# Contents
+<img src="./image/tutorial/main.png" alt="Screenshot of CTTab page" />
+
+# Contentsz
 
 - [Features](#features) - Explains the Awesome Features!
 - [Setup](#setup) - How to set up on browser
