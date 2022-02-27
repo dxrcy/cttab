@@ -6,14 +6,14 @@ The '_CT_' in the name stands for '_Custom Tab_' :)
 
 **Check it out**: [CTTab Website](https://darccyy.github.io/cttab)
 
+Works on Firefox, Chrome, and possible more!
+
 # Contents
 
 - [Features](#features) - Explains the Awesome Features!
 - [Setup](#setup) - How to set up on browser
 - [Contributing](#contributing) - How to contribute to the project
 - [Issues](#issues) - How to submit an issue
-
-<img src="./image/icon/512.png" alt="Pink and cyan icon reading 'CTTab'" title="Really cool icon!" />
 
 # Features
 
@@ -25,6 +25,8 @@ Fully customizable shortcuts to commonly visited sites!
 - Remove by entering blank text into the URL input box
 - Change the amount of shortcuts shown in the top bar '_Change shortcuts_'
 
+<img src="./image/tutorial/sc.png" alt="Explanation of shortcuts" />
+
 ## Quick Notes
 
 Easy notepads for taking short notes in an instant!
@@ -33,6 +35,8 @@ Easy notepads for taking short notes in an instant!
 - Type some text
 - Delete the note with the trash icon
 - Create multiple notes at once!
+
+<img src="./image/tutorial/notes.png" alt="Explanation of notes" />
 
 ## Custom Background Colour & Image
 
@@ -93,9 +97,54 @@ If you can translate into more languages, please consider [contributing](#contri
 
 # Setup
 
-## Firefox
+## Downloading files
 
-### Open in new window
+Download using [powershell](#download-using-powershell) or [manually](#download-manually)
+
+If you run into any problems, [Submit an Issue](#issues) for this repo and I will try to help.
+
+### Download using Powershell
+
+This solution follows the same initial steps as a [Contribution](#contributing)
+
+Make sure you have [Git](https://git-scm.com/downloads) installed.
+
+This has been tested in Windows 10 with PowerShell.
+
+```powershell
+# Navigate to desired location - Example as Documents folder
+cd C:/Users/$env:UserName/Documents
+
+# Clone repository as ./cttab folder in current location, navigate into folder
+git clone https://github.com/darccyy/cttab.git
+cd cttab
+
+# Delete GitHub files
+# OPTIONAL - Only do this if you have no interest of making changes to the files
+rm -Recurse -Force .git
+
+# Open file in default program
+start index.html
+```
+
+Follow the steps below to open automatically (Below manual download)
+
+### Download Manually
+
+This has been tested in Windows 10, but it should work with systems.
+
+1. Open a browser to [https://github.com/darccyy/cttab](https://github.com/darccyy/cttab)
+2. Click the bright green 'Code' button
+3. Click 'Download ZIP'
+4. Save to a location on your computer
+5. Once downloaded, right click on the `.zip` foler in Explorer and click 'Extract All...'
+6. Click 'Extract' in the popup
+7. Open the extracted folder and find `index.html`
+8. That is the location to the file! You can open it in the browser, or follow the steps below to open automatically
+
+## Firefox ⭐
+
+### Open in new window ⭐
 
 1. Open Firefox and click the ☰ hamburger icon in the top right
 2. Click 'Options' from the drop-down menu
@@ -105,6 +154,8 @@ If you can translate into more languages, please consider [contributing](#contri
 
 ### Open on new tab (Online)
 
+Easier option, but less easy to use long term.
+
 1. Download '[New Tab Redirect](https://addons.mozilla.org/en-US/firefox/addon/custom-new-tab-page/)' from Firefox addons
 2. Click the ☰ hamburger icon in the top right
 3. Press 'Addons and Themes' from the drop-down menu
@@ -113,7 +164,9 @@ If you can translate into more languages, please consider [contributing](#contri
 6. Input 'https://darccyy.github.io/cttab' in the text box
 7. Scroll down and press 'Save'
 
-### Open on new tab (Offline)
+### Open on new tab (Offline) ⭐
+
+Difficult to set up, but the optimal option overall.
 
 1. Create a text file one your Desktop and name it `autoconfig.cfg`
 2. Insert this code:
@@ -143,7 +196,7 @@ pref("general.config.sandbox_enabled", false);
 8. Disable any extensions that interfere with the tabs
 9. Then restart Firefox.
 
-To open on a new window, follow the steps under the above guide, with the file path the same as the new tab path.
+To open on a new window, follow the steps under the above guide, with the file path the same as the new tab path. ⭐
 
 ## Chrome
 
@@ -181,8 +234,12 @@ This has been tested in Windows 10 with PowerShell, but it should work for other
 If you run into any problems, [Submit an Issue](#issues) for this repo and I will try to help.
 
 ```powershell
-# Clone repository into ./cttab
-git clone https://github.com/darccyy/react-express-template.git
+# Navigate to desired location - Example Documents folder
+cd C:/Users/$env:UserName/Documents
+
+# Clone repository as ./cttab folder in current location, navigate into folder
+git clone https://github.com/darccyy/cttab.git
+cd cttab
 
 # ... make changes to files...
 
@@ -200,6 +257,6 @@ git push -u origin main
 
 [TODO List](./TODO.md) - View issues being worked on
 
----
+<img src="./image/icon/512.png" alt="Pink and cyan icon reading 'CTTab'" title="Really cool icon!" />
 
 [Made by darcy](https://github.io/darccyy)
