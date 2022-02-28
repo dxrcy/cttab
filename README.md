@@ -1,4 +1,4 @@
-# CTTab <img src="./image/icon/128.png" alt="Small pink and cyan icon reading 'CTTab'" style="height: 1em" />
+# CTTab<img src="./image/icon/128.png" alt="Small pink and cyan icon reading 'CTTab'" style="height: 1em; margin-left: 0.2em" />
 
 The easiest Custom New Tab page for the browser!
 
@@ -25,9 +25,12 @@ Fully customizable shortcuts to commonly visited sites!
 
 - Click the Edit button to change the link and title of each shortcut
 - Remove by entering blank text into the URL input box
+- Icon will automatically be fetched
 - Change the amount of shortcuts shown in the top bar '_Change shortcuts_'
 
 <img src="./image/tutorial/sc.png" alt="Explanation of shortcuts" />
+
+Object: `sc`
 
 ## Quick Notes
 
@@ -35,10 +38,12 @@ Easy notepads for taking short notes in an instant!
 
 - Create a new note in the top bar '_Add note_'
 - Type some text
-- Delete the note with the trash icon
 - Create multiple notes at once!
+- Delete the note with the trash icon
 
 <img src="./image/tutorial/notes.png" alt="Explanation of notes" />
+
+Object: `notes`
 
 ## Custom Background Colour & Image
 
@@ -47,11 +52,15 @@ Create any sort of dynamic background, with random colours and images!
 - Open the background editor in the top bar '_Change background_'
 - Choose how to change the background
 
-### Reset all (`0`)
+Object: `bg`
+  
+### Background Guide
+
+#### Reset all (`0`)
 
 Change all the background to default solid colour `#202038`
 
-### Solid colour (Or background of transparent image) (`1`)
+#### Solid colour (Or background of transparent image) (`1`)
 
 - Change the solid background color
 - If an image is enabled with a transparent background, the colour will be the background
@@ -59,15 +68,32 @@ Change all the background to default solid colour `#202038`
 - Add `$` to represent default colour
 - Add multiple colours by seperating by space - Colour will be chosen randomly each load
 - Add randomly generated colour with `?`
-- - Any text after the `?` will be used as parameters, as follows
+- - Any text after the `?` will be used as parameters for generated colours, as follows:
 - - To change the HSV requirements, use `a=n`, `a<n`, `a>n` syntax, with `a` being a letter of `h` (hue), `s` (saturation), or `v` (value), and `n` being a number between `0-360` for hue, or `0-100` for saturation and value
 - - To change the weight (chance) of the generated colour being chosen, use `w=n` or `W=n` with `n` being a number from `0-Infinity` - `w` (Lowercase) represents weight relative to the amount of other colours given, whereas `W` (Uppercase) represents absolute weight
 
-### Local or online image (`2`)
+Eg. `red #F0F $ rgb(50, 200, 100) ? s>50 v=100 W0.5`
+
+This represents the following:
+- `50%` chance of getting a random colour (`W0.5` - Absolute weight)
+- Generated colour saturation will be greater than `50%` (`s>50`)
+- Generated colour value (lightness) will be `100%` always (`v=100`)
+- Non-generated colours will be randomly selected between:
+- - `red` - (`#F00`)
+- - `#F0F` - Magenta (`magenta`)
+- - `$` - Default colour - Grey blue (`#202038`)
+- - `rgb(50, 200, 100)` - Light green (`#32C864`)
+- Note that `rgb(50, 200, 100)` is parsed as one colour, even if it includes spaces
+
+**`hsv` and `hsl` support coming soon!**
+
+#### Local or online image (`2`)
 
 Add the URL of a local image file, or an online link to an image
 
-### Copy current colour (`3`)
+Eg. `https://darccyy.github.io/cttab/image/icon/256.png`
+
+#### Copy current colour (`3`)
 
 If you like a randomly generated colour, you can use this option to select the current background colour (Also works with custom colours)
 
@@ -77,11 +103,17 @@ Change the Header bar and the Title (Seen in Tabs, Bookmarks, ect.)!
 
 - Click the header to edit, very easy and simple!
 
+Object: `header`
+
 ## Confetti
 
 Instant confetti celebration with one simple click!
 
 This is a secret feature, can you find it?
+<span style="font-size: 30%; opacity: 0.3; line-height: 0">
+It is also available through console commands, if you are a little baby.
+</span>
+Object: `confettiHandler` (`confetti` is the imported object)
 
 ## Import & Export Settings
 
@@ -91,11 +123,15 @@ Save and load settings to a JSON file on your computer! Back up your shortcuts!
 - Import settings from a file in the top bar '_Import_'
 - Settings are saved to `localStorage`
 
+Object: `ls`
+
 ## Change Language
 
 Choose between **TWO** languages!
 
 If you can translate into more languages, please consider [contributing](#contributing) to to this project!
+
+Object: `language` (**NOT** `lang`)
 
 # Setup
 
@@ -170,8 +206,9 @@ Easier option, but less easy to use long term.
 
 Difficult to set up, but the optimal option overall.
 
-1. Create a text file one your Desktop and name it `autoconfig.cfg`
-2. Insert this code:
+1. [Follow instructions to download files](#downloading-files)
+2. Create a text file one your Desktop and name it `autoconfig.cfg`
+3. Insert this code:
 
 ```
 // First line must be comment! Do not delete this line!
@@ -182,10 +219,10 @@ AboutNewTab.newTabURL = newTabURL;
 } catch(e){Cu.reportError(e);} // report errors in the Browser Console
 ```
 
-3. Replace `file:///C:/Users/yourname/yourfile.html` with the path to the local file. Example: `file:///C:/Users/gangstaperson/Documents/new-tab.html`
-4. Save the file and Copy and Paste it into the root Firefox program folder. It is most likely `C:\Program Files\Mozilla Firefox`. You need to copy + paste because the folder usually has permissions that restrict editing of files.
-5. Create a new file called `autoconfig.js` and save it to Desktop
-6. Insert this code:
+4. Replace `file:///C:/Users/yourname/yourfile.html` with the path to the local file. Example: `file:///C:/Users/gangstaperson/Documents/cttab/index.html`
+5. Save the file and Copy and Paste it into the root Firefox program folder. It is most likely `C:\Program Files\Mozilla Firefox`. You need to copy + paste because the folder usually has permissions that restrict editing of files.
+6. Create a new file called `autoconfig.js` and save it to Desktop
+7. Insert this code:
 
 ```
 // First line must be comment! Do not delete this line!
@@ -194,9 +231,9 @@ pref("general.config.obscure_value", 0);
 pref("general.config.sandbox_enabled", false);
 ```
 
-7. Copy and Paste that file into `defaults/pref` in the Firefox program folder used before.
-8. Disable any extensions that interfere with the tabs
-9. Then restart Firefox.
+8. Copy and Paste that file into `defaults/pref` in the Firefox program folder used before.
+9. Disable any extensions that interfere with the tabs
+10. Then restart Firefox.
 
 To open on a new window, follow the steps under the above guide, with the file path the same as the new tab path.
 
@@ -210,12 +247,10 @@ To open on a new window, follow the steps under the above guide, with the file p
 
 ### Open on new tab (Offline)
 
-1. Press the ⋮ menu button
-2. Click on 'More Tools' and then 'Save page as'
-3. Then choose a location to save it
-4. See above to open on new tab, but use your own location instead
+1. [Follow instructions to download files](#downloading-files)
+2. Follow the instructions above, with the path to the `index.html` file as the URL. Example: `file:///C:/Users/gangstaperson/Documents/cttab/index.html`
 
-## Chromium Based (Edge, Brave, ect)
+## Chromium Forks (Edge, Brave, ect)
 
 Try the method for Google Chrome, possibly using a ported extension.
 
@@ -243,7 +278,7 @@ cd C:/Users/$env:UserName/Documents
 git clone https://github.com/darccyy/cttab.git
 cd cttab
 
-# ... make changes to files...
+# ... make an awesome change to the files ...
 
 # Add and commit files
 git add .
@@ -255,10 +290,10 @@ git push -u origin main
 
 # Issues
 
-[Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose) - Choose a template and follow the steps
+[Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose) - Choose a template and follow the steps - I will try to fix it as soon as possible
 
 [TODO List](./TODO.md) - View issues being worked on
 
 <img src="./image/icon/512.png" alt="Pink and cyan icon reading 'CTTab'" title="Really cool icon!" />
 
-[Made by darcy](https://github.io/darccyy)
+[Made by darcy](https://github.com/darccyy)

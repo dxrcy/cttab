@@ -2,6 +2,7 @@
 
 - Move top bar buttons, links
 - Fix multiple notes positioning
+- Add hsv for background
 
 ## Completed
 

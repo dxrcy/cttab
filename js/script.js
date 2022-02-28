@@ -1,3 +1,4 @@
+// DOCUMENTATION - https://github.com/darccyy/cttab#cttab
 // Reload
 function init() {
   ls.check();
