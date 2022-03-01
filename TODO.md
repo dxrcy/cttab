@@ -1,9 +1,12 @@
 # TODO
 
-- Move top bar buttons, links
+- Add mobile support
+- - Move top bar buttons, links
+- - Shortcuts
 - Fix multiple notes positioning
 - Add hsv for background
 - Add 'lang-unknown' classes
+- Add comments
 
 ## Completed
 

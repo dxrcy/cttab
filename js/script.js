@@ -136,40 +136,63 @@ language.change = function (element) {
   if (element.constructor === String || element.constructor === HTMLElement) {
     element = $(element);
   }
-  
-  var text = element.text().split(" ").join("").split("\n").join("");
+  var hasError = false;
+
+  var text = element.text().replace(/^[ \n]*|[ \n]*$/gm, ""); // Remove start, end spaces, new lines
   if (
     !element.hasClass("lang-ignore-text") &&
     text?.startsWith("[") &&
     text.endsWith("]")
-    ) {
+  ) {
+    var code = text.slice(1, -1).split(" ")[0] || "null";
+
     element.text(
       language.get(
-        text.slice(1, -1).split(" ")[0] || "null",
+        code,
         JSON.parse(text.slice(1, -1).split(" ").slice(1).join(" ") || "{}"),
       ),
     );
+
+    if (!language.getIfExists(code)) {
+      hasError = true;
+      element.addClass("lang-unknown-text");
+    }
   }
 
   var attributes = ["title", "placeholder"];
   for (var i in attributes) {
     var attr = element.attr(attributes[i]);
     if (attr && attr.startsWith("[") && attr.endsWith("]")) {
+      var code = attr.slice(1, -1).split(" ")[0] || "null";
+
       element.attr(
         attributes[i],
         language.get(
-          attr.slice(1, -1).split(" ")[0] || "null",
+          code,
           JSON.parse(attr.slice(1, -1).split(" ").slice(1).join(" ") || "{}"),
         ),
       );
+
+      if (!language.getIfExists(code)) {
+        hasError = true;
+        element.addClass("lang-unknown-" + attr);
+      }
     }
+  }
+
+  if (hasError) {
+    element.addClass("lang-error");
   }
 
   element.addClass("lang-filled");
 };
 
+language.getIfExists = function (code) {
+  return language.data[ls.all?.lang || "en"]?.[code];
+};
+
 language.get = function (code, format) {
-  var string = language.data[ls.all?.lang || "en"]?.[code];
+  var string = language.getIfExists(code);
   return F.format(string || string === "" ? string : `[${code}]`, format);
 };
 
@@ -250,7 +273,7 @@ sc.init = function () {
       title:
         item[0] != undefined
           ? item[0]
-          : F.format(language.get("sc_text_default"), { number: i + 1 }),
+          : F.format(`[sc_text_default {"number": ${i + 1} }]`),
       href: item[1] || "https://epicwebsite.bruh.international",
       imageHref: item[1]?.startsWith("file:")
         ? "./image/file.png"

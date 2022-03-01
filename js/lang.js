@@ -13,8 +13,8 @@ const language = {
       top_bg_title: "Click to change background",
       top_sc: "Change shortcuts",
       top_sc_title: "Click to change the amount of shortcuts",
+      
       top_lang_title: "🌐 Change language",
-
       top_import: "Import",
       top_import_title: "Import settings from JSON string",
       top_export: "Export",
@@ -23,6 +23,7 @@ const language = {
       top_reset_title: "Reset all settings",
       top_about: "About",
       top_about_title: "About / help page\n{link}",
+      skip_focus: "Skip focus to notes",
 
       sc_text_default: "Shortcut {number}",
       sc_title: "{title}\n{href}",
@@ -34,7 +35,6 @@ const language = {
         "How many shortcuts?\nLeave blank to set to default ({default})\nType '0' to remove all",
       sc_amount_invalid:
         "Can only set a positive integer or zero less than or equal to 60",
-      skip_focus: "Skip focus to notes",
 
       note_placeholder: "Click to add notes...",
       note_title: "Click to add notes",
@@ -72,8 +72,8 @@ const language = {
       top_bg_title: "Alklaki por ŝanĝi fonon",
       top_sc: "Ŝanĝi ligojn",
       top_sc_title: "Alklaki por ŝanĝi logilojn",
+      
       top_lang_title: "🌐 Ŝanĝi lingvon",
-
       top_import: "Alŝuti",
       top_import_title: "Alŝuti fiksadojn el JSON teksto",
       top_export: "Elŝuti",
