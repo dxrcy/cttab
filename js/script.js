@@ -139,7 +139,7 @@ language.change = function (element) {
 
   var text = element.text();
   if (
-    !element.hasClass("ignore-text") &&
+    !element.hasClass("lang-ignore-text") &&
     text?.startsWith("[") &&
     text.endsWith("]")
   ) {
