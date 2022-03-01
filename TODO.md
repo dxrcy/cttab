@@ -3,6 +3,7 @@
 - Move top bar buttons, links
 - Fix multiple notes positioning
 - Add hsv for background
+- Add 'lang-unknown' classes
 
 ## Completed
 

@@ -136,13 +136,13 @@ language.change = function (element) {
   if (element.constructor === String || element.constructor === HTMLElement) {
     element = $(element);
   }
-
-  var text = element.text();
+  
+  var text = element.text().split(" ").join("").split("\n").join("");
   if (
     !element.hasClass("lang-ignore-text") &&
     text?.startsWith("[") &&
     text.endsWith("]")
-  ) {
+    ) {
     element.text(
       language.get(
         text.slice(1, -1).split(" ")[0] || "null",

@@ -1,9 +1,13 @@
+// Variables
 $header-height: 90px;
 $header-font-size: 55px;
+
 $sc-height: 68px;
 $sc-font-size: 20px;
+
 $note-size: 225px;
 
+// Font
 @font-face {
   font-family: "Lato";
   font-style: normal;
@@ -15,6 +19,17 @@ $note-size: 225px;
     U+FEFF, U+FFFD;
 }
 
+// Global
+* {
+  font-family: Lato, Arial, Helvetica, sans-serif;
+}
+
+.lang-tofill,
+.lang-canfill {
+  color: transparent !important;
+}
+
+// Html, body
 html,
 body {
   max-width: 100%;
@@ -30,15 +45,7 @@ body {
   background-position: center;
 }
 
-* {
-  font-family: Lato, Arial, Helvetica, sans-serif;
-}
-
-.lang-tofill,
-.lang-canfill {
-  color: transparent !important;
-}
-
+// Header
 header {
   position: fixed;
   width: 100%;
@@ -65,13 +72,9 @@ header {
 
     &#header {
       position: absolute;
-      // display: inline-block;
-      // padding-top: 2px;
-      // margin-top: (($header-height - $header-font-size) / 2) - 5px;
       font-size: $header-font-size;
       font-weight: 500;
       border: none;
-      // background-color: red;
 
       width: 100%;
       top: 0;
@@ -84,12 +87,11 @@ header {
 
       &:focus-visible {
         border: 2px solid white;
-        // height: calc(#{$header-height} - 4px);
-        // width: calc(100% - 4px);
         outline: none;
       }
     }
 
+    // Skip focus past notes
     &.skip {
       position: absolute;
       top: 5px;

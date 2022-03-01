@@ -34,7 +34,7 @@ const language = {
         "How many shortcuts?\nLeave blank to set to default ({default})\nType '0' to remove all",
       sc_amount_invalid:
         "Can only set a positive integer or zero less than or equal to 60",
-        skip_focus: "Skip focus to notes",
+      skip_focus: "Skip focus to notes",
 
       note_placeholder: "Click to add notes...",
       note_title: "Click to add notes",
