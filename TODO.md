@@ -5,11 +5,14 @@
 - - Shortcuts
 - Fix multiple notes positioning
 - Add hsv for background
-- Add 'lang-unknown' classes
 - Add comments
+- Add NASA image of the day
 
 ## Completed
 
+- Fix URL toLowerCase for shortcuts
+- Fix shortcuts
+- Add 'lang-unknown' classes
 - Change icon
 - Add issue templates
 - Make README better

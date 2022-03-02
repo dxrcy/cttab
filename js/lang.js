@@ -25,12 +25,12 @@ const language = {
       top_about_title: "About / help page\n{link}",
       skip_focus: "Skip focus to notes",
 
-      sc_text_default: "Shortcut {number}",
-      sc_title: "{title}\n{href}",
+      sc_name_default: "Shortcut {number}",
+      sc_title: "{name}\n{href}",
+      sc_title_default: "Unnamed shortcut",
       sc_edit_title: "Click to edit shortcut",
       sc_edit_url: "URL of Shortcut {number}",
-      sc_edit_text: "Title of Shortcut {number}",
-      sc_edit_text_default: `Shortcut {number}`,
+      sc_edit_name: "Title of Shortcut {number}",
       sc_amount_text:
         "How many shortcuts?\nLeave blank to set to default ({default})\nType '0' to remove all",
       sc_amount_invalid:

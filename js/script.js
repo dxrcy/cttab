@@ -269,11 +269,11 @@ sc.init = function () {
   for (var i = 0; i < ls.all.sc.amount; i++) {
     var item = ls.all.sc.array[i] || {};
     html += getTemplate("shortcut", {
-      //? Add truncate
-      title:
+      name:
         item[0] != undefined
           ? item[0]
-          : F.format(`[sc_text_default {"number": ${i + 1} }]`),
+          : `[sc_name_default {"number": ${i + 1} }]`,
+      title: item[0] != undefined ? item[0] : language.get("sc_title_default"),
       href: item[1] || "https://epicwebsite.bruh.international",
       imageHref: item[1]?.startsWith("file:")
         ? "./image/file.png"
@@ -306,12 +306,12 @@ sc.edit = function (number) {
   }
 
   var title = prompt(
-    F.format(language.get("sc_edit_text"), { number: number + 1 }),
+    F.format(language.get("sc_edit_name"), { number: number + 1 }),
     ls.all.sc.array?.[number]?.[0] != undefined
       ? ls.all.sc.array?.[number]?.[0]
-      : F.format(language.get("sc_edit_text_default"), { number: number + 1 }),
+      : F.format(language.get("sc_name_default"), { number: number + 1 }),
   );
-  if (title === undefined) {
+  if (title === null) {
     return;
   }
 
@@ -355,23 +355,25 @@ function formatURL(string) {
   if (!string) {
     return string;
   }
-  string = string.toLowerCase();
+  var url = string.split("?");
+  var query = url.slice(1).join("?");
+  url = url[0].toLowerCase() + "?" + query;
 
-  if (string.startsWith("c:")) {
-    return "file:///" + string;
+  if (url.startsWith("c:")) {
+    return "file:///" + url;
   }
   if (
     !(
-      string.startsWith("file:") ||
-      string.startsWith("mailto:") ||
-      string.startsWith("https:") ||
-      string.startsWith("http:")
+      url.startsWith("file:") ||
+      url.startsWith("mailto:") ||
+      url.startsWith("https:") ||
+      url.startsWith("http:")
     )
   ) {
-    return "https://" + string;
+    return "https://" + url;
   }
 
-  return string;
+  return url;
 }
 
 // Notes
@@ -456,7 +458,7 @@ confettiHandler.show = function () {
 // Background
 const bg = { default: "#202038" };
 
-bg.init = function () {
+bg.init = async function () {
   if (!ls.all.bg) {
     ls.set(all => {
       all.bg = { color: null, image: null };
