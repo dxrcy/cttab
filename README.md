@@ -93,6 +93,8 @@ Add the URL of a local image file, or an online link to an image
 
 Eg. `https://darccyy.github.io/cttab/image/icon/256.png`
 
+To use *Image of the Day* from the *NASA API*, set the background image to `nasa`, and it will be automatically fetched.
+
 #### Copy current colour (`3`)
 
 If you like a randomly generated colour, you can use this option to select the current background colour (Also works with custom colours)
@@ -113,6 +115,7 @@ This is a secret feature, can you find it?
 <span style="font-size: 30%; opacity: 0.3; line-height: 0">
 It is also available through console commands, if you are a little baby.
 </span>
+
 Object: `confettiHandler` (`confetti` is the imported object)
 
 ## Import & Export Settings

@@ -284,6 +284,7 @@ sc.init = function () {
       imgClass: item[0] || item[1] ? "" : "hide",
       number: i,
       empty: item[0] != undefined && item[1] ? "" : "empty",
+      src: "src" // Prevent preloading image in template
     });
   }
   $("#shortcuts").html(html);
@@ -549,13 +550,25 @@ bg.init = async function () {
   }
 
   bg.current = color || bg.default;
-  document.body.style.backgroundColor = bg.current;
+  $("body").css("background-color", bg.current);
 
   // Add image
-  document.body.style.backgroundImage = "";
   if (ls.all.bg.image) {
-    document.body.style.backgroundImage = `url(${ls.all.bg.image})`;
+    // Nasa image
+    if (ls.all.bg.image === "nasa") {
+      var res = await fetch(
+        `https://api.nasa.gov/planetary/apod?date=${getYesterday()}&api_key=quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh`,
+      );
+      var json = await res.json();
+      $("body").css("background-image", `url(${json.url})`);
+      $("body").addClass("image-fetch");
+      return;
+    }
+
+    $("body").css("background-image", `url(${ls.all.bg.image})`);
+    return;
   }
+  $("body").css("background-image", "");
 };
 
 // Edit background colour, image
@@ -608,3 +621,21 @@ bg.edit = function () {
   });
   bg.init();
 };
+
+function getYesterday() {
+  var date = new Date();
+  date.setDate(date.getDate() - 1);
+
+  var dd = date.getDate();
+  var mm = date.getMonth() + 1;
+  var yyyy = date.getFullYear();
+
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+
+  return yyyy + "-" + mm + "-" + dd;
+}

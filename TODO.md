@@ -6,10 +6,11 @@
 - Fix multiple notes positioning
 - Add hsv for background
 - Add comments
-- Add NASA image of the day
+- Cache online image
 
 ## Completed
 
+- Add NASA image of the day
 - Fix URL toLowerCase for shortcuts
 - Fix shortcuts
 - Add 'lang-unknown' classes
