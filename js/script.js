@@ -359,7 +359,6 @@ function formatURL(string) {
   var url = string.split("?")[0].split("\\").join("/");
   var query = string.split("?").slice(1).join("?");
   
-  console.log("url", url);
   if (url.toLowerCase().startsWith("c:")) {
     return "file:///" + url;
   }
@@ -567,7 +566,6 @@ bg.init = async function () {
       return;
     }
 
-    console.log(formatURL(ls.all.bg.image));
     $("body").css("background-image", `url(${formatURL(ls.all.bg.image)})`);
     return;
   }
