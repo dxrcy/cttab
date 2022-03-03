@@ -84,12 +84,12 @@ const language = {
       top_about_title: "Pri / helpa paĝo\n{link}",
       skip_focus: "Salti fokuso al notoj",
 
-      sc_text_default: "Ligi {number}",
+      sc_name_default: "Ligo {number}",
       sc_title: "{title}\n{href}",
+      sc_title_default: "Sennoma ligo",
       sc_edit_title: "Alklaki por ŝangi ligon",
       sc_edit_url: "URL de ligo {number}",
-      sc_edit_text: "Titilo de ligo {number}",
-      sc_edit_text_default: `ligo {number}`,
+      sc_edit_name: "Titilo de ligo {number}",
       sc_amount_text:
         "Kiom da ligojn?\nResti malplenan por ŝanĝi al la defaŭlta ({default})\nTajpi '0' por foriri ĉiojn",
       sc_amount_invalid:
