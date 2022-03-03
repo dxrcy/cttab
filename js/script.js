@@ -356,13 +356,15 @@ function formatURL(string) {
   if (!string) {
     return string;
   }
-  var url = string.split("?");
-  var query = url.slice(1).join("?");
-  url = url[0].toLowerCase() + "?" + query;
-
-  if (url.startsWith("c:")) {
+  var url = string.split("?")[0].split("\\").join("/");
+  var query = string.split("?").slice(1).join("?");
+  
+  console.log("url", url);
+  if (url.toLowerCase().startsWith("c:")) {
     return "file:///" + url;
   }
+
+  url = url.toLowerCase() + (query ? ("?" + query) : "");
   if (
     !(
       url.startsWith("file:") ||
@@ -565,7 +567,8 @@ bg.init = async function () {
       return;
     }
 
-    $("body").css("background-image", `url(${ls.all.bg.image})`);
+    console.log(formatURL(ls.all.bg.image));
+    $("body").css("background-image", `url(${formatURL(ls.all.bg.image)})`);
     return;
   }
   $("body").css("background-image", "");
