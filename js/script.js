@@ -284,7 +284,7 @@ sc.init = function () {
       imgClass: item[0] || item[1] ? "" : "hide",
       number: i,
       empty: item[0] != undefined && item[1] ? "" : "empty",
-      src: "src" // Prevent preloading image in template
+      src: "src", // Prevent preloading image in template
     });
   }
   $("#shortcuts").html(html);
@@ -358,18 +358,19 @@ function formatURL(string) {
   }
   var url = string.split("?")[0].split("\\").join("/");
   var query = string.split("?").slice(1).join("?");
-  
-  if (url.toLowerCase().startsWith("c:")) {
+  var urlLower = url.toLowerCase();
+  url += query ? "?" + query : "";
+
+  if (urlLower.startsWith("c:")) {
     return "file:///" + url;
   }
 
-  url = url.toLowerCase() + (query ? ("?" + query) : "");
   if (
     !(
-      url.startsWith("file:") ||
-      url.startsWith("mailto:") ||
-      url.startsWith("https:") ||
-      url.startsWith("http:")
+      urlLower.startsWith("file:") ||
+      urlLower.startsWith("mailto:") ||
+      urlLower.startsWith("https:") ||
+      urlLower.startsWith("http:")
     )
   ) {
     return "https://" + url;
