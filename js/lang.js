@@ -85,7 +85,7 @@ const language = {
       skip_focus: "Salti fokuso al notoj",
 
       sc_name_default: "Ligo {number}",
-      sc_title: "{title}\n{href}",
+      sc_title: "{name}\n{href}",
       sc_title_default: "Sennoma ligo",
       sc_edit_title: "Alklaki por ŝangi ligon",
       sc_edit_url: "URL de ligo {number}",
