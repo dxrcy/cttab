@@ -53,7 +53,7 @@ Create any sort of dynamic background, with random colours and images!
 - Choose how to change the background
 
 Object: `bg`
-  
+
 ### Background Guide
 
 #### Reset all (`0`)
@@ -75,6 +75,7 @@ Change all the background to default solid colour `#202038`
 Eg. `red #F0F $ rgb(50, 200, 100) ? s>50 v=100 W0.5`
 
 This represents the following:
+
 - `50%` chance of getting a random colour (`W0.5` - Absolute weight)
 - Generated colour saturation will be greater than `50%` (`s>50`)
 - Generated colour value (lightness) will be `100%` always (`v=100`)
@@ -93,7 +94,7 @@ Add the URL of a local image file, or an online link to an image
 
 Eg. `https://darccyy.github.io/cttab/image/icon/256.png`
 
-To use *Image of the Day* from the *NASA API*, set the background image to `nasa`, and it will be automatically fetched.
+To use _Image of the Day_ from the _NASA API_, set the background image to `nasa`, and it will be automatically fetched.
 
 #### Copy current colour (`3`)
 
