@@ -227,7 +227,7 @@ header.init = function () {
   for (var i in chars) {
     text = text.split(i).join(chars[i]);
   }
-  if (text.toLowerCase() === "bolsa") {
+  if (["bolsa", "bolso"].includes(text.toLowerCase())) {
     confettiHandler.show();
   }
 };
@@ -331,17 +331,16 @@ sc.editAmount = function () {
     language.get("sc_amount_text", { default: sc.default }),
     ls.all.sc.amount || ls.all.sc.amount === 0 ? ls.all.sc.amount : sc.default,
   );
+  if (amount === null) {
+    return;
+  }
 
   if (!amount) {
     amount = sc.default;
   } else {
     amount = parseInt(amount);
-    if (isNaN(amount) || amount < 0) {
+    if (isNaN(amount) || amount < 0 || amount > 60) {
       alert(language.get("sc_amount_invalid"));
-      return;
-    }
-    if (amount > 60) {
-      alert(language.get("sc_amount_max"));
       return;
     }
   }
@@ -556,8 +555,12 @@ bg.init = async function () {
 
   // Add image
   if (ls.all.bg.image) {
+    // Random choice
+    var image = F.randomChoice(ls.all.bg.image.split(" "));
+    console.log(image);
+
     // Nasa image
-    if (ls.all.bg.image === "nasa") {
+    if (image === "nasa") {
       var res = await fetch(
         `https://api.nasa.gov/planetary/apod?date=${getYesterday()}&api_key=quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh`,
       );
@@ -567,7 +570,7 @@ bg.init = async function () {
       return;
     }
 
-    $("body").css("background-image", `url(${formatURL(ls.all.bg.image)})`);
+    $("body").css("background-image", `url(${formatURL(image)})`);
     return;
   }
   $("body").css("background-image", "");
@@ -601,7 +604,8 @@ bg.edit = function () {
   } else if (typeName === "image") {
     value = prompt(
       language.get("bg_image"),
-      ls.all.bg.image || "https://example.com/image.jpeg || C:/path/image.jpeg",
+      ls.all.bg.image ||
+        "https://example.com/image.jpeg || C:/path/image.jpeg || nasa",
     );
   } else {
     return;

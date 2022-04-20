@@ -13,7 +13,7 @@ const language = {
       top_bg_title: "Click to change background",
       top_sc: "Change shortcuts",
       top_sc_title: "Click to change the amount of shortcuts",
-      
+
       top_lang_title: "🌐 Change language",
       top_import: "Import",
       top_import_title: "Import settings from JSON string",
@@ -53,7 +53,8 @@ const language = {
         "What style to change?\n   0 - Reset all\n   1 - Solid colour (Or background of transparent image)\n   2 - Local or online image\n   3 - Copy current colour",
       bg_reset: "Are you sure you want to reset background?",
       bg_color: "What colour? (CSS Compatible)\nLeave blank to reset colour",
-      bg_image: "What is the link?\nLeave blank to remove image",
+      bg_image:
+        "What is the link?\nLeave blank to remove image\nUse 'nasa' for image of the day",
       bg_copy: "Press CTRL + C to copy colour",
 
       support: "Support 𝑩𝒐𝒍𝒔𝒂!",
@@ -72,7 +73,7 @@ const language = {
       top_bg_title: "Alklaki por ŝanĝi fonon",
       top_sc: "Ŝanĝi ligojn",
       top_sc_title: "Alklaki por ŝanĝi logilojn",
-      
+
       top_lang_title: "🌐 Ŝanĝi lingvon",
       top_import: "Alŝuti",
       top_import_title: "Alŝuti fiksadojn el JSON teksto",
@@ -113,7 +114,8 @@ const language = {
       bg_reset: "Ĉu vi ja volas restarigi fonon?",
       bg_color:
         "Kiun koloroa? (CSS Kongrua)\nResti malplenan por restarigi koloron",
-      bg_image: "Kiu estas la ligo?\nResti malplenan por foriri bildon",
+      bg_image:
+        "Kiu estas la ligo?\nResti malplenan por foriri bildon\nUzu 'nasa' por bildo de la tago",
       bg_copy: "Alklaki CTRL + C por almeti koloran",
 
       support: "Subtenu 𝑩𝒐𝒍𝒔𝒐!",
