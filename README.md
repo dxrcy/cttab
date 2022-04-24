@@ -90,9 +90,9 @@ This represents the following:
 
 #### Local or online image (`2`)
 
-Add the URL of a local image file, or an online link to an image
+Add the URL of multiple local image files, or online links to images, separated by a space.
 
-Eg. `https://darccyy.github.io/cttab/image/icon/256.png`
+Eg. `C:/Desktop/troll_face.jpg https://darccyy.github.io/cttab/image/icon/256.png nasa`
 
 To use _Image of the Day_ from the _NASA API_, set the background image to `nasa`, and it will be automatically fetched.
 
