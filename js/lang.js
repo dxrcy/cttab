@@ -102,7 +102,7 @@ const language = {
       note_delete_confirm: "Ĉu vi ja volas foriri ĉi tiun noton?",
 
       footer_main: "Per",
-      footer_name: "Dasio",
+      footer_name: "dasio",
       footer_name_title: "Tiu estas mi!",
 
       ls_reset: "Ĉu vi ja volas restarigi ĉiojn fiksadojn?",
