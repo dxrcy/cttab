@@ -6,7 +6,7 @@ The '_CT_' in the name stands for '_Custom Tab_' :)
 
 **Check it out**: [CTTab Website](https://darccyy.github.io/cttab)
 
-Works on Firefox, Chrome, and possible more!
+Works on Firefox, Chrome, and possibly more!
 
 <img src="./image/tutorial/main.png" alt="Screenshot of CTTab page" />
 

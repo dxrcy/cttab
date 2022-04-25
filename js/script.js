@@ -557,7 +557,6 @@ bg.init = async function () {
   if (ls.all.bg.image) {
     // Random choice
     var image = F.randomChoice(ls.all.bg.image.split(" "));
-    console.log(image);
 
     // Nasa image
     if (image === "nasa") {
