@@ -45,6 +45,7 @@ ls.reset = function () {
     notes: [""],
     lang: "en",
     bg: { color: null, image: null },
+    cache: {},
   });
 
   init();
@@ -560,12 +561,39 @@ bg.init = async function () {
 
     // Nasa image
     if (image === "nasa") {
-      var res = await fetch(
-        `https://api.nasa.gov/planetary/apod?date=${getYesterday()}&api_key=quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh`,
-      );
-      var json = await res.json();
-      $("body").css("background-image", `url(${json.url})`);
-      $("body").addClass("image-fetch");
+      // Reset cache
+      if (!ls.all.cache.nasa) {
+        ls.set(all => {
+          all.cache.nasa = { time: 0, url: null };
+        });
+      }
+
+      // Load cached
+      if (ls.all.cache.nasa.url) {
+        $("body").css("background-image", `url(${ls.all.cache.nasa.url})`);
+        $("body").addClass("image-fetch");
+      }
+
+      // If 1 hour since last refresh
+      if (Date.now() - ls.all.cache.nasa.time > 36e5) {
+        // Fetch url
+        var url = (
+          await (
+            await fetch(
+              `https://api.nasa.gov/planetary/apod?date=${getYesterday()}&api_key=quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh`,
+            )
+          ).json()
+        ).url;
+
+        // Store cache
+        ls.set(all => {
+          all.cache.nasa.url = url;
+          all.cache.nasa.time = Date.now();
+        });
+
+        $("body").css("background-image", `url(${url})`);
+        $("body").addClass("image-fetch");
+      }
       return;
     }
 
@@ -604,7 +632,7 @@ bg.edit = function () {
     value = prompt(
       language.get("bg_image"),
       ls.all.bg.image ||
-        "https://example.com/image.jpeg || C:/path/image.jpeg || nasa",
+        "https://example.com/image.jpeg C:/path/image.jpeg nasa",
     );
   } else {
     return;
