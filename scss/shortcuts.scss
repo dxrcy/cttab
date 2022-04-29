@@ -1,0 +1,103 @@
+@import "./variables.scss";
+
+// Shortcuts
+#shortcuts {
+  display: block;
+  text-align: center;
+  margin: ($header-height + 10px) 5px;
+  margin-bottom: 0;
+
+  article {
+    position: relative;
+    display: inline-block;
+    height: $sc-height;
+    text-align: center;
+
+    width: calc(100% / 6);
+
+    @media (max-width: 900px) {
+      width: calc(100% / 5);
+    }
+
+    @media (max-width: 700px) {
+      width: calc(100% / 4);
+    }
+
+    @media (max-width: 600px) {
+      width: calc(100% / 3);
+    }
+
+    @media (max-width: 500px) {
+      width: calc(100% / 2);
+    }
+
+    @media (max-width: 400px) {
+      width: calc(100% / 1);
+    }
+
+    &.empty {
+      span {
+        color: #888;
+      }
+    }
+
+    a {
+      display: inline-block;
+      width: calc(100% - 8px);
+      height: calc(100% - 8px);
+      margin: 0;
+      border-radius: 10px;
+      font-size: $sc-font-size;
+      overflow: hidden;
+      background-color: #0008;
+      color: white;
+
+      &:hover {
+        span {
+          text-decoration: underline;
+        }
+      }
+
+      &:focus-visible {
+        outline: 2px solid white;
+      }
+
+      span {
+        display: inline-block;
+        margin-top: calc(((#{$sc-height} / 2) - (#{$sc-font-size} / 2) - 5px));
+      }
+    }
+
+    img {
+      position: absolute;
+      width: 20px;
+      left: 8px;
+      bottom: 12px;
+
+      &.hide {
+        display: none;
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 6px;
+      bottom: 8px;
+      padding: 2px 1px 0 2px;
+      font-size: $sc-font-size * 0.9;
+      border: none;
+      background-color: #0000;
+      color: #aaa;
+      cursor: pointer;
+
+      &:hover {
+        color: white;
+      }
+
+      &:focus-visible {
+        border-radius: 5px;
+        outline: 2px solid white;
+      }
+    }
+  }
+}

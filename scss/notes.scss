@@ -1,0 +1,55 @@
+@import "./variables.scss";
+
+// Notes
+#notes {
+  display: block;
+  margin: 0 10px;
+
+  article {
+    position: relative;
+    width: $note-size;
+    height: $note-size;
+    float: left;
+
+    &:not(:first-of-type) {
+      margin-left: 20px;
+    }
+
+    textarea {
+      width: calc(100% - 16px);
+      height: calc(100% - 16px);
+      resize: none;
+      margin: 0;
+      padding: 5px;
+      border: 8px solid #999944;
+      font-size: 22px;
+      font-family: inherit;
+      background-color: #cbcb43;
+
+      &:focus-visible {
+        outline: 2px solid white;
+      }
+    }
+
+    button {
+      position: absolute;
+      right: 2px;
+      bottom: 1px;
+      padding: 2px 1px 0 2px;
+      font-size: 22px;
+      border: none;
+      background-color: #0000;
+      color: #717134;
+      cursor: pointer;
+
+      &:hover {
+        color: #545435;
+      }
+
+      &:focus-visible {
+        border-radius: 5px;
+        outline: 2px solid white;
+      }
+    }
+  }
+}

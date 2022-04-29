@@ -1,0 +1,158 @@
+@import "./variables.scss";
+
+// Header
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: $header-height;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #0008;
+
+  &:focus-visible {
+    border: 2px solid white;
+    height: calc(#{$header-height} - 4px);
+    width: calc(100% - 4px);
+
+    button {
+      padding-top: 0px;
+    }
+  }
+
+  button {
+    background-color: #0000;
+    color: white;
+
+    &#header {
+      position: absolute;
+      font-size: $header-font-size;
+      font-weight: 500;
+      border: none;
+
+      width: 100%;
+      top: 0;
+      height: $header-height;
+      margin: 0;
+      padding: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+
+      &:focus-visible {
+        border: 2px solid white;
+        outline: none;
+      }
+    }
+
+    // Skip focus past notes
+    &.skip {
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translate(-50%);
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      background: none;
+      outline: 2px solid white;
+      text-decoration: none;
+      pointer-events: none;
+
+      &:not(:focus-visible) {
+        opacity: 0;
+      }
+    }
+  }
+
+  left,
+  right {
+    position: fixed;
+    top: 7px;
+    z-index: 60;
+
+    .seperated {
+      item:not(:last-of-type)::after {
+        content: "|";
+        display: inline-block;
+        margin: 0 10px 0 15px;
+      }
+    }
+
+    item {
+      color: #aaa;
+
+      button,
+      a {
+        position: relative;
+        font-size: 16px;
+        text-decoration: none;
+        color: #aaa;
+        background-color: #0000;
+        border: none;
+        cursor: pointer;
+
+        &.about {
+          cursor: help;
+        }
+
+        &.icon {
+          display: inline-block;
+          user-select: none;
+
+          &.hidden {
+            display: none;
+          }
+
+          &[disabled] {
+            filter: grayscale(100%);
+            cursor: progress;
+          }
+
+          &:active {
+            transform: scale(1.2);
+          }
+        }
+
+        &:not(.icon) {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        &:focus-visible {
+          outline: none;
+
+          & > span {
+            border-radius: 5px;
+            outline: 2px solid white;
+          }
+        }
+
+        input {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          cursor: pointer;
+
+          &:focus-visible ~ span {
+            border-radius: 5px;
+            outline: 2px solid white;
+          }
+        }
+      }
+    }
+  }
+
+  left {
+    left: 7px;
+  }
+
+  right {
+    right: 7px;
+  }
+}
