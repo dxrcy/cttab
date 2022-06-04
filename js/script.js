@@ -269,20 +269,28 @@ sc.init = function () {
   var html = "";
   for (var i = 0; i < ls.all.sc.amount; i++) {
     var item = ls.all.sc.array[i] || {};
+
+    var iconType = "none",
+      iconHref = "";
+    if (item[1]) {
+      if (item[1].match(/(^file:\/*)|(^(https?:\/*)?localhost)/)) {
+        iconHref = "./image/file.png";
+        iconType = "file";
+      } else {
+        iconHref = getIcon(item[1]);
+        iconType = "faviconkit";
+      }
+    }
+
     html += getTemplate("shortcut", {
       name:
         item[0] != undefined
           ? item[0]
           : `[sc_name_default {"number": ${i + 1} }]`,
       title: item[0] != undefined ? item[0] : language.get("sc_title_default"),
-      href: item[1] || "https://epicwebsite.bruh.international",
-      imageHref: item[1]?.startsWith("file:")
-        ? "./image/file.png"
-        : item[0] || item[1]
-        ? "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" +
-          (item[1] || "https://epicwebsite.bruh.international")
-        : "",
-      imgClass: item[0] || item[1] ? "" : "hide",
+      href: item[1] || "",
+      iconHref,
+      className: (item[0] || item[1] ? " " : "hide ") + iconType,
       number: i,
       empty: item[0] != undefined && item[1] ? "" : "empty",
       src: "src", // Prevent preloading image in template
@@ -290,6 +298,38 @@ sc.init = function () {
   }
   $("#shortcuts").html(html);
   language.fillTemplate("#shortcuts");
+};
+
+// Get url for api
+function getIcon(href, useGstatic) {
+  if (useGstatic) {
+    return (
+      "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" +
+      (href || "")
+    );
+  }
+  if (!href) {
+    return "";
+  }
+  return "https://api.faviconkit.com/" + href.replace(/^https?:\/*/, "");
+}
+
+// Fallback icon
+sc.imageError = function (number) {
+  $(`.shortcut[number="${number}"] img`).each((i, element) => {
+    // Try gstatic api instead
+    if ($(element).is(".faviconkit")) {
+      $(element).removeClass("faviconkit");
+      $(element).addClass("gstatic");
+      $(element).attr(
+        "src",
+        getIcon($(`.shortcut[number="${number}"] a`).attr("href"), true),
+      );
+      return;
+    }
+
+    $(`.shortcut[number="${number}"] img`).attr("src", "./image/error.png");
+  });
 };
 
 sc.edit = function (number) {
@@ -321,10 +361,6 @@ sc.edit = function (number) {
     all.sc.array[number] = [title, formatURL(href)];
   });
   sc.init();
-};
-
-sc.imageError = function (number) {
-  $(`.shortcut[number="${number}"] img`).attr("src", "./image/error.png");
 };
 
 sc.editAmount = function () {
@@ -655,6 +691,7 @@ bg.edit = function () {
   bg.init();
 };
 
+// Get yesterday's date as YYYY-MM-DD
 function getYesterday() {
   var date = new Date();
   date.setDate(date.getDate() - 1);
