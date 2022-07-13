@@ -121,6 +121,10 @@ const language = {
       bg_image:
         "Kiu estas la ligo?\nResti malplenan por foriri bildon\nUzu 'nasa' por bildo de la tago",
       bg_copy: "Alklaki CTRL + C por almeti koloran",
+      bg_info_button: "Informo de Bildo",
+      bg_info_button_title: "Rigardi klarigon de fona bildo",
+      bg_info_alert: "Priskribo de fona bildo\n\n{info}\n\nFonto: NASA",
+      bg_info_none: "Ne informo :(",
 
       support: "Subtenu 𝑩𝒐𝒍𝒔𝒐!",
     },
