@@ -51,36 +51,36 @@ footer {
   display: flex;
   flex-direction: column;
 
-  .bgInfo {
-    padding-bottom: 5px;
+  div {
     text-align: right;
 
     button {
+      margin-bottom: 10px;
       background-color: transparent;
       border: none;
       border-radius: 5px;
       color: #888;
-      background-color: #111A;
+      background-color: #111a;
       cursor: pointer;
 
       &:hover {
         text-decoration: underline;
       }
     }
-  }
 
-  a {
-    padding: 7px;
-    border-radius: 10px;
-    background-color: #111a;
-    color: #ddd;
+    a {
+      padding: 7px;
+      border-radius: 10px;
+      background-color: #111a;
+      color: #ddd;
 
-    &:not(:hover) {
-      text-decoration: none;
-    }
+      &:not(:hover) {
+        text-decoration: none;
+      }
 
-    &:focus-visible {
-      outline: 2px solid white;
+      &:focus-visible {
+        outline: 2px solid white;
+      }
     }
   }
 }
