@@ -7,6 +7,7 @@
 - Fix multiple notes positioning
 - Add hsv for background
 - Add comments
+- Add daily garfield
 
 ## Completed
 
