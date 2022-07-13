@@ -66,7 +66,7 @@ ls.__defineGetter__("all", () => {
 
 ls.set = function (callback) {
   all = ls.all;
-  var value = callback(all);
+  const value = callback(all);
   if (value) {
     localStorage.cttab = value;
     return;
@@ -95,11 +95,11 @@ ls.export = function () {
 
 // Download file
 function download(data, filename, type) {
-  var file = new Blob([data], { type: type });
-  if (window.navigator.msSaveOrOpenBlob)
+  const file = new Blob([data], { type: type });
+  if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveOrOpenBlob(file, filename);
-  else {
-    var a = document.createElement("a"),
+  } else {
+    const a = document.createElement("a"),
       url = URL.createObjectURL(file);
     a.href = url;
     a.download = filename;
@@ -115,16 +115,16 @@ function download(data, filename, type) {
 // Lang (Defined in lang.js)
 language.init = function () {
   $("#lang_display").text((ls.all.lang || "en").toUpperCase());
-  $(".lang-tofill").each((i, element) => {
-    element = $(element);
+  $(".lang-tofill").each((i, e) => {
+    const element = $(e);
     language.change(element);
     element.removeClass("lang-tofill");
   });
 };
 
 language.fillTemplate = function (parent) {
-  $(parent + " .lang-canfill").each((i, element) => {
-    element = $(element);
+  $(parent + " .lang-canfill").each((i, e) => {
+    const element = $(e);
     language.change(element);
     element.removeClass("lang-canfill");
   });
@@ -137,9 +137,9 @@ language.change = function (element) {
   if (element.constructor === String || element.constructor === HTMLElement) {
     element = $(element);
   }
-  var hasError = false;
 
-  var text = element.text().replace(/^[ \n]*|[ \n]*$/gm, ""); // Remove start, end spaces, new lines
+  var hasError = false,
+    text = element.text().replace(/^[ \n]*|[ \n]*$/gm, ""); // Remove start, end spaces, new lines
   if (
     !element.hasClass("lang-ignore-text") &&
     text?.startsWith("[") &&
@@ -392,9 +392,9 @@ function formatURL(string) {
   if (!string) {
     return string;
   }
-  var url = string.split("?")[0].split("\\").join("/");
-  var query = string.split("?").slice(1).join("?");
-  var urlLower = url.toLowerCase();
+  var url = string.split("?")[0].split("\\").join("/"),
+    query = string.split("?").slice(1).join("?"),
+    urlLower = url.toLowerCase();
   url += query ? "?" + query : "";
 
   if (urlLower.startsWith("c:")) {
@@ -511,11 +511,11 @@ bg.init = async function () {
 
   if (string) {
     // Parse color string
-    var bracket = false;
-    var current = "";
-    var colors = [];
-    var isRandom = false;
-    var random = [];
+    var bracket = false,
+      current = "",
+      colors = [],
+      isRandom = false,
+      random = [];
     for (var i in string) {
       var char = string[i];
       if (!bracket && char === " ") {
@@ -557,9 +557,9 @@ bg.init = async function () {
 
     // Parse random color
     if (isRandom) {
-      var settings = { h0: 0, h1: 360, s0: 0, s1: 100, v0: 0, v1: 100 };
-      var weight = 1;
-      var isAbsoluteWeight = false;
+      var settings = { h0: 0, h1: 360, s0: 0, s1: 100, v0: 0, v1: 100 },
+        weight = 1,
+        isAbsoluteWeight = false;
       for (var i in random) {
         var param = random[i];
         if (param[0].toLocaleLowerCase() === "w") {
@@ -676,8 +676,8 @@ bg.edit = function () {
     return;
   }
 
-  var value;
-  var typeName = [null, "color", "image"][type];
+  var value,
+    typeName = [null, "color", "image"][type];
   if (typeName === "color") {
     value = prompt(language.get("bg_color"), ls.all.bg.color || bg.default);
   } else if (typeName === "image") {
@@ -712,9 +712,9 @@ function getYesterday() {
   var date = new Date();
   date.setDate(date.getDate() - 1);
 
-  var dd = date.getDate();
-  var mm = date.getMonth() + 1;
-  var yyyy = date.getFullYear();
+  var dd = date.getDate(),
+    mm = date.getMonth() + 1,
+    yyyy = date.getFullYear();
 
   if (dd < 10) {
     dd = "0" + dd;
