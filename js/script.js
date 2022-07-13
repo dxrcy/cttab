@@ -611,6 +611,7 @@ bg.init = async function () {
       if (ls.all.cache.nasa.url) {
         $("body").css("background-image", `url(${ls.all.cache.nasa.url})`);
         $("body").addClass("image-fetch");
+        $("#bgInfoButton").css("display", "initial"); // Show info button
       }
 
       // If 1 hour since last refresh
@@ -632,11 +633,8 @@ bg.init = async function () {
 
         $("body").css("background-image", `url(${url})`);
         $("body").addClass("image-fetch");
+        $("#bgInfoButton").css("display", "initial"); // Show info button
       }
-
-      // Show info button
-      $("#bgInfoButton").css("display", "initial");
-
       return;
     }
 
