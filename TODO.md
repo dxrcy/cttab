@@ -1,5 +1,6 @@
 # TODO
 
+- Migrate to TS
 - Add mobile support
 - - Move top bar buttons, links
 - - Shortcuts
