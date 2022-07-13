@@ -504,6 +504,9 @@ bg.init = async function () {
     });
   }
 
+  // Hide info button
+  $("#bgInfoButton").css("display", "none");
+
   var string = ls.all.bg.color;
 
   if (string) {
@@ -600,7 +603,7 @@ bg.init = async function () {
       // Reset cache
       if (!ls.all.cache.nasa) {
         ls.set(all => {
-          all.cache.nasa = { time: 0, url: null };
+          all.cache.nasa = { time: 0, url: null, info: null };
         });
       }
 
@@ -611,25 +614,29 @@ bg.init = async function () {
       }
 
       // If 1 hour since last refresh
-      if (Date.now() - ls.all.cache.nasa.time > 36e5) {
+      if (
+        !ls.all.cache.nasa.url ||
+        Date.now() - ls.all.cache.nasa.time > 36e5
+      ) {
         // Fetch url
-        var url = (
-          await (
-            await fetch(
-              `https://api.nasa.gov/planetary/apod?date=${getYesterday()}&api_key=quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh`,
-            )
-          ).json()
-        ).url;
+        const { url, explanation: info } = await (
+          await fetch(
+            `https://api.nasa.gov/planetary/apod?date=${getYesterday()}&api_key=quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh`,
+          )
+        ).json();
 
         // Store cache
         ls.set(all => {
-          all.cache.nasa.url = url;
-          all.cache.nasa.time = Date.now();
+          all.cache.nasa = { url, info, time: Date.now() };
         });
 
         $("body").css("background-image", `url(${url})`);
         $("body").addClass("image-fetch");
       }
+
+      // Show info button
+      $("#bgInfoButton").css("display", "initial");
+
       return;
     }
 
@@ -639,7 +646,16 @@ bg.init = async function () {
   $("body").css("background-image", "");
 };
 
-// Edit background colour, image
+// Show info for nasa background
+bg.showInfo = function () {
+  alert(
+    ls.all.cache?.nasa?.info
+      ? language.get("bg_info_alert", { info: ls.all.cache.nasa.info })
+      : language.get("bg_info_none"),
+  );
+};
+
+// Edit background color, image
 bg.edit = function () {
   var type = prompt(language.get("bg_edit"), "1");
   if (type === "0" || type === "") {

@@ -56,6 +56,10 @@ const language = {
       bg_image:
         "What is the link?\nLeave blank to remove image\nUse 'nasa' for image of the day",
       bg_copy: "Press CTRL + C to copy colour",
+      bg_info_button: "Image Info",
+      bg_info_button_title: "View explanation of background image",
+      bg_info_alert: "Background image description\n\n{info}\n\nSource: NASA",
+      bg_info_none: "No info :(",
 
       support: "Support 𝑩𝒐𝒍𝒔𝒂!",
     },
