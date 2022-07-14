@@ -137,6 +137,10 @@ If you can translate into more languages, please consider [contributing](#contri
 
 Object: `language` (**NOT** `lang`)
 
+## Garfield
+
+Toggle the Daily Garfield Comic from the button in the top right!
+
 # Setup
 
 ## Downloading files
