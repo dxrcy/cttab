@@ -5,6 +5,7 @@ function init() {
   console.log(language.get("console"));
   header.init();
   sc.init();
+  garf.init();
   notes.init();
   bg.init();
   language.init();
@@ -45,6 +46,7 @@ ls.reset = function () {
     notes: [""],
     lang: "en",
     bg: { color: null, image: null },
+    garf: false,
     cache: {},
   });
 
@@ -115,16 +117,16 @@ function download(data, filename, type) {
 // Lang (Defined in lang.js)
 language.init = function () {
   $("#lang_display").text((ls.all.lang || "en").toUpperCase());
-  $(".lang-tofill").each((i, e) => {
-    const element = $(e);
+  $(".lang-tofill").each((i, el) => {
+    const element = $(el);
     language.change(element);
     element.removeClass("lang-tofill");
   });
 };
 
 language.fillTemplate = function (parent) {
-  $(parent + " .lang-canfill").each((i, e) => {
-    const element = $(e);
+  $(parent + " .lang-canfill").each((i, el) => {
+    const element = $(el);
     language.change(element);
     element.removeClass("lang-canfill");
   });
@@ -418,15 +420,18 @@ function formatURL(string) {
 // Notes
 const notes = {};
 notes.init = function () {
-  var html = "";
+  $(".note").each((i, el) => {
+    el.remove();
+  });
   for (var i = 0; i < ls.all.notes.length; i++) {
-    html += getTemplate("note", {
-      number: i,
-      text: ls.all.notes[i] || "",
-    });
+    $("main").append(
+      getTemplate("note", {
+        number: i,
+        text: ls.all.notes[i] || "",
+      }),
+    ); //? Use <main> for notes ?
   }
-  $("#notes").html(html);
-  language.fillTemplate("#notes");
+  language.fillTemplate("main");
 };
 
 notes.edit = function (number) {
@@ -453,7 +458,7 @@ notes.add = function (number) {
 };
 
 notes.focus = function () {
-  $("#notes textarea").first().focus();
+  $(".note").first().focus();
 };
 
 // Confetti
@@ -497,7 +502,7 @@ confettiHandler.show = function () {
 // Background
 const bg = { default: "#202038" };
 
-bg.init = async function () {
+bg.init = async function (forceReload) {
   if (!ls.all.bg) {
     ls.set(all => {
       all.bg = { color: null, image: null };
@@ -608,7 +613,7 @@ bg.init = async function () {
       }
 
       // Load cached
-      if (ls.all.cache.nasa.url) {
+      if (ls.all.cache.nasa.url && !forceReload) {
         $("body").css("background-image", `url(${ls.all.cache.nasa.url})`);
         $("body").addClass("image-fetch");
         $("#bgInfoButton").css("display", "initial"); // Show info button
@@ -617,7 +622,8 @@ bg.init = async function () {
       // If 1 hour since last refresh
       if (
         !ls.all.cache.nasa.url ||
-        Date.now() - ls.all.cache.nasa.time > 36e5
+        Date.now() - ls.all.cache.nasa.time > 36e5 ||
+        forceReload
       ) {
         // Fetch url
         const { url, explanation: info } = await (
@@ -706,7 +712,7 @@ bg.edit = function () {
 };
 
 // Get yesterday's date as YYYY-MM-DD
-function getYesterday() {
+function getYesterday(char = "-") {
   var date = new Date();
   date.setDate(date.getDate() - 1);
 
@@ -721,5 +727,66 @@ function getYesterday() {
     mm = "0" + mm;
   }
 
-  return yyyy + "-" + mm + "-" + dd;
+  return yyyy + char + mm + char + dd;
 }
+
+// Get garfield comic
+const garf = {};
+garf.init = async function (forceReload) {
+  // If disabled
+  if (!ls.all.garf) {
+    $("#garf").css("display", "none");
+    return;
+  }
+
+  // Reset cache
+  if (!ls.all.cache.garf) {
+    ls.set(all => {
+      all.cache.garf = { time: 0, url: null };
+    });
+  }
+
+  // Load cached
+  if (ls.all.cache.garf.url && !forceReload) {
+    $("#garf_img").attr("src", ls.all.cache.garf.url);
+    $("#garf").css("display", "initial");
+  } else {
+    $("#garf").css("display", "none");
+  }
+
+  // If 1 hour since last refresh
+  if (
+    !ls.all.cache.garf.url ||
+    Date.now() - ls.all.cache.garf.time > 36e5 ||
+    forceReload
+  ) {
+    // Fetch url
+    const text = await (
+        await fetch(
+          "https://api.scraperapi.com?api_key=1ddbd21386871fa6c32ca5a91407c32d&url=https://www.gocomics.com/garfield/" +
+            getYesterday("/"),
+          {
+            method: "GET",
+          },
+        )
+      ).text(),
+      position = text.indexOf("https://assets.amuniversal.com"),
+      url = text.substring(position, position + 63);
+
+    // Store cache
+    ls.set(all => {
+      all.cache.garf = { url, time: Date.now() };
+    });
+
+    $("#garf_img").attr("src", url);
+    $("#garf").css("display", "initial");
+  }
+};
+
+// Show/hide garf
+garf.toggle = function () {
+  ls.set(all => {
+    all.garf = !all.garf;
+  });
+  garf.init();
+};

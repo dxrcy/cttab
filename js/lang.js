@@ -7,6 +7,8 @@ const language = {
       header_title: "Click to edit header",
       header_edit: "Change header",
 
+      top_garf: "Toggle Garf",
+      top_garf_title: "Show/Hide Garfield Comic",
       top_note: "Add note",
       top_note_title: "Click to add note",
       top_bg: "Change background",
@@ -71,6 +73,8 @@ const language = {
       header_title: "Alklaki por ŝanĝi titilon",
       header_edit: "Ŝanĝi titilon",
 
+      top_garf: "Inversigi Garfo",
+      top_garf_title: "Vidigi/Malvidigi Garfildan Bildrakonton",
       top_note: "Aldoni noton",
       top_note_title: "Aldoni noton",
       top_bg: "Ŝanĝi fonon",

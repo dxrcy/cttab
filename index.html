@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./css/index.min.css" />
     <link rel="stylesheet" href="./css/header.min.css" />
     <link rel="stylesheet" href="./css/shortcuts.min.css" />
+    <link rel="stylesheet" href="./css/garf.min.css" />
     <link rel="stylesheet" href="./css/notes.min.css" />
 
     <link rel="stylesheet" href="./css//font-awesome.min.css" />
@@ -29,6 +30,16 @@
     <header>
       <left>
         <span class="seperated">
+          <item>
+            <button
+              onclick="garf.toggle()"
+              title="[top_garf_title]"
+              class="lang-tofill"
+            >
+              [top_garf]
+            </button>
+          </item>
+
           <item>
             <button
               onclick="notes.add()"
@@ -141,7 +152,9 @@
     <main>
       <contain id="shortcuts"></contain>
 
-      <contain id="notes"></contain>
+      <contain id="garf">
+        <img id="garf_img" src="#" />
+      </contain>
     </main>
 
     <footer>
