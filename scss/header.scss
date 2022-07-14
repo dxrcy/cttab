@@ -10,6 +10,7 @@ header {
   padding: 0;
   text-align: center;
   background-color: #0008;
+  z-index: 500;
 
   &:focus-visible {
     border: 2px solid white;
@@ -22,7 +23,7 @@ header {
   }
 
   button {
-    background-color: #0000;
+    background-color: transparent;
     color: white;
 
     &#header {
@@ -38,7 +39,6 @@ header {
       padding: 0;
       left: 0;
       right: 0;
-      z-index: 50;
 
       &:focus-visible {
         border: 2px solid white;

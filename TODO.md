@@ -8,6 +8,8 @@
 - Add hsv for background
 - Add comments
 - Add daily garfield
+- Fix notes margins
+- Fix tab index
 
 ## Completed
 
