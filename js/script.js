@@ -432,6 +432,9 @@ notes.init = function () {
     ); //? Use <main> for notes ?
   }
   language.fillTemplate("main");
+
+  // Enable/disable skip button
+  $(".skip").css("display", ls.all.notes.length ? "initial" : "none");
 };
 
 notes.edit = function (number) {
@@ -458,7 +461,7 @@ notes.add = function (number) {
 };
 
 notes.focus = function () {
-  $(".note").first().focus();
+  $(".note:first-of-type textarea").focus();
 };
 
 // Confetti

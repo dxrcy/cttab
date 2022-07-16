@@ -7,11 +7,8 @@
   display: flex;
   width: $note-size;
   height: $note-size;
+  margin-left: 10px;
   margin-bottom: 10px;
-
-  &:not(:first-of-type) {
-    margin-left: 10px;
-  }
 
   textarea {
     width: 100%;

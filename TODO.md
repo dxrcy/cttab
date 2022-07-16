@@ -6,4 +6,3 @@
 - - Shortcuts
 - Add hsv for background
 - Add comments
-- Fix tab index

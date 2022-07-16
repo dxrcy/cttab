@@ -25,7 +25,7 @@ const language = {
       top_reset_title: "Reset all settings",
       top_about: "About",
       top_about_title: "About / help page\n{link}",
-      skip_focus: "Skip focus to notes",
+      skip_focus: "Skip focus to first note",
 
       sc_name_default: "Shortcut {number}",
       sc_title: "{name}\n{href}",
@@ -91,7 +91,7 @@ const language = {
       top_reset_title: "Restarigi ĉiojn fiksadojn",
       top_about: "Pri",
       top_about_title: "Pri / helpa paĝo\n{link}",
-      skip_focus: "Salti fokuso al notoj",
+      skip_focus: "Salti fokuso al unua notoj",
 
       sc_name_default: "Ligo {number}",
       sc_title: "{name}\n{href}",

@@ -122,14 +122,10 @@ header {
         }
 
         &:focus-visible {
-          outline: none;
-
-          & > span {
-            border-radius: 5px;
-            outline: 2px solid white;
-          }
+          border-radius: 5px;
+          outline: 2px solid white;
         }
-
+        
         input {
           position: absolute;
           top: 0;
@@ -139,11 +135,19 @@ header {
           opacity: 0;
           cursor: pointer;
 
+          & ~ span {
+            padding: 1px 4px;
+          }
+
           &:focus-visible ~ span {
             border-radius: 5px;
             outline: 2px solid white;
           }
         }
+      }
+
+      a {
+        padding: 1px 4px;
       }
     }
   }

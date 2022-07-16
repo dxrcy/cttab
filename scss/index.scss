@@ -66,6 +66,10 @@ footer {
       &:hover {
         text-decoration: underline;
       }
+
+      &:focus-visible {
+        outline: 2px solid white;
+      }
     }
 
     a {
