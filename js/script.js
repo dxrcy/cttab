@@ -458,51 +458,60 @@ class sc {
 }
 
 // Notes
-const notes = {};
-notes.init = function () {
-  $(".note").each((i, el) => {
-    el.remove();
-  });
-  for (var i = 0; i < ls.all.notes.length; i++) {
-    $("main").append(
-      getTemplate("note", {
-        number: i,
-        text: ls.all.notes[i] || "",
-      }),
-    ); //? Use <main> for notes ?
+class notes {
+  // Initialize notes
+  static init() {
+    $(".note").each((i, el) => {
+      el.remove();
+    });
+    for (var i = 0; i < ls.all.notes.length; i++) {
+      $("main").append(
+        getTemplate("note", {
+          number: i,
+          text: ls.all.notes[i] || "",
+        }),
+      ); //? Use <main> for notes ?
+    }
+    language.fillTemplate("main");
+
+    // Enable/disable skip button
+    $(".skip").css("display", ls.all.notes.length ? "initial" : "none");
   }
-  language.fillTemplate("main");
 
-  // Enable/disable skip button
-  $(".skip").css("display", ls.all.notes.length ? "initial" : "none");
-};
-
-notes.edit = function (number) {
-  ls.set(all => {
-    all.notes[number] = $(`.note[number=${number}] textarea`).val();
-  });
-};
-
-notes.delete = function (number) {
-  if (ls.all.notes[number] && !confirm(language.get("note_delete_confirm"))) {
-    return;
+  // Edit note text - Save to localStorage
+  static edit(number) {
+    ls.set(all => {
+      all.notes[number] = $(`.note[number=${number}] textarea`).val();
+    });
   }
-  ls.set(all => {
-    all.notes = [...all.notes.slice(0, number), ...all.notes.slice(number + 1)];
-  });
-  notes.init();
-};
 
-notes.add = function (number) {
-  ls.set(all => {
-    all.notes.push("");
-  });
-  notes.init();
-};
+  // Delete note
+  static delete(number) {
+    if (ls.all.notes[number] && !confirm(language.get("note_delete_confirm"))) {
+      return;
+    }
+    ls.set(all => {
+      all.notes = [
+        ...all.notes.slice(0, number),
+        ...all.notes.slice(number + 1),
+      ];
+    });
+    notes.init();
+  }
 
-notes.focus = function () {
-  $(".note:first-of-type textarea").focus();
-};
+  // Add note
+  static add(number) {
+    ls.set(all => {
+      all.notes.push("");
+    });
+    notes.init();
+  }
+
+  // Focus note (with skip button in header)
+  static focus() {
+    $(".note:first-of-type textarea").focus();
+  }
+}
 
 // Confetti
 // Cannot be named `confetti`
