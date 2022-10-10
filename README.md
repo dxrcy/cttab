@@ -139,7 +139,7 @@ Object: `language` (**NOT** `lang`)
 
 ## Garfield
 
-Toggle the Daily Garfield Comic from the button in the top right!
+Toggle the Random Garfield Comic from the button in the top right!
 
 # Setup
 

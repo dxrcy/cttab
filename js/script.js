@@ -115,7 +115,7 @@ function download(data, filename, type) {
 }
 
 // Lang - `data` values defined in lang/*.js
-const language = {data: {}}
+const language = { data: {} };
 
 language.init = function () {
   $("#lang_display").text((ls.all.lang || "en").toUpperCase());
@@ -507,6 +507,13 @@ confettiHandler.show = function () {
 // Background
 const bg = { default: "#202038" };
 
+// Get yesterday's date as YYYY-MM-DD
+function getYesterday() {
+  var date = new Date();
+  date.setDate(date.getDate() - 1);
+  return formatDate("-");
+}
+
 bg.init = async function (forceReload) {
   if (!ls.all.bg) {
     ls.set(all => {
@@ -716,11 +723,8 @@ bg.edit = function () {
   bg.init();
 };
 
-// Get yesterday's date as YYYY-MM-DD
-function getYesterday(char = "-") {
-  var date = new Date();
-  date.setDate(date.getDate() - 1);
-
+// Format Date object as YYYYxMMxDD with `x` given as `char`
+function formatDate(date, char = "-") {
   var dd = date.getDate(),
     mm = date.getMonth() + 1,
     yyyy = date.getFullYear();
@@ -736,62 +740,82 @@ function getYesterday(char = "-") {
 }
 
 // Get garfield comic
-const garf = {};
-garf.init = async function (forceReload) {
-  // If disabled
-  if (!ls.all.garf) {
-    $("#garf").css("display", "none");
-    return;
-  }
-
-  // Reset cache
-  if (!ls.all.cache.garf) {
-    ls.set(all => {
-      all.cache.garf = { time: 0, url: null };
+class garf {
+  // Get comic url from date
+  static get(date) {
+    return new Promise((resolve, reject) => {
+      fetch(
+        "https://api.scraperapi.com?api_key=1ddbd21386871fa6c32ca5a91407c32d&url=https://www.gocomics.com/garfield/" +
+          date,
+        {
+          method: "GET",
+        },
+      )
+        .then(res => res.text())
+        .then(text => {
+          var position = text.indexOf("https://assets.amuniversal.com");
+          resolve(text.substring(position, position + 63));
+        })
+        .catch(err => reject(err));
     });
   }
 
-  // Load cached
-  if (ls.all.cache.garf.url && !forceReload) {
-    $("#garf_img").attr("src", ls.all.cache.garf.url);
-    $("#garf").css("display", "initial");
-  } else {
-    $("#garf").css("display", "none");
+  // Get random valid date for comic
+  static randomDate() {
+    var start = new Date("1978-06-19").getTime();
+    return formatDate(
+      new Date(start + Math.random() * (Date.now() - start)),
+      "/",
+    );
   }
 
-  // If 1 hour since last refresh
-  if (
-    !ls.all.cache.garf.url ||
-    Date.now() - ls.all.cache.garf.time > 36e5 ||
-    forceReload
-  ) {
-    // Fetch url
-    const text = await (
-        await fetch(
-          "https://api.scraperapi.com?api_key=1ddbd21386871fa6c32ca5a91407c32d&url=https://www.gocomics.com/garfield/" +
-            getYesterday("/"),
-          {
-            method: "GET",
-          },
-        )
-      ).text(),
-      position = text.indexOf("https://assets.amuniversal.com"),
-      url = text.substring(position, position + 63);
+  // Load comic
+  static async init(forceReload) {
+    // If disabled
+    if (!ls.all.garf) {
+      $("#garf").css("display", "none");
+      return;
+    }
 
-    // Store cache
+    // Reset cache
+    if (!ls.all.cache.garf) {
+      ls.set(all => {
+        all.cache.garf = { time: 0, url: null };
+      });
+    }
+
+    // Load cached
+    if (ls.all.cache.garf.url && !forceReload) {
+      $("#garf_img").attr("src", ls.all.cache.garf.url);
+      $("#garf").css("display", "initial");
+    } else {
+      $("#garf").css("display", "none");
+    }
+
+    // If 1 hour since last refresh
+    if (
+      !ls.all.cache.garf.url ||
+      Date.now() - ls.all.cache.garf.time > 36e5 ||
+      forceReload
+    ) {
+      // Fetch url - Random date
+      const url = await garf.get(garf.randomDate());
+
+      // Store cache
+      ls.set(all => {
+        all.cache.garf = { url, time: Date.now() };
+      });
+
+      $("#garf_img").attr("src", url);
+      $("#garf").css("display", "initial");
+    }
+  }
+
+  // Show/hide comic
+  static toggle() {
     ls.set(all => {
-      all.cache.garf = { url, time: Date.now() };
+      all.garf = !all.garf;
     });
-
-    $("#garf_img").attr("src", url);
-    $("#garf").css("display", "initial");
+    garf.init();
   }
-};
-
-// Show/hide garf
-garf.toggle = function () {
-  ls.set(all => {
-    all.garf = !all.garf;
-  });
-  garf.init();
-};
+}

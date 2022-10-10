@@ -1,5 +1,7 @@
 # TODO
 
+- Change all objects to classes
+- Move classes to separate script files
 - Add comments
 
 # Maybe
