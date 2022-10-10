@@ -114,7 +114,9 @@ function download(data, filename, type) {
   }
 }
 
-// Lang (Defined in lang.js)
+// Lang - `data` values defined in lang/*.js
+const language = {data: {}}
+
 language.init = function () {
   $("#lang_display").text((ls.all.lang || "en").toUpperCase());
   $(".lang-tofill").each((i, el) => {
