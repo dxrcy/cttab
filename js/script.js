@@ -1,6 +1,6 @@
 //* DOCUMENTATION - https://github.com/darccyy/cttab#cttab
 
-// Reload all states
+// Reload all states - Only on page load
 function init() {
   ls.check();
   console.log(language.get("console"));
@@ -23,6 +23,53 @@ function getTemplate(name, values) {
       .join(""),
     values,
   );
+}
+
+// Download file
+function download(data, filename, type) {
+  const file = new Blob([data], { type: type });
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(file, filename);
+  } else {
+    const a = document.createElement("a"),
+      url = URL.createObjectURL(file);
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, 0);
+  }
+}
+
+// Format trimmed URL to include `file`, `http`, ect
+function formatURL(string) {
+  if (!string) {
+    return string;
+  }
+  var url = string.split("?")[0].split("\\").join("/"),
+    query = string.split("?").slice(1).join("?"),
+    urlLower = url.toLowerCase();
+  url += query ? "?" + query : "";
+
+  if (urlLower.startsWith("c:")) {
+    return "file:///" + url;
+  }
+
+  if (
+    !(
+      urlLower.startsWith("file:") ||
+      urlLower.startsWith("mailto:") ||
+      urlLower.startsWith("https:") ||
+      urlLower.startsWith("http:")
+    )
+  ) {
+    return "https://" + url;
+  }
+
+  return url;
 }
 
 // Local Storage API
@@ -101,25 +148,6 @@ class ls {
   // Export localStorage to file
   static export() {
     download(JSON.stringify(ls.all), "cttab-data.json", "text/json");
-  }
-}
-
-// Download file
-function download(data, filename, type) {
-  const file = new Blob([data], { type: type });
-  if (window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveOrOpenBlob(file, filename);
-  } else {
-    const a = document.createElement("a"),
-      url = URL.createObjectURL(file);
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(function () {
-      document.body.removeChild(a);
-      window.URL.revokeObjectURL(url);
-    }, 0);
   }
 }
 
@@ -220,7 +248,7 @@ class language {
     return F.format(string || string === "" ? string : `[${code}]`, format);
   }
 
-  // Switch / toggle language mode 
+  // Switch / toggle language mode
   static switch() {
     ls.set(all => {
       all.lang = all.lang !== "eo" ? "eo" : "en";
@@ -283,164 +311,150 @@ class header {
 }
 
 // Shortcuts
-const sc = { default: 24 };
-sc.init = function () {
-  if (
-    ls.all.sc.amount !== 0 &&
-    (!ls.all.sc.amount || isNaN(ls.all.sc.amount))
-  ) {
-    ls.set(all => {
-      all.sc.amount = sc.default;
-    });
-  }
+class sc {
+  // Default number of shortcuts shown
+  static default = 24;
 
-  var html = "";
-  for (var i = 0; i < ls.all.sc.amount; i++) {
-    var item = ls.all.sc.array[i] || {};
-
-    var iconType = "none",
-      iconHref = "";
-    if (item[1]) {
-      if (item[1].match(/(^file:\/*)|(^(https?:\/*)?localhost)/)) {
-        iconHref = "./image/file.png";
-        iconType = "file";
-      } else {
-        iconHref = getIcon(item[1]);
-        iconType = "faviconkit";
-      }
+  // Initialize shortcuts
+  //TODO Add comments
+  static init() {
+    if (
+      ls.all.sc.amount !== 0 &&
+      (!ls.all.sc.amount || isNaN(ls.all.sc.amount))
+    ) {
+      ls.set(all => {
+        all.sc.amount = sc.default;
+      });
     }
 
-    html += getTemplate("shortcut", {
-      name:
-        item[0] != undefined
-          ? item[0]
-          : `[sc_name_default {"number": ${i + 1} }]`,
-      title: item[0] != undefined ? item[0] : language.get("sc_title_default"),
-      href: item[1] || "",
-      iconHref,
-      className: (item[0] || item[1] ? " " : "hide ") + iconType,
-      number: i,
-      empty: item[0] != undefined && item[1] ? "" : "empty",
-      src: "src", // Prevent preloading image in template
+    var html = "";
+    for (var i = 0; i < ls.all.sc.amount; i++) {
+      var item = ls.all.sc.array[i] || {};
+
+      var iconType = "none",
+        iconHref = "";
+      if (item[1]) {
+        if (item[1].match(/(^file:\/*)|(^(https?:\/*)?localhost)/)) {
+          iconHref = "./image/file.png";
+          iconType = "file";
+        } else {
+          iconHref = sc.getIcon(item[1]);
+          iconType = "faviconkit";
+        }
+      }
+
+      html += getTemplate("shortcut", {
+        name:
+          item[0] != undefined
+            ? item[0]
+            : `[sc_name_default {"number": ${i + 1} }]`,
+        title:
+          item[0] != undefined ? item[0] : language.get("sc_title_default"),
+        href: item[1] || "",
+        iconHref,
+        className: (item[0] || item[1] ? " " : "hide ") + iconType,
+        number: i,
+        empty: item[0] != undefined && item[1] ? "" : "empty",
+        src: "src", // Prevent preloading image in template
+      });
+    }
+    $("#shortcuts").html(html);
+    language.fillTemplate("#shortcuts");
+  }
+
+  // Get url for API
+  static getIcon(href, useGstatic) {
+    if (useGstatic) {
+      return (
+        "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" +
+        (href || "")
+      );
+    }
+    if (!href) {
+      return "";
+    }
+    return "https://api.faviconkit.com/" + href.replace(/^https?:\/*/, "");
+  }
+
+  // Fallback icon
+  static imageError(number) {
+    $(`.shortcut[number="${number}"] img`).each((i, element) => {
+      // Try gstatic api instead
+      if ($(element).is(".faviconkit")) {
+        $(element).removeClass("faviconkit");
+        $(element).addClass("gstatic");
+        $(element).attr(
+          "src",
+          sc.getIcon($(`.shortcut[number="${number}"] a`).attr("href"), true),
+        );
+        return;
+      }
+
+      $(`.shortcut[number="${number}"] img`).attr("src", "./image/error.png");
     });
   }
-  $("#shortcuts").html(html);
-  language.fillTemplate("#shortcuts");
-};
 
-// Get url for api
-function getIcon(href, useGstatic) {
-  if (useGstatic) {
-    return (
-      "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=128&url=" +
-      (href || "")
+  // Edit shortcut link and text
+  //TODO Add comments
+  static edit(number) {
+    var href = prompt(
+      F.format(language.get("sc_edit_url"), { number: number + 1 }),
+      ls.all.sc.array?.[number]?.[1] ||
+        "https://epicwebsite.bruh.international",
     );
-  }
-  if (!href) {
-    return "";
-  }
-  return "https://api.faviconkit.com/" + href.replace(/^https?:\/*/, "");
-}
-
-// Fallback icon
-sc.imageError = function (number) {
-  $(`.shortcut[number="${number}"] img`).each((i, element) => {
-    // Try gstatic api instead
-    if ($(element).is(".faviconkit")) {
-      $(element).removeClass("faviconkit");
-      $(element).addClass("gstatic");
-      $(element).attr(
-        "src",
-        getIcon($(`.shortcut[number="${number}"] a`).attr("href"), true),
-      );
+    if (href === "") {
+      ls.set(all => {
+        all.sc.array[number] = [];
+      });
+      sc.init();
+    }
+    if (!href) {
       return;
     }
 
-    $(`.shortcut[number="${number}"] img`).attr("src", "./image/error.png");
-  });
-};
+    var title = prompt(
+      F.format(language.get("sc_edit_name"), { number: number + 1 }),
+      ls.all.sc.array?.[number]?.[0] != undefined
+        ? ls.all.sc.array?.[number]?.[0]
+        : F.format(language.get("sc_name_default"), { number: number + 1 }),
+    );
+    if (title === null) {
+      return;
+    }
 
-sc.edit = function (number) {
-  var href = prompt(
-    F.format(language.get("sc_edit_url"), { number: number + 1 }),
-    ls.all.sc.array?.[number]?.[1] || "https://epicwebsite.bruh.international",
-  );
-  if (href === "") {
     ls.set(all => {
-      all.sc.array[number] = [];
+      all.sc.array[number] = [title, formatURL(href)];
     });
     sc.init();
   }
-  if (!href) {
-    return;
-  }
 
-  var title = prompt(
-    F.format(language.get("sc_edit_name"), { number: number + 1 }),
-    ls.all.sc.array?.[number]?.[0] != undefined
-      ? ls.all.sc.array?.[number]?.[0]
-      : F.format(language.get("sc_name_default"), { number: number + 1 }),
-  );
-  if (title === null) {
-    return;
-  }
-
-  ls.set(all => {
-    all.sc.array[number] = [title, formatURL(href)];
-  });
-  sc.init();
-};
-
-sc.editAmount = function () {
-  var amount = prompt(
-    language.get("sc_amount_text", { default: sc.default }),
-    ls.all.sc.amount || ls.all.sc.amount === 0 ? ls.all.sc.amount : sc.default,
-  );
-  if (amount === null) {
-    return;
-  }
-
-  if (!amount) {
-    amount = sc.default;
-  } else {
-    amount = parseInt(amount);
-    if (isNaN(amount) || amount < 0 || amount > 60) {
-      alert(language.get("sc_amount_invalid"));
+  // Edit amount of shortcuts shown
+  static editAmount() {
+    var amount = prompt(
+      language.get("sc_amount_text", { default: sc.default }),
+      ls.all.sc.amount || ls.all.sc.amount === 0
+        ? ls.all.sc.amount
+        : sc.default,
+    );
+    if (amount === null) {
       return;
     }
+
+    if (!amount) {
+      amount = sc.default;
+    } else {
+      amount = parseInt(amount);
+      if (isNaN(amount) || amount < 0 || amount > 60) {
+        alert(language.get("sc_amount_invalid"));
+        return;
+      }
+    }
+
+    ls.set(all => {
+      all.sc.amount = amount;
+    });
+    sc.init();
   }
-
-  ls.set(all => {
-    all.sc.amount = amount;
-  });
-  sc.init();
-};
-
-function formatURL(string) {
-  if (!string) {
-    return string;
-  }
-  var url = string.split("?")[0].split("\\").join("/"),
-    query = string.split("?").slice(1).join("?"),
-    urlLower = url.toLowerCase();
-  url += query ? "?" + query : "";
-
-  if (urlLower.startsWith("c:")) {
-    return "file:///" + url;
-  }
-
-  if (
-    !(
-      urlLower.startsWith("file:") ||
-      urlLower.startsWith("mailto:") ||
-      urlLower.startsWith("https:") ||
-      urlLower.startsWith("http:")
-    )
-  ) {
-    return "https://" + url;
-  }
-
-  return url;
 }
 
 // Notes
