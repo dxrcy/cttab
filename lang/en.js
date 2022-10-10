@@ -1,3 +1,4 @@
+//* English language file
 language.data.en = {
   console: "Hello :)",
 

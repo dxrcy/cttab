@@ -1,3 +1,4 @@
+//* Esperanto language file
 language.data.eo = {
   console: "Saluton :)",
 
