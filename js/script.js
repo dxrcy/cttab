@@ -221,54 +221,57 @@ class language {
 }
 
 // Header
-const header = {};
-header.init = function () {
-  var text = ls.all.header || language.get("header_default");
-  $("#header").text(text);
-  $("title").text(text);
+class header {
+  // Initialize header
+  static init() {
+    var text = ls.all.header || language.get("header_default");
+    $("#header").text(text);
+    $("title").text(text);
 
-  // Advocacy for 𝑩𝒐𝒍𝒔𝒂
-  confettiHandler.hide();
-  var chars = {
-    𝑩: "b",
-    𝑶: "o",
-    𝑳: "l",
-    𝑺: "s",
-    𝑨: "a",
-    𝒃: "𝒃",
-    𝒐: "o",
-    𝒍: "l",
-    𝒔: "s",
-    𝒂: "a",
-  };
-  for (var i in chars) {
-    text = text.split(i).join(chars[i]);
-  }
-  if (["bolsa", "bolso"].includes(text.toLowerCase())) {
-    confettiHandler.show();
-  }
-};
-
-header.edit = function (event) {
-  if (event?.key && !["Enter", "Space"].includes(event.code)) {
-    return;
+    // Advocacy for 𝑩𝒐𝒍𝒔𝒂
+    confettiHandler.hide();
+    var chars = {
+      𝑩: "b",
+      𝑶: "o",
+      𝑳: "l",
+      𝑺: "s",
+      𝑨: "a",
+      𝒃: "𝒃",
+      𝒐: "o",
+      𝒍: "l",
+      𝒔: "s",
+      𝒂: "a",
+    };
+    for (var i in chars) {
+      text = text.split(i).join(chars[i]);
+    }
+    if (["bolsa", "bolso"].includes(text.toLowerCase())) {
+      confettiHandler.show();
+    }
   }
 
-  var text = prompt(
-    language.get("header_edit"),
-    ls.all.header || language.get("header_default"),
-  );
-  if (text === "") {
-    text = null;
-  } else if (!text) {
-    return;
-  }
+  // Edit text
+  static edit(event) {
+    if (event?.key && !["Enter", "Space"].includes(event.code)) {
+      return;
+    }
 
-  ls.set(all => {
-    all.header = text;
-  });
-  header.init();
-};
+    var text = prompt(
+      language.get("header_edit"),
+      ls.all.header || language.get("header_default"),
+    );
+    if (text === "") {
+      text = null;
+    } else if (!text) {
+      return;
+    }
+
+    ls.set(all => {
+      all.header = text;
+    });
+    header.init();
+  }
+}
 
 // Shortcuts
 const sc = { default: 24 };
@@ -479,6 +482,7 @@ notes.focus = function () {
 };
 
 // Confetti
+// Cannot be named `confetti`
 const confettiHandler = {
   cooldown: 0,
 };
