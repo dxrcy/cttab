@@ -123,11 +123,14 @@ function download(data, filename, type) {
   }
 }
 
-// Lang - `data` values defined in lang/*.js
+// Language API
 // Cannot be named `lang` for js reasons
 class language {
+  // Translations defined in lang/*.js
   static data = {};
 
+  // Initialize language
+  // Can only be called ONCE per page load - reload page to re-initialize lang
   static init() {
     $("#lang_display").text((ls.all.lang || "en").toUpperCase());
     $(".lang-tofill").each((_i, el) => {
@@ -137,6 +140,7 @@ class language {
     });
   }
 
+  // Fill HTML template with lang values
   static fillTemplate(parent) {
     $(parent + " .lang-canfill").each((i, el) => {
       const element = $(el);
@@ -145,6 +149,8 @@ class language {
     });
   }
 
+  // Change language values on HTML element
+  //TODO Add comments
   static change(element) {
     if (!element) {
       return;
@@ -203,15 +209,18 @@ class language {
     element.addClass("lang-filled");
   }
 
+  // Get language value if exists, otherwise undefined
   static getIfExists(code) {
     return language.data[ls.all?.lang || "en"]?.[code];
   }
 
+  // Get language value if exists, otherwise missing language display (code in brackets)
   static get(code, format) {
     var string = language.getIfExists(code);
     return F.format(string || string === "" ? string : `[${code}]`, format);
   }
 
+  // Switch / toggle language mode 
   static switch() {
     ls.set(all => {
       all.lang = all.lang !== "eo" ? "eo" : "en";
