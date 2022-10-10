@@ -609,7 +609,7 @@ bg.init = async function (forceReload) {
     var image = F.randomChoice(ls.all.bg.image.split(" "));
 
     // Nasa image
-    if (image === "nasa") {
+    if (image === "$") {
       // Reset cache
       if (!ls.all.cache.nasa) {
         ls.set(all => {

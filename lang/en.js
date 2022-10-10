@@ -54,7 +54,7 @@ language.data.en = {
   bg_reset: "Are you sure you want to reset background?",
   bg_color: "What colour? (CSS Compatible)\nLeave blank to reset colour",
   bg_image:
-    "What is the link?\nLeave blank to remove image\nUse 'nasa' for image of the day",
+    "What is the link?\nLeave blank to remove image\nUse '$' for image of the day",
   bg_copy: "Press CTRL + C to copy colour",
   bg_info_button: "Image Info",
   bg_info_button_title: "View explanation of background image",

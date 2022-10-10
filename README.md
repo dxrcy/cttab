@@ -92,9 +92,9 @@ This represents the following:
 
 Add the URL of multiple local image files, or online links to images, separated by a space.
 
-Eg. `C:/Desktop/troll_face.jpg https://darccyy.github.io/cttab/image/icon/256.png nasa`
+Eg. `C:/Desktop/troll_face.jpg https://darccyy.github.io/cttab/image/icon/256.png $`
 
-To use _Image of the Day_ from the _NASA API_, set the background image to `nasa`, and it will be automatically fetched. Use 'Image Info' button above footer to view the description.
+To use _Image of the Day_ from the _NASA API_, set the background image to `$`, and it will be automatically fetched. Use 'Image Info' button above footer to view the description.
 
 #### Copy current colour (`3`)
 

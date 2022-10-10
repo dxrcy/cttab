@@ -55,7 +55,7 @@ language.data.eo = {
   bg_color:
     "Kiun koloron? (CSS Kongrua)\nResti malplenan por restarigi koloron",
   bg_image:
-    "Kio estas la ligo?\nResti malplenan por foriri bildon\nUzu 'nasa' por bildo de la tago",
+    "Kio estas la ligo?\nResti malplenan por foriri bildon\nUzu '$' por bildo de la tago",
   bg_copy: "Premu CTRL + C por alglui koloran",
   bg_info_button: "Informo de Bildo",
   bg_info_button_title: "Rigardu klarigon de fona bildo",
