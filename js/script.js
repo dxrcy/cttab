@@ -515,42 +515,49 @@ class notes {
 
 // Confetti
 // Cannot be named `confetti`
-const confettiHandler = {
-  cooldown: 0,
-};
+class confettiHandler {
+  // Confetti settings
+  static cooldown = 0;
 
-confettiHandler.start = function () {
-  if (confettiHandler.cooldown + 200 > Date.now()) {
-    return;
+  // Start confetti animation
+  static start() {
+    if (confettiHandler.cooldown + 200 > Date.now()) {
+      return;
+    }
+    confettiHandler.cooldown = Date.now();
+    confettiHandler.disable();
+    setTimeout(confettiHandler.enable, 200);
+
+    // Settings for confetti.js
+    confetti({
+      particleCount: 150,
+      origin: { x: 0.5, y: 1 },
+      scalar: 1.7,
+    });
+
+    console.log(language.get("support"));
   }
-  confettiHandler.cooldown = Date.now();
-  confettiHandler.disable();
-  setTimeout(confettiHandler.enable, 200);
 
-  confetti({
-    particleCount: 150,
-    origin: { x: 0.5, y: 1 },
-    scalar: 1.7,
-  });
+  // Disable button (while active)
+  static disable() {
+    $("#confetti").attr("disabled", true);
+  }
 
-  console.log(language.get("support"));
-};
+  // Enable button
+  static enable() {
+    $("#confetti").attr("disabled", false);
+  }
 
-confettiHandler.disable = function () {
-  $("#confetti").attr("disabled", true);
-};
+  // Hide button
+  static hide() {
+    $("#confetti").addClass("hidden");
+  }
 
-confettiHandler.enable = function () {
-  $("#confetti").attr("disabled", false);
-};
-
-confettiHandler.hide = function () {
-  $("#confetti").addClass("hidden");
-};
-
-confettiHandler.show = function () {
-  $("#confetti").removeClass("hidden");
-};
+  // Show button
+  static show() {
+    $("#confetti").removeClass("hidden");
+  }
+}
 
 // Background
 const bg = { default: "#202038" };
