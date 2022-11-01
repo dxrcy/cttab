@@ -91,9 +91,9 @@ class language {
   }
 
   // Get language value if exists, otherwise missing language display (code in brackets)
-  static get(code, format) {
+  static get(code, formatWith) {
     var string = language.getIfExists(code);
-    return F.format(string || string === "" ? string : `[${code}]`, format);
+    return format(string || string === "" ? string : `[${code}]`, formatWith);
   }
 
   // Switch / toggle language mode

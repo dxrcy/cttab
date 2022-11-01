@@ -1,7 +1,6 @@
 # TODO
 
 - Add comments
-- Extract fortissimo functions
 
 # Maybe
 

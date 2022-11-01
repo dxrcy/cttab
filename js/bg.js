@@ -59,7 +59,7 @@ class bg {
           ? null
           : colors.length === 1
           ? colors[0]
-          : F.randomChoice(colors);
+          : randomChoice(colors);
       // Select default color with dollar
       if (color === "$") {
         color = bg.default;
@@ -91,11 +91,11 @@ class bg {
         // Create random color if weight is selected
         var weight = isAbsoluteWeight ? weight : weight / (colors.length + 1);
         if (!colors || colors.length === 0 || Math.random() < weight) {
-          color = F.hsv2hex(
-            F.randomInt(settings.h0, Math.max(settings.h0, settings.h1)),
-            F.randomInt(settings.s0, Math.max(settings.s0, settings.s1)),
-            F.randomInt(settings.v0, Math.max(settings.v0, settings.v1)),
-          );
+          color = hsv2hex({
+            h: randomInt(settings.h0, Math.max(settings.h0, settings.h1)),
+            s: randomInt(settings.s0, Math.max(settings.s0, settings.s1)),
+            v: randomInt(settings.v0, Math.max(settings.v0, settings.v1)),
+          });
         }
       }
     }
@@ -106,7 +106,7 @@ class bg {
     // Add image
     if (ls.all.bg.image) {
       // Random choice
-      var image = F.randomChoice(ls.all.bg.image.split(" "));
+      var image = randomChoice(ls.all.bg.image.split(" "));
 
       // Nasa image
       if (image === "$") {

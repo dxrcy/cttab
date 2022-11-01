@@ -86,7 +86,7 @@ This represents the following:
 - - `rgb(50, 200, 100)` - Light green (`#32C864`)
 - Note that `rgb(50, 200, 100)` is parsed as one colour, even if it includes spaces
 
-**`hsv` and `hsl` support coming soon!**
+**`hsv` and `hsl` support coming soon! Maybe!**
 
 #### Local or online image (`2`)
 

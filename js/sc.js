@@ -87,7 +87,7 @@ class sc {
   //TODO Add comments
   static edit(number) {
     var href = prompt(
-      F.format(language.get("sc_edit_url"), { number: number + 1 }),
+      format(language.get("sc_edit_url"), { number: number + 1 }),
       ls.all.sc.array?.[number]?.[1] ||
         "https://epicwebsite.bruh.international",
     );
@@ -102,10 +102,10 @@ class sc {
     }
 
     var title = prompt(
-      F.format(language.get("sc_edit_name"), { number: number + 1 }),
+      format(language.get("sc_edit_name"), { number: number + 1 }),
       ls.all.sc.array?.[number]?.[0] != undefined
         ? ls.all.sc.array?.[number]?.[0]
-        : F.format(language.get("sc_name_default"), { number: number + 1 }),
+        : format(language.get("sc_name_default"), { number: number + 1 }),
     );
     if (title === null) {
       return;

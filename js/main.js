@@ -15,7 +15,7 @@ function init() {
 
 // Format template element in html
 function getTemplate(name, values) {
-  return F.format(
+  return format(
     $(`template[name=${name}]`)
       .html()
       .split("\n")
@@ -242,4 +242,112 @@ class confettiHandler {
   static show() {
     $("#confetti").removeClass("hidden");
   }
+}
+
+// * -----------------------------
+// * All below was from Fortissimo
+// * -----------------------------
+//TODO Add comments to all functions
+
+function format(string, ...replace) {
+  if (!replace || !string || typeof string !== "string") {
+    return string;
+  }
+  if (typeof replace[0] === "object") {
+    replace = replace[0];
+  }
+  for (var i in replace) {
+    string = string.split("{" + i + "}").join(replace[i]);
+  }
+  return string;
+}
+
+function randomInt(min, max, floor = true) {
+  if (min === max) {
+    return min;
+  }
+  if (min > max) {
+    throw "Minimum greater than maximum";
+  }
+  return Math[floor ? "floor" : "round"](Math.random() * (max - min) + min);
+}
+
+function randomChoice(array) {
+  if (!array) {
+    return;
+  }
+  return array[randomInt(0, array.length - 1)];
+}
+
+function toHex(number) {
+  if (number === 0) {
+    return "00";
+  }
+  if (number) {
+    var hex = Math.floor(number).toString(16).toUpperCase();
+    if (hex) {
+      return hex.length === 1 ? "0" + hex : hex;
+    }
+  }
+  throw "`number` is not defined";
+}
+
+function rgb2hex(rgb) {
+  return "#" + toHex(rgb.r) + toHex(rgb.g) + toHex(rgb.b);
+}
+
+function hsv2rgb(hsv, round = true) {
+  var h = (round ? Math.floor(hsv.h) : hsv.h) / 360,
+    s = (round ? Math.floor(hsv.s) : hsv.s) / 100,
+    v = (round ? Math.floor(hsv.v) : hsv.v) / 100,
+    i = Math.floor(h * 6),
+    f = h * 6 - i,
+    p = v * (1 - s),
+    q = v * (1 - f * s),
+    t = v * (1 - (1 - f) * s),
+    r = 0,
+    g = 0,
+    b = 0;
+
+  switch (i % 6) {
+    case 0:
+      (r = v), (g = t), (b = p);
+      break;
+    case 1:
+      (r = q), (g = v), (b = p);
+      break;
+    case 2:
+      (r = p), (g = v), (b = t);
+      break;
+    case 3:
+      (r = p), (g = q), (b = v);
+      break;
+    case 4:
+      (r = t), (g = p), (b = v);
+      break;
+    case 5:
+      (r = v), (g = p), (b = q);
+      break;
+  }
+
+  r *= 255;
+  g *= 255;
+  b *= 255;
+  if (!round) {
+    return {
+      r,
+      g,
+      b,
+    };
+  }
+
+  return {
+    r: Math.round(r),
+    g: Math.round(g),
+    b: Math.round(b),
+  };
+}
+
+function hsv2hex(hsv) {
+  return rgb2hex(hsv2rgb(hsv));
 }
