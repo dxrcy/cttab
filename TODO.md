@@ -7,7 +7,7 @@
 
 - Add hsv for background
 
-# Not going to do
+# Not going to do ... probably
 
 - Migrate to TS
 - Add mobile support
