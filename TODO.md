@@ -1,12 +1,11 @@
 # TODO
 
-- Separate script files to local/imported
 - Add comments
+- Extract fortissimo functions
 
 # Maybe
 
 - Add hsv for background
-- Extract fortissimo functions
 
 # Not going to do
 
