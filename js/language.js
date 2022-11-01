@@ -1,4 +1,5 @@
 //* Language API
+
 // Cannot be named `lang` for js reasons
 class language {
   // Translations defined in lang/*.js

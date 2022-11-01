@@ -1,4 +1,5 @@
 //* Random garfield comic
+
 class garf {
   // Get comic url from date
   static get(date) {

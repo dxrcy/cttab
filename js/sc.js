@@ -1,4 +1,5 @@
 //* Shortcuts
+
 class sc {
   // Default number of shortcuts shown
   static default = 24;

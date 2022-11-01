@@ -1,4 +1,5 @@
 //* Local Storage API
+
 class ls {
   // Check if localStorage exists and is valid, otherwise reset
   static check() {

@@ -30,7 +30,7 @@ Fully customizable shortcuts to commonly visited sites!
 
 <img src="./image/tutorial/sc.png" alt="Explanation of shortcuts" />
 
-Object: `sc`
+Class: `sc` (`sc.js`)
 
 ## Quick Notes
 
@@ -43,7 +43,7 @@ Easy notepads for taking short notes in an instant!
 
 <img src="./image/tutorial/notes.png" alt="Explanation of notes" />
 
-Object: `notes`
+Class: `notes` (`main.js`)
 
 ## Custom Background Colour & Image
 
@@ -52,7 +52,7 @@ Create any sort of dynamic background, with random colours and images!
 - Open the background editor in the top bar '_Change background_'
 - Choose how to change the background
 
-Object: `bg`
+Class: `bg` (`bg.js`)
 
 ### Background Guide
 
@@ -106,7 +106,7 @@ Change the Header bar and the Title (Seen in Tabs, Bookmarks, ect.)!
 
 - Click the header to edit, very easy and simple!
 
-Object: `header`
+Class: `header` (`main.js`)
 
 ## Confetti
 
@@ -117,7 +117,7 @@ This is a secret feature, can you find it?
 It is also available through console commands, if you are a little baby.
 </span>
 
-Object: `confettiHandler` (`confetti` is the imported object)
+Class: `confettiHandler` (`main.js`) (object `confetti` is the imported API)
 
 ## Import & Export Settings
 
@@ -127,7 +127,7 @@ Save and load settings to a JSON file on your computer! Back up your shortcuts!
 - Import settings from a file in the top bar '_Import_'
 - Settings are saved to `localStorage`
 
-Object: `ls`
+Class: `ls` (`ls.js`)
 
 ## Change Language
 
@@ -135,7 +135,7 @@ Choose between **TWO** languages!
 
 If you can translate into more languages, please consider [contributing](#contributing) to to this project!
 
-Object: `language` (**NOT** `lang`)
+Class: `language` (**NOT** `lang`) (`language.js`)
 
 ## Garfield
 

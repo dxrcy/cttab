@@ -1,5 +1,5 @@
-
 //* Background
+
 class bg {
   // Default background color
   static default = "#202038";
