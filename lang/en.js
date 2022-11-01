@@ -15,7 +15,7 @@ language.data.en = {
   top_sc: "Change shortcuts",
   top_sc_title: "Click to change the amount of shortcuts",
 
-  top_lang_title: "🌐 Change language",
+  top_lang_title: "🌐 Change language to Esperanto",
   top_import: "Import",
   top_import_title: "Import settings from JSON string",
   top_export: "Export",

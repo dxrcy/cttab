@@ -15,7 +15,7 @@ language.data.eo = {
   top_sc: "Ŝanĝi ligojn",
   top_sc_title: "Ŝanĝi logilojn",
 
-  top_lang_title: "🌐 Ŝanĝi lingvon",
+  top_lang_title: "🌐 Ŝanĝi lingvon al la angla",
   top_import: "Alŝuti",
   top_import_title: "Alŝuti fiksadojn el JSON teksto",
   top_export: "Elŝuti",
