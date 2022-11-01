@@ -133,7 +133,7 @@ class bg {
           // Fetch url
           const { url, explanation: info } = await (
             await fetch(
-              `https://api.nasa.gov/planetary/apod?date=${getYesterday()}&api_key=quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh`,
+              `https://api.nasa.gov/planetary/apod?date=${bg.getYesterday()}&api_key=quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh`,
             )
           ).json();
 
@@ -159,7 +159,7 @@ class bg {
   static getYesterday() {
     var date = new Date();
     date.setDate(date.getDate() - 1);
-    return formatDate("-");
+    return formatDate(date);
   }
 
   // Show info for nasa background
