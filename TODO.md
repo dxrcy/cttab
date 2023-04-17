@@ -1,5 +1,6 @@
 # TODO
 
+- Add image to readme with features showed
 - Add comments
 
 # Maybe
