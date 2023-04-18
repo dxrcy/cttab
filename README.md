@@ -147,15 +147,34 @@ If you run into any problems, [Submit an Issue](#issues) for this repo and I wil
 
 ## Downloading files
 
-Download using [powershell](#download-using-powershell) or [manually](#download-manually)s
+- Download options:
+  - [Bash](#bash) (Linux)
+  - [Powershell](#powershell) (Windows)
+  - [Manually](#download-manually)
 
-### Download using Powershell
-
-This solution follows the same initial steps as a [Contribution](#contributing)
+### Bash
 
 Make sure you have [Git](https://git-scm.com/downloads) installed.
 
-This has been tested in Windows 10 with PowerShell.
+```bash
+# Navigate to desired location - Example as Documents folder
+cd ~/Documents
+
+# Clone repository as ./cttab folder in current location, navigate into folder
+git clone https://github.com/darccyy/cttab.git
+cd cttab
+
+# Delete GitHub files
+# OPTIONAL - Only do this if you have no interest of making changes to the files
+rm -rf .git
+
+# Open file in default program
+xdg-open index.html
+```
+
+### Powershell
+
+Make sure you have [Git](https://git-scm.com/downloads) installed.
 
 ```powershell
 # Navigate to desired location - Example as Documents folder
@@ -283,9 +302,9 @@ This has been tested in Windows 10 with PowerShell, but it should work for other
 
 If you run into any problems, [Submit an Issue](#issues) for this repo and I will try to help.
 
-```powershell
+```bash
 # Navigate to desired location - Example Documents folder
-cd C:/Users/$env:UserName/Documents
+cd ~/Documents
 
 # Clone repository as ./cttab folder in current location, navigate into folder
 git clone https://github.com/darccyy/cttab.git
