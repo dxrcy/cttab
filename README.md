@@ -12,10 +12,10 @@ Works on Firefox, Chrome, and possibly more!
 
 # Contents
 
-- [Features](#features) - Explains the Awesome Features!
-- [Setup](#setup) - How to set up on browser
-- [Contributing](#contributing) - How to contribute to the project
-- [Issues](#issues) - How to submit an issue
+-   [Features](#features) - Explains the Awesome Features!
+-   [Setup](#setup) - How to set up on browser
+-   [Contributing](#contributing) - How to contribute to the project
+-   [Issues](#issues) - How to submit an issue
 
 # Features
 
@@ -23,10 +23,10 @@ Works on Firefox, Chrome, and possibly more!
 
 Fully customizable shortcuts to commonly visited sites!
 
-- Click the Edit button to change the link and title of each shortcut
-- Remove by entering blank text into the URL input box
-- Icon will automatically be fetched
-- Change the amount of shortcuts shown in the top bar '_Change shortcuts_'
+-   Click the Edit button to change the link and title of each shortcut
+-   Remove by entering blank text into the URL input box
+-   Icon will automatically be fetched
+-   Change the amount of shortcuts shown in the top bar '_Change shortcuts_'
 
 <img src="./image/tutorial/sc.png" alt="Explanation of shortcuts" />
 
@@ -36,10 +36,10 @@ Class: `sc` (`sc.js`)
 
 Easy notepads for taking short notes in an instant!
 
-- Create a new note in the top bar '_Add note_'
-- Type some text
-- Create multiple notes at once!
-- Delete the note with the trash icon
+-   Create a new note in the top bar '_Add note_'
+-   Type some text
+-   Create multiple notes at once!
+-   Delete the note with the trash icon
 
 <img src="./image/tutorial/notes.png" alt="Explanation of notes" />
 
@@ -49,8 +49,8 @@ Class: `notes` (`main.js`)
 
 Create any sort of dynamic background, with random colours and images!
 
-- Open the background editor in the top bar '_Change background_'
-- Choose how to change the background
+-   Open the background editor in the top bar '_Change background_'
+-   Choose how to change the background
 
 Class: `bg` (`bg.js`)
 
@@ -62,29 +62,29 @@ Change all the background to default solid colour `#202038`
 
 #### Solid colour (Or background of transparent image) (`1`)
 
-- Change the solid background color
-- If an image is enabled with a transparent background, the colour will be the background
-- Add any CSS compatible colour, hex codes (`#XXXXXX`), rgb (`rgb(xx, xx, xx)`), or hsl (`hsl(xx, xx, xx)`, **NOT** `hsv`),
-- Add `$` to represent default colour
-- Add multiple colours by seperating by space - Colour will be chosen randomly each load
-- Add randomly generated colour with `?`
-- - Any text after the `?` will be used as parameters for generated colours, as follows:
-- - To change the HSV requirements, use `a=n`, `a<n`, `a>n` syntax, with `a` being a letter of `h` (hue), `s` (saturation), or `v` (value), and `n` being a number between `0-360` for hue, or `0-100` for saturation and value
-- - To change the weight (chance) of the generated colour being chosen, use `w=n` or `W=n` with `n` being a number from `0-Infinity` - `w` (Lowercase) represents weight relative to the amount of other colours given, whereas `W` (Uppercase) represents absolute weight
+-   Change the solid background color
+-   If an image is enabled with a transparent background, the colour will be the background
+-   Add any CSS compatible colour, hex codes (`#XXXXXX`), rgb (`rgb(xx, xx, xx)`), or hsl (`hsl(xx, xx, xx)`, **NOT** `hsv`),
+-   Add `$` to represent default colour
+-   Add multiple colours by seperating by space - Colour will be chosen randomly each load
+-   Add randomly generated colour with `?`
+    -   Any text after the `?` will be used as parameters for generated colours, as follows:
+    -   To change the HSV requirements, use `a=n`, `a<n`, `a>n` syntax, with `a` being a letter of `h` (hue), `s` (saturation), or `v` (value), and `n` being a number between `0-360` for hue, or `0-100` for saturation and value
+    -   To change the weight (chance) of the generated colour being chosen, use `w=n` or `W=n` with `n` being a number from `0-Infinity` - `w` (Lowercase) represents weight relative to the amount of other colours given, whereas `W` (Uppercase) represents absolute weight
 
 Eg. `red #F0F $ rgb(50, 200, 100) ? s>50 v=100 W0.5`
 
 This represents the following:
 
-- `50%` chance of getting a random colour (`W0.5` - Absolute weight)
-- Generated colour saturation will be greater than `50%` (`s>50`)
-- Generated colour value (lightness) will be `100%` always (`v=100`)
-- Non-generated colours will be randomly selected between:
-- - `red` - (`#F00`)
-- - `#F0F` - Magenta (`magenta`)
-- - `$` - Default colour - Grey blue (`#202038`)
-- - `rgb(50, 200, 100)` - Light green (`#32C864`)
-- Note that `rgb(50, 200, 100)` is parsed as one colour, even if it includes spaces
+-   `50%` chance of getting a random colour (`W0.5` - Absolute weight)
+-   Generated colour saturation will be greater than `50%` (`s>50`)
+-   Generated colour value (lightness) will be `100%` always (`v=100`)
+-   Non-generated colours will be randomly selected between:
+    -   `red` - (`#F00`)
+    -   `#F0F` - Magenta (`magenta`)
+    -   `$` - Default colour - Grey blue (`#202038`)
+    -   `rgb(50, 200, 100)` - Light green (`#32C864`)
+-   Note that `rgb(50, 200, 100)` is parsed as one colour, even if it includes spaces
 
 **`hsv` and `hsl` support coming soon! Maybe!**
 
@@ -104,7 +104,7 @@ If you like a randomly generated colour, you can use this option to select the c
 
 Change the Header bar and the Title (Seen in Tabs, Bookmarks, ect.)!
 
-- Click the header to edit, very easy and simple!
+-   Click the header to edit, very easy and simple!
 
 Class: `header` (`main.js`)
 
@@ -123,9 +123,9 @@ Class: `confettiHandler` (`main.js`) (object `confetti` is the imported API)
 
 Save and load settings to a JSON file on your computer! Back up your shortcuts!
 
-- Export settings and save to `cttab-data.json` in the top bar '_Export_'
-- Import settings from a file in the top bar '_Import_'
-- Settings are saved to `localStorage`
+-   Export settings and save to `cttab-data.json` in the top bar '_Export_'
+-   Import settings from a file in the top bar '_Import_'
+-   Settings are saved to `localStorage`
 
 Class: `ls` (`ls.js`)
 
@@ -143,11 +143,11 @@ Toggle the Random Garfield Comic from the button in the top right!
 
 # Setup
 
+If you run into any problems, [Submit an Issue](#issues) for this repo and I will try to help.
+
 ## Downloading files
 
-Download using [powershell](#download-using-powershell) or [manually](#download-manually)
-
-If you run into any problems, [Submit an Issue](#issues) for this repo and I will try to help.
+Download using [powershell](#download-using-powershell) or [manually](#download-manually)s
 
 ### Download using Powershell
 
@@ -190,6 +190,8 @@ This has been tested in Windows 10, but it should work with systems.
 
 ## Firefox ⭐
 
+These methods also work with Firefox forks such as LibreWolf.
+
 ### Open in new window ⭐
 
 1. Open Firefox and click the ☰ hamburger icon in the top right
@@ -228,7 +230,10 @@ AboutNewTab.newTabURL = newTabURL;
 ```
 
 4. Replace `file:///C:/Users/yourname/yourfile.html` with the path to the local file. Example: `file:///C:/Users/gangstaperson/Documents/cttab/index.html`
-5. Save the file and Copy and Paste it into the root Firefox program folder. It is most likely `C:\Program Files\Mozilla Firefox`. You need to copy + paste because the folder usually has permissions that restrict editing of files.
+5. Save the file and Copy and Paste it into the root Firefox program folder. You need to copy + paste because the folder usually has permissions that restrict editing of files.
+    - For _Windows_ (Firefox): `C:/Program Files/Mozilla Firefox`
+    - For _Linux_ (Firefox): `/usr/lib/firefox`
+    - For _Linux_ (LibreWolf): `/usr/share/librewolf`
 6. Create a new file called `autoconfig.js` and save it to Desktop
 7. Insert this code:
 
