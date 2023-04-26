@@ -74,6 +74,6 @@ class ls {
 
   // Export localStorage to file
   static export() {
-    download(JSON.stringify(ls.all), "cttab-data.json", "text/json");
+    download(JSON.stringify(ls.all), "cttab.json", "text/json");
   }
 }

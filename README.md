@@ -123,7 +123,7 @@ Class: `confettiHandler` (`main.js`) (object `confetti` is the imported API)
 
 Save and load settings to a JSON file on your computer! Back up your shortcuts!
 
--   Export settings and save to `cttab-data.json` in the top bar '_Export_'
+-   Export settings and save to `cttab.json` in the top bar '_Export_'
 -   Import settings from a file in the top bar '_Import_'
 -   Settings are saved to `localStorage`
 
