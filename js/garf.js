@@ -36,8 +36,6 @@ class garf {
 
   // Load comic
   static async init(forceReload) {
-    console.log(ls.all.garf);
-
     // If disabled
     if (ls.all.garf === null) {
       $("#garf").css("display", "none");
@@ -67,9 +65,7 @@ class garf {
       forceReload
     ) {
       // Fetch url - Random date
-      console.log("reload");
       const url = await garf.getImageUrl(garf.randomDate(), ls.all.garf);
-      console.log("url:", url);
 
       // Store cache
       ls.set(all => {
