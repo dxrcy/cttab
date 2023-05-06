@@ -23,7 +23,7 @@ class ls {
       notes: [""],
       lang: "en",
       bg: { color: null, image: null },
-      garf: false,
+      garf: null,
       cache: {},
     });
 

@@ -6,7 +6,7 @@ language.data.eo = {
   header_title: "Alklaki por ŝanĝi titilon",
   header_edit: "Ŝanĝi titilon",
 
-  top_garf: "Inversigi Garfo",
+  top_garf: "Ŝanĝi Garfo",
   top_garf_title: "Vidigi/Malvidigi Garfildan Bildstrion",
   top_note: "Krei noton",
   top_note_title: "Krei novan noton",
@@ -25,6 +25,8 @@ language.data.eo = {
   top_about: "Pri",
   top_about_title: "Pri / helpa paĝo\n{link}",
   skip_focus: "Saltigi fokuson al unua notoj",
+  
+  garf_edit: "URL por Garfilda bildstrio\n[missing...]",
 
   sc_name_default: "Ligo {number}",
   sc_title: "{name}\n{href}",

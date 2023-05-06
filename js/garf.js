@@ -2,37 +2,44 @@
 
 class garf {
   // Get comic url from date
-  static get(date) {
-    return new Promise((resolve, reject) => {
-      fetch(
-        "https://api.scraperapi.com?api_key=1ddbd21386871fa6c32ca5a91407c32d&url=https://www.gocomics.com/garfield/" +
-          date,
-        {
-          method: "GET",
-        },
-      )
-        .then(res => res.text())
-        .then(text => {
-          var position = text.indexOf("https://assets.amuniversal.com");
-          resolve(text.substring(position, position + 63));
-        })
-        .catch(err => reject(err));
-    });
+  static getImageUrl(date, mode) {
+    if (mode === true) {
+      return new Promise((resolve, reject) => {
+        fetch(
+          "https://api.scraperapi.com?api_key=1ddbd21386871fa6c32ca5a91407c32d&url=https://www.gocomics.com/garfield/" +
+            formatDate(date, "/"),
+          {
+            method: "GET",
+          },
+        )
+          .then(res => res.text())
+          .then(text => {
+            var position = text.indexOf("https://assets.amuniversal.com");
+            resolve(text.substring(position, position + 63));
+          })
+          .catch(err => reject(err));
+      });
+    } else {
+      return format(mode, {
+        YYYY: date.getFullYear(),
+        MM: padTwoDigits(date.getMonth() + 1),
+        DD: padTwoDigits(date.getDate()),
+      });
+    }
   }
 
   // Get random valid date for comic
   static randomDate() {
     var start = new Date("1978-06-19").getTime();
-    return formatDate(
-      new Date(start + Math.random() * (Date.now() - start)),
-      "/",
-    );
+    return new Date(start + Math.random() * (Date.now() - start));
   }
 
   // Load comic
   static async init(forceReload) {
+    console.log(ls.all.garf);
+
     // If disabled
-    if (!ls.all.garf) {
+    if (ls.all.garf === null) {
       $("#garf").css("display", "none");
       return;
     }
@@ -55,11 +62,14 @@ class garf {
     // If 1 hour since last refresh
     if (
       !ls.all.cache.garf.url ||
+      ls.all.garf !== true ||
       Date.now() - ls.all.cache.garf.time > 36e5 ||
       forceReload
     ) {
       // Fetch url - Random date
-      const url = await garf.get(garf.randomDate());
+      console.log("reload");
+      const url = await garf.getImageUrl(garf.randomDate(), ls.all.garf);
+      console.log("url:", url);
 
       // Store cache
       ls.set(all => {
@@ -72,9 +82,30 @@ class garf {
   }
 
   // Show/hide comic
-  static toggle() {
+  static edit() {
+    //TODO lang
+    //TODO description
+
+    var mode = prompt(language.get("garf_edit"));
+
+    if (mode === null) {
+      return;
+    }
+
+    if (mode.length < 1) {
+      mode = null
+    } else if (mode === "$") {
+      mode = true;
+    } else if (!mode.startsWith("file:")) {
+      mode = "file:///" + mode;
+    }
+
     ls.set(all => {
-      all.garf = !all.garf;
+      if (all.garf !== mode) {
+        all.cache.garf = undefined;
+      }      
+
+      all.garf = mode;
     });
     garf.init();
   }

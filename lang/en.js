@@ -6,8 +6,8 @@ language.data.en = {
   header_title: "Click to edit header",
   header_edit: "Change header",
 
-  top_garf: "Toggle Garf",
-  top_garf_title: "Show/Hide Garfield Comic",
+  top_garf: "Change Garf",
+  top_garf_title: "Click to edit URL used to fetch Garfield comic",
   top_note: "Add note",
   top_note_title: "Click to add note",
   top_bg: "Change background",
@@ -25,6 +25,8 @@ language.data.en = {
   top_about: "About",
   top_about_title: "About / help page\n{link}",
   skip_focus: "Skip focus to first note",
+
+  garf_edit: "URL for Garfield comic\nEnter local file path to comic repository, formatted with:\n   - {YYYY} Year\n   - {MM} Month\n   - {DD} Day\nUse '$' for automatic online API (slow)\nLeave blank to hide comic",
 
   sc_name_default: "Shortcut {number}",
   sc_title: "{name}\n{href}",

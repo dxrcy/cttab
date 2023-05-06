@@ -89,6 +89,14 @@ function formatDate(date, char = "-") {
   return yyyy + char + mm + char + dd;
 }
 
+//TODO comments
+function padTwoDigits(number) {
+  number = number.toString();
+  return number.length < 2
+    ? "0" + number
+    : number;
+}
+
 // Header
 class header {
   // Initialize header
