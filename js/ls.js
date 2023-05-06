@@ -17,14 +17,14 @@ class ls {
   // Reset localStorage
   static reset() {
     localStorage.cttab = JSON.stringify({
-      header: null,
-      sc: { amount: sc.default, array: {} },
-      search: null,
-      notes: [""],
       lang: "en",
-      bg: { color: null, image: null },
+      header: null,
       garf: null,
+      bg: { color: null, image: null },
+      sc: { amount: sc.default, array: {} },
+      notes: [""],
       cache: {},
+      // search: null, //? What is this ?
     });
 
     init();
@@ -74,6 +74,6 @@ class ls {
 
   // Export localStorage to file
   static export() {
-    download(JSON.stringify(ls.all), "cttab.json", "text/json");
+    download(JSON.stringify(ls.all, null, 2), "cttab.json", "text/json");
   }
 }
