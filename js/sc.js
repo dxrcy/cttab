@@ -89,7 +89,7 @@ class sc {
     var href = prompt(
       format(language.get("sc_edit_url"), { number: number + 1 }),
       ls.all.sc.array?.[number]?.[1] ||
-        "https://epicwebsite.bruh.international",
+        "https://bruh.news",
     );
     if (href === "") {
       ls.set(all => {
