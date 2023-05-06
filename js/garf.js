@@ -3,7 +3,7 @@
 class garf {
   // Get comic url from date
   static getImageUrl(date, mode) {
-    if (mode === true) {
+    if (mode === "$") {
       return new Promise((resolve, reject) => {
         fetch(
           "https://api.scraperapi.com?api_key=1ddbd21386871fa6c32ca5a91407c32d&url=https://www.gocomics.com/garfield/" +
@@ -62,7 +62,7 @@ class garf {
     // If 1 hour since last refresh
     if (
       !ls.all.cache.garf.url ||
-      ls.all.garf !== true ||
+      ls.all.garf !== "$" ||
       Date.now() - ls.all.cache.garf.time > 36e5 ||
       forceReload
     ) {
@@ -83,10 +83,7 @@ class garf {
 
   // Show/hide comic
   static edit() {
-    //TODO lang
-    //TODO description
-
-    var mode = prompt(language.get("garf_edit"));
+    var mode = prompt(language.get("garf_edit"), ls.all.garf);
 
     if (mode === null) {
       return;
@@ -94,16 +91,14 @@ class garf {
 
     if (mode.length < 1) {
       mode = null
-    } else if (mode === "$") {
-      mode = true;
-    } else if (!mode.startsWith("file:")) {
+    } else if (mode !== "$" && !mode.startsWith("file:")) {
       mode = "file:///" + mode;
     }
 
     ls.set(all => {
       if (all.garf !== mode) {
         all.cache.garf = undefined;
-      }      
+      }  
 
       all.garf = mode;
     });
