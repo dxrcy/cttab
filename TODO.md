@@ -1,6 +1,5 @@
 # TODO
 
-- format all files!
 - linting and change var->let
 - comments!
 - refactor!
