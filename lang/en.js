@@ -27,7 +27,7 @@ language.data.en = {
     skip_focus: "Skip focus to first note",
 
     garf_edit:
-        "URL for Garfield comic\nLocal file path to comic repository, formatted with:\n   - {YYYY} Year\n   - {MM} Month\n   - {DD} Day\nUse '$' for automatic online API (slow)\nLeave blank to hide comic",
+        "URL for Garfield comic\nLocal comic repository, formatted with:\n   - {YYYY} Year\n   - {MM} Month\n   - {DD} Day\nUse '$' for automatic online API (slow)\nLeave blank to hide comic",
 
     sc_name_default: "Shortcut {number}",
     sc_title: "{name}\n{href}",

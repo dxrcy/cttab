@@ -26,7 +26,7 @@ language.data.eo = {
     top_about_title: "Pri / helpa paĝo\n{link}",
     skip_focus: "Saltigi fokuson al unua notoj",
 
-    garf_edit: "URL por Garfilda bildstrio\n[missing...]",
+    garf_edit: "URL por Garfilda bildstrio\nLoka dosierujo de bildstrioj, formatita laŭ:\n    - {YYYY} Jaro\n    - {MM} Monato\n    - {DD} Tago\nUzi '$' por aŭtomata reta API (malrapida)\nResti malplenan por malŝajnigi bildstrion",
 
     sc_name_default: "Ligo {number}",
     sc_title: "{name}\n{href}",
