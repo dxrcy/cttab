@@ -1,241 +1,258 @@
 <!DOCTYPE html>
 <html>
-  <!-- Thanks for using CTTab v3.0 - By darcy :) -->
+    <!-- Thanks for using CTTab v3.0 - By darcy :) -->
 
-  <head>
-    <title>CTTab</title>
+    <head>
+        <title>CTTab</title>
 
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
-    <meta content="utf-8" http-equiv="encoding" />
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+        <meta content="utf-8" http-equiv="encoding" />
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="./css/index.min.css" />
-    <link rel="stylesheet" href="./css/header.min.css" />
-    <link rel="stylesheet" href="./css/shortcuts.min.css" />
-    <link rel="stylesheet" href="./css/garf.min.css" />
-    <link rel="stylesheet" href="./css/notes.min.css" />
+        <!-- Styles -->
+        <link rel="stylesheet" href="./css/index.min.css" />
+        <link rel="stylesheet" href="./css/header.min.css" />
+        <link rel="stylesheet" href="./css/shortcuts.min.css" />
+        <link rel="stylesheet" href="./css/garf.min.css" />
+        <link rel="stylesheet" href="./css/notes.min.css" />
 
-    <link rel="stylesheet" href="./css//font-awesome.min.css" />
+        <link rel="stylesheet" href="./css//font-awesome.min.css" />
 
-    <!-- Imported scripts -->
-    <script type="text/javascript" src="./js/imported/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/imported/confetti.min.js"></script>
+        <!-- Imported scripts -->
+        <script
+            type="text/javascript"
+            src="./js/imported/jquery.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="./js/imported/confetti.min.js"
+        ></script>
 
-    <!-- Local scripts -->
-    <script type="text/javascript" src="./js/main.js"></script>
-    <script type="text/javascript" src="./js/ls.js"></script>
-    <script type="text/javascript" src="./js/language.js"></script>
-    <script type="text/javascript" src="./js/sc.js"></script>
-    <script type="text/javascript" src="./js/bg.js"></script>
-    <script type="text/javascript" src="./js/garf.js"></script>
+        <!-- Local scripts -->
+        <script type="text/javascript" src="./js/main.js"></script>
+        <script type="text/javascript" src="./js/ls.js"></script>
+        <script type="text/javascript" src="./js/language.js"></script>
+        <script type="text/javascript" src="./js/sc.js"></script>
+        <script type="text/javascript" src="./js/bg.js"></script>
+        <script type="text/javascript" src="./js/garf.js"></script>
 
-    <!-- Language files -->
-    <script type="text/javascript" src="./lang/en.js"></script>
-    <script type="text/javascript" src="./lang/eo.js"></script>
+        <!-- Language files -->
+        <script type="text/javascript" src="./lang/en.js"></script>
+        <script type="text/javascript" src="./lang/eo.js"></script>
 
-    <link rel="shortcut icon" type="image/png" href="./image/icon/256.png" />
-  </head>
+        <link
+            rel="shortcut icon"
+            type="image/png"
+            href="./image/icon/256.png"
+        />
+    </head>
 
-  <body onload="init()">
-    <header>
-      <left>
-        <span class="seperated">
-          <item>
+    <body onload="init()">
+        <header>
+            <left>
+                <span class="seperated">
+                    <item>
+                        <button
+                            onclick="garf.edit()"
+                            title="[top_garf_title]"
+                            class="lang-tofill"
+                        >
+                            [top_garf]
+                        </button>
+                    </item>
+
+                    <item>
+                        <button
+                            onclick="notes.add()"
+                            title="[top_note_title]"
+                            class="lang-tofill"
+                        >
+                            [top_note]
+                        </button>
+                    </item>
+
+                    <item>
+                        <button
+                            onclick="bg.edit()"
+                            title="[top_bg_title]"
+                            class="lang-tofill"
+                        >
+                            [top_bg]
+                        </button>
+                    </item>
+
+                    <item>
+                        <button
+                            onclick="sc.editAmount()"
+                            title="[top_sc_title]"
+                            class="lang-tofill"
+                        >
+                            [top_sc]
+                        </button>
+                    </item>
+                </span>
+            </left>
+
             <button
-              onclick="garf.edit()"
-              title="[top_garf_title]"
-              class="lang-tofill"
-            >
-              [top_garf]
+                id="header"
+                onclick="header.edit()"
+                title="[header_title]"
+                class="lang-tofill"
+                onclick="header.edit(event)"
+            ></button>
+
+            <right>
+                <span class="seperated">
+                    <item>
+                        <button
+                            onclick="language.switch()"
+                            title="[top_lang_title]"
+                            class="lang-tofill lang-ignore-text"
+                        >
+                            🌐<span id="lang_display">--</span>
+                        </button>
+                    </item>
+
+                    <item>
+                        <button
+                            onclick="ls.export()"
+                            span
+                            title="[top_export_title]"
+                            class="lang-tofill"
+                        >
+                            [top_export]
+                        </button>
+                    </item>
+
+                    <item>
+                        <button tabindex="-1">
+                            <input
+                                type="file"
+                                id="ls-file"
+                                onchange="ls.import()"
+                            />
+                            <span
+                                title="[top_import_title]"
+                                class="lang-tofill focus"
+                            >
+                                [top_import]
+                            </span>
+                        </button>
+                    </item>
+
+                    <item>
+                        <button
+                            onclick="ls.resetConfirm()"
+                            title="[top_reset_title]"
+                            class="lang-tofill"
+                        >
+                            [top_reset]
+                        </button>
+                    </item>
+
+                    <item>
+                        <a
+                            href="https://github.com/darccyy/cttab#cttab"
+                            title='[top_about_title {"link": "https://github.com/darccyy/cttab"}]'
+                            class="lang-tofill bruh"
+                            >[top_about]
+                        </a>
+                    </item>
+                </span>
+
+                <item>
+                    <button
+                        onclick="confettiHandler.start()"
+                        class="icon hidden"
+                        id="confetti"
+                        title="🎉"
+                    >
+                        🎉
+                    </button>
+                </item>
+            </right>
+
+            <button onclick="notes.focus()" class="lang-tofill skip">
+                [skip_focus]
             </button>
-          </item>
+        </header>
 
-          <item>
-            <button
-              onclick="notes.add()"
-              title="[top_note_title]"
-              class="lang-tofill"
-            >
-              [top_note]
-            </button>
-          </item>
+        <main>
+            <contain id="shortcuts"></contain>
 
-          <item>
-            <button
-              onclick="bg.edit()"
-              title="[top_bg_title]"
-              class="lang-tofill"
-            >
-              [top_bg]
-            </button>
-          </item>
+            <contain id="garf" style="display: none">
+                <img id="garf_img" src="#" />
+            </contain>
+        </main>
 
-          <item>
-            <button
-              onclick="sc.editAmount()"
-              title="[top_sc_title]"
-              class="lang-tofill"
-            >
-              [top_sc]
-            </button>
-          </item>
-        </span>
-      </left>
+        <footer>
+            <div class="bgInfo">
+                <button
+                    id="bgInfoButton"
+                    onclick="bg.showInfo()"
+                    class="lang-tofill"
+                    title="[bg_info_button_title]"
+                >
+                    [bg_info_button]
+                </button>
+            </div>
 
-      <button
-        id="header"
-        onclick="header.edit()"
-        title="[header_title]"
-        class="lang-tofill"
-        onclick="header.edit(event)"
-      ></button>
-
-      <right>
-        <span class="seperated">
-          <item>
-            <button
-              onclick="language.switch()"
-              title="[top_lang_title]"
-              class="lang-tofill lang-ignore-text"
-            >
-              🌐<span id="lang_display">--</span>
-            </button>
-          </item>
-
-          <item>
-            <button
-              onclick="ls.export()"
-              span
-              title="[top_export_title]"
-              class="lang-tofill"
-            >
-              [top_export]
-            </button>
-          </item>
-
-          <item>
-            <button tabindex="-1">
-              <input type="file" id="ls-file" onchange="ls.import()" />
-              <span title="[top_import_title]" class="lang-tofill focus">
-                [top_import]
-              </span>
-            </button>
-          </item>
-
-          <item>
-            <button
-              onclick="ls.resetConfirm()"
-              title="[top_reset_title]"
-              class="lang-tofill"
-            >
-              [top_reset]
-            </button>
-          </item>
-
-          <item>
-            <a
-              href="https://github.com/darccyy/cttab#cttab"
-              title='[top_about_title {"link": "https://github.com/darccyy/cttab"}]'
-              class="lang-tofill bruh"
-              >[top_about]
-            </a>
-          </item>
-        </span>
-
-        <item>
-          <button
-            onclick="confettiHandler.start()"
-            class="icon hidden"
-            id="confetti"
-            title="🎉"
-          >
-            🎉
-          </button>
-        </item>
-      </right>
-
-      <button onclick="notes.focus()" class="lang-tofill skip">
-        [skip_focus]
-      </button>
-    </header>
-
-    <main>
-      <contain id="shortcuts"></contain>
-
-      <contain id="garf" style="display: none">
-        <img id="garf_img" src="#" />
-      </contain>
-    </main>
-
-    <footer>
-      <div class="bgInfo">
-        <button
-          id="bgInfoButton"
-          onclick="bg.showInfo()"
-          class="lang-tofill"
-          title="[bg_info_button_title]"
-        >
-          [bg_info_button]
-        </button>
-      </div>
-
-      <div>
-        <a href="https://github.com/darccyy">
-          <span class="lang-tofill">[footer_main]</span>
-          <span title="[footer_name_title]" class="lang-tofill"
-            >[footer_name]</span
-          >
-        </a>
-      </div>
-    </footer>
-  </body>
+            <div>
+                <a href="https://github.com/darccyy">
+                    <span class="lang-tofill">[footer_main]</span>
+                    <span title="[footer_name_title]" class="lang-tofill"
+                        >[footer_name]</span
+                    >
+                </a>
+            </div>
+        </footer>
+    </body>
 </html>
 
 <contain style="display: none; visibility: hidden">
-  <template name="shortcut">
-    <article class="shortcut {empty}" number="{number}">
-      <a
-        href="{href}"
-        title='[sc_title {"name": "{title}", "href": "{href}"}]'
-        class="lang-canfill lang-ignore-text"
-      >
-        <img
-          {src}="{iconHref}"
-          class="{className}"
-          onerror="sc.imageError({number})"
-        />
-        <span class="lang-canfill">{name}</span>
-      </a>
+    <template name="shortcut">
+        <article class="shortcut {empty}" number="{number}">
+            <a
+                href="{href}"
+                title='[sc_title {"name": "{title}", "href": "{href}"}]'
+                class="lang-canfill lang-ignore-text"
+            >
+                <img
+                    {src}="{iconHref}"
+                    class="{className}"
+                    onerror="sc.imageError({number})"
+                />
+                <span class="lang-canfill">{name}</span>
+            </a>
 
-      <button
-        onclick="sc.edit({number})"
-        title="[sc_edit_title]"
-        class="lang-canfill"
-      >
-        <icon class="fa fa-edit"></icon>
-      </button>
-    </article>
-  </template>
+            <button
+                onclick="sc.edit({number})"
+                title="[sc_edit_title]"
+                class="lang-canfill"
+            >
+                <icon class="fa fa-edit"></icon>
+            </button>
+        </article>
+    </template>
 
-  <template name="note">
-    <article class="note" number="{number}">
-      <textarea
-        placeholder="[note_placeholder]"
-        title="[note_title]"
-        oninput="notes.edit({number})"
-        class="lang-canfill"
-        spellcheck="false"
-      >
+    <template name="note">
+        <article class="note" number="{number}">
+            <textarea
+                placeholder="[note_placeholder]"
+                title="[note_title]"
+                oninput="notes.edit({number})"
+                class="lang-canfill"
+                spellcheck="false"
+            >
 {text}</textarea
-      >
+            >
 
-      <button onclick="notes.delete({number})">
-        <icon
-          class="fa fa-trash lang-canfill"
-          title="[note_delete_title]"
-        ></icon>
-      </button>
-    </article>
-  </template>
+            <button onclick="notes.delete({number})">
+                <icon
+                    class="fa fa-trash lang-canfill"
+                    title="[note_delete_title]"
+                ></icon>
+            </button>
+        </article>
+    </template>
 </contain>

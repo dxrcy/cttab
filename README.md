@@ -147,10 +147,10 @@ If you run into any problems, [Submit an Issue](#issues) for this repo and I wil
 
 ## Downloading files
 
-- Download options:
-  - [Bash](#bash) (Linux)
-  - [Powershell](#powershell) (Windows)
-  - [Manually](#download-manually)
+-   Download options:
+    -   [Bash](#bash) (Linux)
+    -   [Powershell](#powershell) (Windows)
+    -   [Manually](#download-manually)
 
 ### Bash
 
