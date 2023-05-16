@@ -139,7 +139,15 @@ Class: `language` (**NOT** `lang`) (`language.js`)
 
 ## Garfield
 
-Toggle the Random Garfield Comic from the button in the top right!
+Choose the API URL for the random Garfield comic.
+
+Date is chosen automatically, and substituted into url with `{YYYY}`, `{MM}`, and `{DD}` string variables.
+
+See [EveryGarf Comic Downloader](https://github.com/darccyy/everygarf) for information on downloading Garfield comics.
+
+- `$` - Use default API [gocomics.com](https://www.gocomics.com/garfield/1978/6/19)
+- Example of online link: `https://darccyy.github.com/garfield/comic/{YYYY}-{MM}-{DD}.png`
+- Example of local link: `file:///home/gangstaperson/Pictures/garfield/{YYYY}-{MM}-{DD}.png`
 
 # Setup
 
