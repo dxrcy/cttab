@@ -131,7 +131,7 @@ Class: `ls` (`ls.js`)
 
 ## Change Language
 
-Choose between **TWO** languages!
+Choose between **TWO** languages! (English and Esperanto)
 
 If you can translate into more languages, please consider [contributing](#contributing) to to this project!
 
@@ -145,7 +145,7 @@ Date is chosen automatically, and substituted into url with `{YYYY}`, `{MM}`, an
 
 See [EveryGarf Comic Downloader](https://github.com/darccyy/everygarf) for information on downloading Garfield comics.
 
-- `$` - Use default API [gocomics.com](https://www.gocomics.com/garfield/1978/6/19)
+- `$` - Use default API ([gocomics.com](https://www.gocomics.com/garfield/1978/6/19))
 - Example of online link: `https://darccyy.github.com/garfield/comic/{YYYY}-{MM}-{DD}.png`
 - Example of local link: `file:///home/gangstaperson/Pictures/garfield/{YYYY}-{MM}-{DD}.png`
 
