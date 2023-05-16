@@ -103,25 +103,10 @@ class header {
         $("#header").text(text);
         $("title").text(text);
 
-        // Advocacy for 𝑩𝒐𝒍𝒔𝒂
-        confettiHandler.hide();
-        var chars = {
-            𝑩: "b",
-            𝑶: "o",
-            𝑳: "l",
-            𝑺: "s",
-            𝑨: "a",
-            𝒃: "𝒃",
-            𝒐: "o",
-            𝒍: "l",
-            𝒔: "s",
-            𝒂: "a",
-        };
-        for (var i in chars) {
-            text = text.split(i).join(chars[i]);
-        }
-        if (["bolsa", "bolso"].includes(text.toLowerCase())) {
+        // Advocacy
+        if (/[bB𝒃𝑩][oO𝒐𝑶][lL𝒍𝑳][sS𝒔𝑺][aAoO𝒐𝑶]/.test(text.toLowerCase())) {
             confettiHandler.show();
+            confettiHandler.start();
         }
     }
 
@@ -225,8 +210,11 @@ class confettiHandler {
         // Settings for confetti.js
         confetti({
             particleCount: 150,
-            origin: { x: 0.5, y: 1 },
-            scalar: 1.7,
+            origin: { x: 0.5, y: -0.05 },
+            scalar: 1.5,
+            startVelocity: 50,
+            spread: 160,
+            ticks: 300,
         });
 
         console.log(language.get("support"));
