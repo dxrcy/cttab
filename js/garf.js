@@ -89,7 +89,7 @@ class garf {
 
         if (mode.length < 1) {
             mode = null;
-        } else if (mode !== "$" && !mode.startsWith("file:")) {
+        } else if (mode !== "$" && !/(file|https?):/.test(mode)) {
             mode = "file:///" + mode;
         }
 
