@@ -149,6 +149,8 @@ See [EveryGarf Comic Downloader](https://github.com/darccyy/everygarf) for infor
 - Example of online link: `https://darccyy.github.com/garfield/comic/{YYYY}-{MM}-{DD}.png`
 - Example of local link: `file:///home/gangstaperson/Pictures/garfield/{YYYY}-{MM}-{DD}.png`
 
+Type `garf.showRecent()` in the terminal to show dates of recent comics!
+
 # Setup
 
 If you run into any problems, [Submit an Issue](#issues) for this repo and I will try to help.
