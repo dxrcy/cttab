@@ -3,6 +3,12 @@
 class garf {
     // Get comic url from date
     static getImageUrl(date, mode) {
+        // Add date to recent dates
+        ls.set(all => {
+            all.cache.garf.recent.unshift(formatDate(date));
+            all.cache.garf.recent = all.cache.garf.recent.slice(0, 5);
+        });
+
         if (mode === "$") {
             return new Promise((resolve, reject) => {
                 fetch(
@@ -30,6 +36,17 @@ class garf {
         }
     }
 
+    // Print recent garfield comic dates cached
+    static showRecent() {
+        let recent = ls.all.cache.garf?.recent || [];
+        if (recent.length > 0) {
+            let list = recent.map((date) => "\n  " + date).join("");
+            console.log(recent.length +  " most recent Garfield comics:" + list);
+        } else {
+            console.log("No recent Garfield comics in cache");
+        }
+    }
+
     // Get random valid date for comic
     static randomDate() {
         var start = new Date("1978-06-19").getTime();
@@ -47,7 +64,7 @@ class garf {
         // Reset cache
         if (!ls.all.cache.garf) {
             ls.set((all) => {
-                all.cache.garf = { time: 0, url: null };
+                all.cache.garf = { time: 0, url: null, recent: [] };
             });
         }
 
@@ -71,7 +88,8 @@ class garf {
 
             // Store cache
             ls.set((all) => {
-                all.cache.garf = { url, time: Date.now() };
+                all.cache.garf.url = url;
+                all.cache.garf.time = Date.now();
             });
 
             $("#garf_img").attr("src", url);

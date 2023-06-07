@@ -30,6 +30,13 @@ class ls {
         init();
     }
 
+    // Reset localStorage CACHE only
+    static resetCache() {
+        ls.set(all => {
+            all.cache = {};
+        });
+    }
+
     // Reset with confirmation box
     static resetConfirm() {
         if (!confirm(language.get("ls_reset"))) {
