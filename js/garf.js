@@ -12,13 +12,26 @@ class garf {
         if (mode === "$") {
             return new Promise((resolve, reject) => {
                 fetch(
-                    "https://api.scraperapi.com?api_key=1ddbd21386871fa6c32ca5a91407c32d&url=https://www.gocomics.com/garfield/" +
+                    // "https://api.scraperapi.com?api_key=1ddbd21386871fa6c32ca5a91407c32d&url=https://www.gocomics.com/garfield/" +
+                    "https://corsproxy.garfieldapp.workers.dev/cors-proxy?https://www.gocomics.com/garfield/" + 
                         formatDate(date, "/"),
                     {
                         method: "GET",
                     },
                 )
-                    .then((res) => res.text())
+                    .then((res) => {
+                        // Handle HTTP error
+                        switch (res.status) {
+                            case 200:
+                                return res.text();
+                                break;
+                            case 401:
+                                throw "API key invalid";
+                                break;
+                            default:
+                                throw "Unknown error"
+                        }
+                    })
                     .then((text) => {
                         var position = text.indexOf(
                             "https://assets.amuniversal.com",
@@ -84,16 +97,20 @@ class garf {
             forceReload
         ) {
             // Fetch url - Random date
-            const url = await garf.getImageUrl(garf.randomDate(), ls.all.garf);
+            try {
+                const url = await garf.getImageUrl(garf.randomDate(), ls.all.garf);
 
-            // Store cache
-            ls.set((all) => {
-                all.cache.garf.url = url;
-                all.cache.garf.time = Date.now();
-            });
+                // Store cache
+                ls.set((all) => {
+                    all.cache.garf.url = url;
+                    all.cache.garf.time = Date.now();
+                });
 
-            $("#garf_img").attr("src", url);
-            $("#garf").css("display", "initial");
+                $("#garf_img").attr("src", url);
+                $("#garf").css("display", "initial");
+            } catch (err) {
+                console.error("Garfield comic failed (Fetching image url)\nReason:", err);
+            }
         }
     }
 
