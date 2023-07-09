@@ -62,8 +62,22 @@ class garf {
 
     // Get random valid date for comic
     static randomDate() {
-        var start = new Date("1978-06-19").getTime();
+        const start = new Date("1978-06-19").getTime();
         return new Date(start + Math.random() * (Date.now() - start));
+    }
+
+    // Get random valid date for comic, which is a Sunday
+    static randomDateSunday() {
+        const date = garf.randomDate();
+        return new Date(date.setDate(date.getDate() - date.getDay()));
+    }
+
+    // Change whether only Sunday comics are shown
+    static setOnlySunday(onlySunday) {
+        ls.set((all) => {
+            all.garf.onlySunday = onlySunday || false;
+        });
+        garf.init();
     }
 
     // Load comic
@@ -92,13 +106,17 @@ class garf {
         // If 1 hour since last refresh
         if (
             !ls.all.cache.garf.url ||
-            ls.all.garf !== "$" ||
+            ls.all.garf.url !== "$" ||
             Date.now() - ls.all.cache.garf.time > 36e5 ||
             forceReload
         ) {
             // Fetch url - Random date
             try {
-                const url = await garf.getImageUrl(garf.randomDate(), ls.all.garf);
+                // Get random date
+                const onlySunday = ls.all.garf.onlySunday || false;
+                const randomDate = onlySunday ? garf.randomDateSunday() : garf.randomDate();
+                // Get url
+                const url = await garf.getImageUrl(randomDate, ls.all.garf.url);
 
                 // Store cache
                 ls.set((all) => {
@@ -116,24 +134,29 @@ class garf {
 
     // Show/hide comic
     static edit() {
-        var mode = prompt(language.get("garf_edit"), ls.all.garf);
+        var url = prompt(language.get("garf_edit"), ls.all.garf.url);
 
-        if (mode === null) {
+        // Skip
+        if (url === null) {
             return;
         }
 
-        if (mode.length < 1) {
-            mode = null;
-        } else if (mode !== "$" && !/(file|https?):/.test(mode)) {
-            mode = "file:///" + mode;
+        if (url.length < 1) {
+            // Reset to default
+            url = null;
+        } else if (url !== "$" && !/(file|https?):/.test(url)) {
+            // Local filepath
+            url = "file:///" + url;
         }
 
         ls.set((all) => {
-            if (all.garf !== mode) {
+            // Reset cache if changed
+            if (all.garf.url !== url) {
                 all.cache.garf = undefined;
             }
 
-            all.garf = mode;
+            // Change url
+            all.garf.url = url;
         });
         garf.init();
     }

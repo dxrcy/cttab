@@ -19,7 +19,7 @@ class ls {
         localStorage.cttab = JSON.stringify({
             lang: "en",
             header: null,
-            garf: null,
+            garf: { url: null, onlySunday: false },
             bg: { color: null, image: null },
             sc: { amount: sc.default, array: {} },
             notes: [""],
