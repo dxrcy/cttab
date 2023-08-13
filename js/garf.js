@@ -50,7 +50,7 @@ class garf {
     }
 
     // Print recent garfield comic dates cached
-    static showRecent() {
+    static recent() {
         let recent = ls.all.cache.garf?.recent || [];
         if (recent.length > 0) {
             let list = recent.map((date) => "\n  " + date).join("");
@@ -84,7 +84,7 @@ class garf {
     static async init(forceReload) {
         // If disabled
         if (ls.all.garf === null) {
-            $("#garf").css("display", "none");
+            garf.hideComic();
             return;
         }
 
@@ -96,11 +96,11 @@ class garf {
         }
 
         // Load cached
-        if (ls.all.cache.garf.url && !forceReload) {
-            $("#garf_img").attr("src", ls.all.cache.garf.url);
-            $("#garf").css("display", "initial");
+        let cache = ls.all.cache.garf;
+        if (cache?.date && cache?.url && !forceReload) {
+            garf.setComic(new Date(cache.date), cache.url);
         } else {
-            $("#garf").css("display", "none");
+            garf.hideComic();
         }
 
         // If 1 hour since last refresh
@@ -114,22 +114,45 @@ class garf {
             try {
                 // Get random date
                 const onlySunday = ls.all.garf.onlySunday || false;
-                const randomDate = onlySunday ? garf.randomDateSunday() : garf.randomDate();
+                const date = onlySunday ? garf.randomDateSunday() : garf.randomDate();
                 // Get url
-                const url = await garf.getImageUrl(randomDate, ls.all.garf.url);
+                const url = await garf.getImageUrl(date, ls.all.garf.url);
 
                 // Store cache
                 ls.set((all) => {
+                    all.cache.garf.date = date;
                     all.cache.garf.url = url;
                     all.cache.garf.time = Date.now();
                 });
 
-                $("#garf_img").attr("src", url);
-                $("#garf").css("display", "initial");
+                garf.setComic(date, url);
             } catch (err) {
                 console.error("Garfield comic failed (Fetching image url)\nReason:", err);
             }
         }
+    }
+
+    // Set src url of comic, and make visible
+    static setComic(date, url) {
+        $("#garf_img").attr("src", url);
+        $("#garf_img").attr("title", formatDate(date));
+        $("#garf").css("display", "initial");
+    }
+    // Hide comic
+    static hideComic() {
+        $("#garf").css("display", "none");
+    }
+
+    // Copy date to clipboard
+    static copyDate() {
+        let date = ls.all.cache.garf?.date;
+        if (!date) {
+            throw "No date cached :(";
+        }
+        date = new Date(date);
+        date = formatDate(date);
+        console.log(date);
+        copy(date);
     }
 
     // Show/hide comic
