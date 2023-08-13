@@ -53,8 +53,8 @@ class garf {
     static recent() {
         let recent = ls.all.cache.garf?.recent || [];
         if (recent.length > 0) {
-            let list = recent.map((date) => "\n  " + date).join("");
-            console.log(recent.length +  " most recent Garfield comics:" + list);
+            let list = recent.join("\n");
+            console.log(recent.length +  " most recent Garfield comics:\n" + list);
         } else {
             console.log("No recent Garfield comics in cache");
         }
