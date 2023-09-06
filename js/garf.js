@@ -5,8 +5,9 @@ class garf {
     static getImageUrl(date, mode) {
         // Add date to recent dates
         ls.set(all => {
+            const MAX_RECENT_DATES = 10;
             all.cache.garf.recent.unshift(formatDate(date));
-            all.cache.garf.recent = all.cache.garf.recent.slice(0, 5);
+            all.cache.garf.recent = all.cache.garf.recent.slice(0, MAX_RECENT_DATES);
         });
 
         if (mode === "$") {
