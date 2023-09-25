@@ -243,7 +243,21 @@ Easier option, but less easy to use long term.
 
 ### Open on new tab (Offline) ⭐
 
+#### Linux
+
+Easy!
+
+Simply run `./install firefox` or `./install librewolf`
+
+This will automate the steps shown below.
+
+#### Windows, or manual Linux
+
 Difficult to set up, but the optimal option overall.
+
+> Note: Copy/pasting of files is done because of Windows' weird permission system.
+> 
+> Linux users can avoid this by running as root (or installing automatically [as shown above](#linux))
 
 1. [Follow instructions to download files](#downloading-files)
 2. Create a text file one your Desktop and name it `autoconfig.cfg`
@@ -262,7 +276,7 @@ AboutNewTab.newTabURL = newTabURL;
 5. Save the file and Copy and Paste it into the root Firefox program folder. You need to copy + paste because the folder usually has permissions that restrict editing of files.
     - For _Windows_ (Firefox): `C:/Program Files/Mozilla Firefox`
     - For _Linux_ (Firefox): `/usr/lib/firefox`
-    - For _Linux_ (LibreWolf): `/usr/share/librewolf`
+    - For _Linux_ (LibreWolf): `/usr/lib/librewolf`
 6. Create a new file called `autoconfig.js` and save it to Desktop
 7. Insert this code:
 

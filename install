@@ -1,0 +1,109 @@
+#!/bin/sh
+
+# Rerun this script as root, if not already
+# Seamlessly prompts sudo password and continues
+if [ "$(id -u)" -ne 0 ]; then
+    echo 'this script requires superuser privileges'
+    echo 'you may be prompted for your sudo password'
+    echo 'required to create files in /usr/lib'
+    echo
+    sudo "$0" "$@"
+    exit $?
+fi
+
+# Get filename of this script, with fallback
+progname="$(basename "$0" || 'cttab-install')"
+
+# First argument: Browser
+# Must be `firefox` or `librewolf`
+browser="$1"
+case "$browser" in
+    # Valid
+    firefox|librewolf) ;;
+    # Invalid - empty or unsupported browser
+    *)
+        echo 'please enter a supported browser name to install for'
+        if [ "$browser" ]; then
+            echo "'$browser' is not supported by this script"
+        fi
+        echo 'options: [ firefox | librewolf ]'
+        echo "    EXAMPLE: $progname firefox <FILEPATH>"
+        exit 1
+        ;;
+esac
+
+# Second argument: Filepath
+# If this script is ran from cttab directory, `./index.html` is used
+filepath="$2"
+if [ ! "$filepath" ]; then
+    # Use relative filepath to current directory
+    filepath_rel="$(pwd)/index.html"
+    if [ -f "$filepath_rel" ]; then
+        filepath="$filepath_rel"
+        echo "NOTE: using $filepath_rel as filepath"
+    else
+        # No filename given or could be inferred
+        echo "please enter the FULL filefilepath to the 'index.html' file"
+        echo "    EXAMPLE: $progname <BROWSER> ~/Documents/cttab/index.html"
+        echo
+        echo "alternatively, run this script from inside your 'cttab' folder"
+        echo "    EXAMPLE: cd ~/Documents/cttab && $progname <BROWSER>"
+        exit 2
+    fi
+fi
+# Replace `~` with full path to home directory
+if [ "${filepath%"${filepath#?}"}" = "~" ]; then
+    filepath="$HOME${filepath#?}"
+fi
+# Check index file exists
+if [ ! -f "$filepath" ]; then
+    echo "cannot find a file at '$filepath'"
+    echo 'please make sure that is the correct filepath'
+    echo "NOTE: do NOT include 'file:///' at the start of the path"
+    echo "    EXAMPLE: $progname <BROWSER> ~/Documents/cttab/index.html"
+    exit 3
+fi
+# Add `file://` prefix to filename
+# Note only 2 extra slashes are needed, as path is already absolute, starting at root
+filepath_full="file://$filepath"
+
+# Path to create all files in
+path="/usr/lib/$browser"
+# Check path exists
+if [ ! -d "$path" ]; then
+    echo "ERROR: cannot find $path"
+    echo 'maybe the selected browser is not installed on your system, or installed in a different directory?'
+    exit 4
+fi
+
+# Files to create
+# autoconfig.cfg
+path_1="$path/autoconfig.cfg"
+file_1="// First line must be comment! Do not delete this line!
+var {classes:Cc,interfaces:Ci,utils:Cu} = Components;
+try { Cu.import(\"resource:///modules/AboutNewTab.jsm\");
+var newTabURL = \"$filepath_full\";
+AboutNewTab.newTabURL = newTabURL;
+} catch(e){Cu.reportError(e);} // report errors in the Browser Console"
+# defaults/pref/autoconfig.cfg
+path_2="$path/defaults/pref/autoconfig.js"
+file_2='// First line must be comment! Do not delete this line!
+pref("general.config.filename", "autoconfig.cfg");
+pref("general.config.obscure_value", 0);
+pref("general.config.sandbox_enabled", false);'
+
+# Create files
+echo "$file_1" > "$path_1" || {
+    echo "ERROR: cannot create file $path_1"
+    exit 5
+}
+echo "$file_2" > "$path_2" || {
+    echo "ERROR: cannot create file $path_2"
+    exit 6
+}
+
+# Success!
+echo
+echo 'successfully created 2 files'
+echo "NOTE: $browser needs to be restarted for changes to be applied"
+
