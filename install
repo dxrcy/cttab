@@ -7,7 +7,7 @@ if [ "$(id -u)" -ne 0 ]; then
     echo 'you may be prompted for your sudo password'
     echo 'required to create files in /usr/lib'
     echo
-    sudo "$0" "$@"
+    sudo sh "$0" "$@"
     exit $?
 fi
 
@@ -106,4 +106,7 @@ echo "$file_2" > "$path_2" || {
 echo
 echo 'successfully created 2 files'
 echo "NOTE: $browser needs to be restarted for changes to be applied"
+echo "NOTE: to apply to new *windows* as well, change this setting:"
+echo "    about:preferences > Home > Homepage and new windows > Custom URLS"
+echo "    to: $filepath"
 
