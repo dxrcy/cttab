@@ -247,7 +247,7 @@ Easier option, but less easy to use long term.
 
 Easy!
 
-Simply run `sh install firefox` or `sh install librewolf`
+Simply run `sh ./install firefox` or `sh ./install librewolf`
 
 This will automate the steps shown below.
 
