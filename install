@@ -30,6 +30,7 @@ if [ ! "$filepath" ]; then
     if [ -f "$filepath_rel" ]; then
         filepath="$filepath_rel"
         echo "NOTE: using $filepath_rel as filepath"
+        echo
     else
         # No filename given or could be inferred
         echo "please enter the FULL filefilepath to the 'index.html' file"
@@ -82,7 +83,6 @@ pref("general.config.obscure_value", 0);
 pref("general.config.sandbox_enabled", false);'
 
 
-echo
 echo 'NOTE: root access is required to create 2 files:'
 echo "    $path_1"
 echo "    $path_2"
