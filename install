@@ -1,16 +1,5 @@
 #!/bin/sh
 
-# Rerun this script as root, if not already
-# Seamlessly prompts sudo password and continues
-if [ "$(id -u)" -ne 0 ]; then
-    echo 'this script requires superuser privileges'
-    echo 'you may be prompted for your sudo password'
-    echo 'required to create files in /usr/lib'
-    echo
-    sudo sh "$0" "$@"
-    exit $?
-fi
-
 # Get filename of this script, with fallback
 progname="$(basename "$0" || 'cttab-install')"
 
@@ -92,19 +81,24 @@ pref("general.config.filename", "autoconfig.cfg");
 pref("general.config.obscure_value", 0);
 pref("general.config.sandbox_enabled", false);'
 
+
+echo
+echo 'NOTE: root access is required to create 2 files:'
+echo "    $path_1"
+echo "    $path_2"
+
 # Create files
-echo "$file_1" > "$path_1" || {
+echo "$file_1" | sudo tee "$path_1" > /dev/null || {
     echo "ERROR: cannot create file $path_1"
     exit 5
 }
-echo "$file_2" > "$path_2" || {
+echo "$file_2" | sudo tee "$path_2" > /dev/null || {
     echo "ERROR: cannot create file $path_2"
     exit 6
 }
 
-# Success!
 echo
-echo 'successfully created 2 files'
+echo 'All good!'
 echo "NOTE: $browser needs to be restarted for changes to be applied"
 echo "NOTE: to apply to new *windows* as well, change this setting:"
 echo "    about:preferences > Home > Homepage and new windows > Custom URLS"
