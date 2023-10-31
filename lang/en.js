@@ -34,11 +34,11 @@ language.data.en = {
     sc_title_default: "Unnamed shortcut",
     sc_edit_title: "Click to edit shortcut",
     sc_edit_url: "URL of Shortcut {number}",
-    sc_edit_name: "Title of Shortcut {number}",
+    sc_edit_name: "Title of shortcut {number}",
     sc_amount_text:
         "How many shortcuts?\nLeave blank to set to default ({default})\nType '0' to remove all",
     sc_amount_invalid:
-        "Can only set a positive integer or zero less than or equal to 60",
+        "Can only set a number between 0 and 60",
 
     note_placeholder: "Click to add notes...",
     note_title: "Click to add notes",
