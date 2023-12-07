@@ -3,7 +3,6 @@
 # Get filename of this script, with fallback
 progname="$(basename "$0" || 'cttab-install')"
 
-# First argument: Browser
 # Must be `firefox` or `librewolf`
 browser="$1"
 case "$browser" in
@@ -17,45 +16,51 @@ case "$browser" in
         fi
         echo 'options: [ firefox | librewolf ]'
         echo "    EXAMPLE: $progname firefox <FILEPATH>"
+        echo 'or uninstall for a browser:'
+        echo "    EXAMPLE: $progname firefox --uninstall"
         exit 1
         ;;
 esac
 
-# Second argument: Filepath
-# If this script is ran from cttab directory, `./index.html` is used
-filepath="$2"
-if [ ! "$filepath" ]; then
-    # Use relative filepath to current directory
-    filepath_rel="$(pwd)/index.html"
-    if [ -f "$filepath_rel" ]; then
-        filepath="$filepath_rel"
-        echo "NOTE: using $filepath_rel as filepath"
-        echo
-    else
-        # No filename given or could be inferred
-        echo "please enter the FULL filefilepath to the 'index.html' file"
-        echo "    EXAMPLE: $progname <BROWSER> ~/Documents/cttab/index.html"
-        echo
-        echo "alternatively, run this script from inside your 'cttab' folder"
-        echo "    EXAMPLE: cd ~/Documents/cttab && $progname <BROWSER>"
-        exit 2
+# Uninstall for a browser
+if [ "$2" = '--uninstall' ] || [ "$1" = '--remove' ]; then
+    uninstall=1
+else
+    # If this script is ran from cttab directory, `./index.html` is used
+    filepath="$2"
+    if [ ! "$filepath" ]; then
+        # Use relative filepath to current directory
+        filepath_rel="$(pwd)/index.html"
+        if [ -f "$filepath_rel" ]; then
+            filepath="$filepath_rel"
+            echo "NOTE: using $filepath_rel as filepath"
+            echo
+        else
+            # No filename given or could be inferred
+            echo "please enter the FULL filefilepath to the 'index.html' file"
+            echo "    EXAMPLE: $progname <BROWSER> ~/Documents/cttab/index.html"
+            echo
+            echo "alternatively, run this script from inside your 'cttab' folder"
+            echo "    EXAMPLE: cd ~/Documents/cttab && $progname <BROWSER>"
+            exit 2
+        fi
     fi
+    # Replace `~` with full path to home directory
+    if [ "${filepath%"${filepath#?}"}" = "~" ]; then
+        filepath="$HOME${filepath#?}"
+    fi
+    # Check index file exists
+    if [ ! -f "$filepath" ]; then
+        echo "cannot find a file at '$filepath'"
+        echo 'please make sure that is the correct filepath'
+        echo "NOTE: do NOT include 'file:///' at the start of the path"
+        echo "    EXAMPLE: $progname <BROWSER> ~/Documents/cttab/index.html"
+        exit 3
+    fi
+    # Add `file://` prefix to filename
+    # Note only 2 extra slashes are needed, as path is already absolute, starting at root
+    filepath_full="file://$filepath"
 fi
-# Replace `~` with full path to home directory
-if [ "${filepath%"${filepath#?}"}" = "~" ]; then
-    filepath="$HOME${filepath#?}"
-fi
-# Check index file exists
-if [ ! -f "$filepath" ]; then
-    echo "cannot find a file at '$filepath'"
-    echo 'please make sure that is the correct filepath'
-    echo "NOTE: do NOT include 'file:///' at the start of the path"
-    echo "    EXAMPLE: $progname <BROWSER> ~/Documents/cttab/index.html"
-    exit 3
-fi
-# Add `file://` prefix to filename
-# Note only 2 extra slashes are needed, as path is already absolute, starting at root
-filepath_full="file://$filepath"
 
 # Path to create all files in
 path="/usr/lib/$browser"
@@ -83,19 +88,42 @@ pref("general.config.obscure_value", 0);
 pref("general.config.sandbox_enabled", false);'
 
 
-echo 'NOTE: root access is required to create 2 files:'
+action='create'
+[ -n "$uninstall" ] && action='remove'
+echo "NOTE: root access is required to $action 2 files:"
 echo "    $path_1"
 echo "    $path_2"
 
-# Create files
-echo "$file_1" | sudo tee "$path_1" > /dev/null || {
-    echo "ERROR: cannot create file $path_1"
-    exit 5
-}
-echo "$file_2" | sudo tee "$path_2" > /dev/null || {
-    echo "ERROR: cannot create file $path_2"
-    exit 6
-}
+if [ -z "$uninstall" ]; then
+    # Create files
+    echo "$file_1" | sudo tee "$path_1" > /dev/null || {
+        echo "ERROR: cannot create file $path_1"
+        exit 5
+    }
+    echo "$file_2" | sudo tee "$path_2" > /dev/null || {
+        echo "ERROR: cannot create file $path_2"
+        exit 6
+    }
+else
+    # Remove files
+    if [ ! -e "$path_1" ] && [ ! -e "$path_1" ]; then
+        echo
+        echo 'WARNING: no files to remove!'
+        exit 0
+    fi
+    if [ -e "$path_1" ]; then
+        sudo rm "$path_1" || {
+            echo "ERROR: cannot remove file $path_1"
+            exit 7
+        }
+    fi
+    if [ -e "$path_2" ]; then
+        sudo rm "$path_2" || {
+            echo "ERROR: cannot remove file $path_2"
+            exit 8
+        }
+    fi
+fi
 
 echo
 echo 'All good!'
