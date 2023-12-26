@@ -158,7 +158,7 @@ class garf {
 
     // Show/hide comic
     static edit() {
-        var url = prompt(language.get("garf_edit"), ls.all.garf.url);
+        var url = prompt(language.get("garf_edit"), ls.all.garf.url ?? "");
 
         // Skip
         if (url === null) {

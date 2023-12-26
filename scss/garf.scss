@@ -2,18 +2,25 @@
 
 // Garfield
 #garf {
+    $border-radius: 10px;
+
     float: left;
-    max-height: 200px;
-    max-width: 600px;
+    // max-height: 200px;
+    width: min(600px, calc(100% - 25px));
     margin: 0 10px;
     margin-right: 0;
     border: 2px solid #509191;
-    border-radius: 10px;
+    // border-radius: $border-radius;
     background-color: #111;
 
+    background-color: red;
+
     img {
-        max-width: 100%;
-        max-height: 100%;
-        border-radius: 7.5px;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        // height: calc(100% + 50px);
+        // width: calc(100% - 5px);
+        border-radius: #{$border_radius * 0.75};
     }
 }
