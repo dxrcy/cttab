@@ -13,8 +13,7 @@ class garf {
         if (mode === "$") {
             return new Promise((resolve, reject) => {
                 fetch(
-                    // "https://api.scraperapi.com?api_key=1ddbd21386871fa6c32ca5a91407c32d&url=https://www.gocomics.com/garfield/" +
-                    "https://corsproxy.garfieldapp.workers.dev/cors-proxy?https://www.gocomics.com/garfield/" + 
+                    "https://proxy.darcy-700.workers.dev/cors-proxy?https://www.gocomics.com/garfield/" + 
                         formatDate(date, "/"),
                     {
                         method: "GET",
