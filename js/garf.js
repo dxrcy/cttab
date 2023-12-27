@@ -136,7 +136,7 @@ class garf {
     static setComic(date, url) {
         $("#garf_img").attr("src", url);
         $("#garf_img").attr("title", formatDate(date));
-        $("#garf").css("display", "initial");
+        $("#garf").css("display", "inline-block");
     }
     // Hide comic
     static hideComic() {
