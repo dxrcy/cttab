@@ -83,7 +83,7 @@ class garf {
     // Load comic
     static async init(forceReload) {
         // If disabled
-        if (ls.all.garf === null) {
+        if (ls.all.garf.url === null) {
             garf.hideComic();
             return;
         }
@@ -97,7 +97,7 @@ class garf {
 
         // Load cached
         let cache = ls.all.cache.garf;
-        if (cache?.date && cache?.url && !forceReload) {
+        if (cache?.date && cache?.url && !forceReload && ls.all.garf.url === "$") {
             garf.setComic(new Date(cache.date), cache.url);
         } else {
             garf.hideComic();
