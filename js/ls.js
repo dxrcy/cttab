@@ -22,7 +22,7 @@ class ls {
             garf: { url: null, onlySunday: false },
             bg: { color: null, image: null },
             sc: { amount: sc.default, array: {} },
-            notes: [""],
+            notes: [],
             cache: {},
             // search: null, //? What is this ?
         });

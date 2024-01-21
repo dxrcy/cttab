@@ -2,7 +2,7 @@
 
 class sc {
     // Default number of shortcuts shown
-    static default = 24;
+    static default = 18;
 
     // Initialize shortcuts
     //TODO Add comments
