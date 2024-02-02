@@ -4,7 +4,7 @@ The easiest Custom New Tab page for the browser!
 
 The '_CT_' in the name stands for '_Custom Tab_' :)
 
-**Check it out**: [CTTab Website](https://darccyy.github.io/cttab)
+**Check it out**: [CTTab Website](https://dxrcy.github.io/cttab)
 
 Works on Firefox, Chrome, and possibly more!
 
@@ -92,7 +92,7 @@ This represents the following:
 
 Add the URL of multiple local image files, or online links to images, separated by a space.
 
-Eg. `C:/Desktop/troll_face.jpg https://darccyy.github.io/cttab/image/icon/256.png $`
+Eg. `C:/Desktop/troll_face.jpg https://dxrcy.github.io/cttab/image/icon/256.png $`
 
 To use _Image of the Day_ from the _NASA API_, set the background image to `$`, and it will be automatically fetched. Use 'Image Info' button above footer to view the description.
 
@@ -143,10 +143,10 @@ Choose the API URL for the random Garfield comic.
 
 Date is chosen automatically, and substituted into url with `{YYYY}`, `{MM}`, and `{DD}` string variables.
 
-See [EveryGarf Comic Downloader](https://github.com/darccyy/everygarf) for information on downloading Garfield comics.
+See [EveryGarf Comic Downloader](https://github.com/dxrcy/everygarf) for information on downloading Garfield comics.
 
 - `$` - Use default API ([gocomics.com](https://www.gocomics.com/garfield/1978/6/19))
-- Example of online link: `https://darccyy.github.com/garfield/comic/{YYYY}-{MM}-{DD}.png`
+- Example of online link: `https://dxrcy.github.com/garfield/comic/{YYYY}-{MM}-{DD}.png`
 - Example of local link: `file:///home/gangstaperson/Pictures/garfield/{YYYY}-{MM}-{DD}.png`
 
 Type `garf.showRecent()` in the terminal to show dates of recent comics!
@@ -171,7 +171,7 @@ Make sure you have [Git](https://git-scm.com/downloads) installed.
 cd ~/Documents
 
 # Clone repository as ./cttab folder in current location, navigate into folder
-git clone https://github.com/darccyy/cttab.git
+git clone https://github.com/dxrcy/cttab.git
 cd cttab
 
 # Delete GitHub files
@@ -191,7 +191,7 @@ Make sure you have [Git](https://git-scm.com/downloads) installed.
 cd C:/Users/$env:UserName/Documents
 
 # Clone repository as ./cttab folder in current location, navigate into folder
-git clone https://github.com/darccyy/cttab.git
+git clone https://github.com/dxrcy/cttab.git
 cd cttab
 
 # Delete GitHub files
@@ -208,7 +208,7 @@ Follow the steps below to open automatically (Below manual download)
 
 This has been tested in Windows 10, but it should work with systems.
 
-1. Open a browser to [https://github.com/darccyy/cttab](https://github.com/darccyy/cttab)
+1. Open a browser to [https://github.com/dxrcy/cttab](https://github.com/dxrcy/cttab)
 2. Click the bright green 'Code' button
 3. Click 'Download ZIP'
 4. Save to a location on your computer
@@ -227,7 +227,7 @@ These methods also work with Firefox forks such as LibreWolf.
 2. Click 'Options' from the drop-down menu
 3. Select 'Home' on the left panel
 4. Beside 'Homepage and new windows', select 'Custom URLs' from the list.
-5. Input 'https://darccyy.github.io/cttab' in the text box
+5. Input 'https://dxrcy.github.io/cttab' in the text box
 
 ### Open on new tab (Online)
 
@@ -238,7 +238,7 @@ Easier option, but less easy to use long term.
 3. Press 'Addons and Themes' from the drop-down menu
 4. Find and click 'Custom New Tab Page' from the list
 5. Click 'Options' on the top bar under the name
-6. Input 'https://darccyy.github.io/cttab' in the text box
+6. Input 'https://dxrcy.github.io/cttab' in the text box
 7. Scroll down and press 'Save'
 
 ### Open on new tab (Offline) ⭐
@@ -299,7 +299,7 @@ To open on a new window, follow the steps under the above guide, with the file p
 
 1. Download 'New Tab Redirect' from Chrome Web Store
 2. Click on the icon and press 'Options'
-3. Type the url ('https://darccyy.github.io/cttab') in the text box
+3. Type the url ('https://dxrcy.github.io/cttab') in the text box
 
 ### Open on new tab (Offline)
 
@@ -331,7 +331,7 @@ If you run into any problems, [Submit an Issue](#issues) for this repo and I wil
 cd ~/Documents
 
 # Clone repository as ./cttab folder in current location, navigate into folder
-git clone https://github.com/darccyy/cttab.git
+git clone https://github.com/dxrcy/cttab.git
 cd cttab
 
 # ... make an awesome change to the files ...
@@ -346,10 +346,10 @@ git push -u origin main
 
 # Issues
 
-[Submit an Issue](https://github.com/darccyy/cttab/issues/new/choose) - Choose a template and follow the steps - I will try to fix it as soon as possible
+[Submit an Issue](https://github.com/dxrcy/cttab/issues/new/choose) - Choose a template and follow the steps - I will try to fix it as soon as possible
 
 [TODO List](./TODO.md) - View issues being worked on
 
 <img src="./image/icon/512.png" alt="Pink and cyan icon reading 'CTTab'" title="Really cool icon!" />
 
-[Made by darcy](https://github.com/darccyy)
+[Made by darcy](https://github.com/dxrcy)

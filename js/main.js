@@ -1,4 +1,4 @@
-//* DOCUMENTATION - https://github.com/darccyy/cttab#cttab
+//* DOCUMENTATION - https://github.com/dxrcy/cttab#cttab
 //* Main script file - Global functions and small classes
 
 // Reload all states - Only on page load
