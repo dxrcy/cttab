@@ -66,21 +66,22 @@ header {
         }
     }
 
-    left,
-    right {
+    .left,
+    .right {
         position: fixed;
         top: 7px;
         z-index: 60;
 
-        .seperated {
-            item:not(:last-of-type)::after {
+        .separated {
+            .item:not(:last-of-type)::after {
                 content: "|";
                 display: inline-block;
                 margin: 0 10px 0 15px;
             }
         }
 
-        item {
+        .item {
+            display: inline;
             color: #aaa;
 
             button,
@@ -152,11 +153,11 @@ header {
         }
     }
 
-    left {
+    .left {
         left: 7px;
     }
 
-    right {
+    .right {
         right: 7px;
     }
 }
