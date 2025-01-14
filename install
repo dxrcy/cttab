@@ -1,73 +1,112 @@
 #!/bin/sh
+# https://github.com/dxrcy/cttab
 
 # Get filename of this script, with fallback
 progname="$(basename "$0" || 'cttab-install')"
 
-# Must be `firefox` or `librewolf`
+color() {
+    [ -t 1 ] || return # Only print color if stdout is a terminal
+    # Use built-in printf, for Unicode support with narrowly-compliant shells
+    /bin/printf '\033[%sm' "$1";
+}
+
+RESET=0
+RED=31
+GREEN=32
+YELLOW=33
+BLUE=34
+
+cleanup() { color "$RESET"; }
+trap cleanup EXIT
+
 browser="$1"
+path=''
 case "$browser" in
     # Valid
-    firefox|librewolf) ;;
+    firefox)   path='/usr/lib/firefox' ;;
+    librewolf) path='/usr/lib/librewolf' ;;
+    zen)       path='/opt/zen-browser-bin' ;;
+    floorp)    path='/opt/floorp' ;;
     # Invalid - empty or unsupported browser
     *)
-        echo 'please enter a supported browser name to install for'
-        if [ "$browser" ]; then
-            echo "'$browser' is not supported by this script"
-        fi
-        echo 'options: [ firefox | librewolf ]'
-        echo "    EXAMPLE: $progname firefox <FILEPATH>"
-        echo 'or uninstall for a browser:'
-        echo "    EXAMPLE: $progname firefox --uninstall"
+        case "$browser" in # if (browser == "" or browser[0] == '-')
+            ''|-*)
+                color "$RED"
+                echo 'missing browser name'
+                ;;
+            *)
+                color "$RED"
+                echo "unsupported browser: '$browser'"
+            ;;
+        esac
+        color "$YELLOW"
+        echo '    please enter the name of the browser for which to install:'
+        color "$BLUE"
+        echo '        supported browsers: firefox, librewolf, zen, floorp'
+        color "$BLUE"
+        echo "        $progname firefox <FILEPATH>"
+        color "$YELLOW"
+        echo '    or to uninstall for a browser:'
+        color "$BLUE"
+        echo "        $progname firefox --uninstall"
         exit 1
         ;;
 esac
 
 # Uninstall for a browser
-if [ "$2" = '--uninstall' ] || [ "$1" = '--remove' ]; then
+if [ "$2" = '--uninstall' ]; then
     uninstall=1
 else
-    # If this script is ran from cttab directory, `./index.html` is used
     filepath="$2"
-    if [ ! "$filepath" ]; then
-        # Use relative filepath to current directory
-        filepath_rel="$(pwd)/index.html"
-        if [ -f "$filepath_rel" ]; then
-            filepath="$filepath_rel"
-            echo "NOTE: using $filepath_rel as filepath"
-            echo
-        else
-            # No filename given or could be inferred
-            echo "please enter the FULL filefilepath to the 'index.html' file"
-            echo "    EXAMPLE: $progname <BROWSER> ~/Documents/cttab/index.html"
-            echo
-            echo "alternatively, run this script from inside your 'cttab' folder"
-            echo "    EXAMPLE: cd ~/Documents/cttab && $progname <BROWSER>"
-            exit 2
-        fi
-    fi
+    # Remove `file://` prefix
+    filepath="${filepath#file://}"
     # Replace `~` with full path to home directory
     if [ "${filepath%"${filepath#?}"}" = "~" ]; then
         filepath="$HOME${filepath#?}"
     fi
-    # Check index file exists
-    if [ ! -f "$filepath" ]; then
-        echo "cannot find a file at '$filepath'"
-        echo 'please make sure that is the correct filepath'
-        echo "NOTE: do NOT include 'file:///' at the start of the path"
-        echo "    EXAMPLE: $progname <BROWSER> ~/Documents/cttab/index.html"
-        exit 3
+    # Make path absolute
+    filepath="$(realpath -- "$filepath" 2> /dev/null)"
+    # Append `index.html` if path is directory and child exists
+    if [ -d "$filepath" ] && [ -f "$filepath/index.html" ]; then
+        filepath="$filepath/index.html"
     fi
-    # Add `file://` prefix to filename
-    # Note only 2 extra slashes are needed, as path is already absolute, starting at root
-    filepath_full="file://$filepath"
+
+    # Check index file exists
+    if [ ! "$filepath" ] || [ ! -f "$filepath" ]; then
+        color "$RED"
+        if [ ! "$filepath" ];
+            then echo "missing filepath"
+            else echo "cannot find file at $filepath"
+        fi
+        color "$YELLOW"
+        echo "    please enter the full filepath to the 'index.html' file:"
+        color "$BLUE"
+        echo "        $progname <BROWSER> ~/Documents/cttab/index.html"
+        color "$YELLOW"
+        echo "    or run this script from inside the 'cttab' directory:"
+        color "$BLUE"
+        echo "        cd ~/Documents/cttab && $progname <BROWSER> ."
+        if [ ! "$filepath" ];
+            then exit 2
+            else exit 3
+        fi
+    fi
+
+    color "$YELLOW"
+    echo "using absolute filepath: $filepath"
+    color "$RESET"
 fi
 
 # Path to create all files in
-path="/usr/lib/$browser"
 # Check path exists
 if [ ! -d "$path" ]; then
-    echo "ERROR: cannot find $path"
-    echo 'maybe the selected browser is not installed on your system, or installed in a different directory?'
+    color "$RED"
+    echo "cannot find install directory $path"
+    color "$BLUE"
+    echo '    please make sure that is the correct filepath'
+    echo '    maybe the selected browser is not installed on your system, or installed in'
+    echo '        a different directory?'
+    echo '    note that not all Firefox-based browsers use the same install directory'
     exit 4
 fi
 
@@ -77,7 +116,7 @@ path_1="$path/autoconfig.cfg"
 file_1="// First line must be comment! Do not delete this line!
 var {classes:Cc,interfaces:Ci,utils:Cu} = Components;
 try { Cu.import(\"resource:///modules/AboutNewTab.jsm\");
-var newTabURL = \"$filepath_full\";
+var newTabURL = \"file://$filepath\";
 AboutNewTab.newTabURL = newTabURL;
 } catch(e){Cu.reportError(e);} // report errors in the Browser Console"
 # defaults/pref/autoconfig.cfg
@@ -87,48 +126,65 @@ pref("general.config.filename", "autoconfig.cfg");
 pref("general.config.obscure_value", 0);
 pref("general.config.sandbox_enabled", false);'
 
-
 action='create'
 [ -n "$uninstall" ] && action='remove'
-echo "NOTE: root access is required to $action 2 files:"
+color "$YELLOW"
+echo "root access is required to $action 2 files:"
+color "$BLUE"
 echo "    $path_1"
 echo "    $path_2"
+color "$RESET"
 
 if [ -z "$uninstall" ]; then
     # Create files
-    echo "$file_1" | sudo tee "$path_1" > /dev/null || {
-        echo "ERROR: cannot create file $path_1"
+    if [ -e "$path_1" ] || [ -e "$path_1" ]; then
+        color "$YELLOW"
+        echo 'overwriting existing files'
+    fi
+    if ! echo "$file_1" | sudo tee "$path_1" > /dev/null; then
+        color "$RED"
+        echo "cannot create file $path_1"
         exit 5
-    }
-    echo "$file_2" | sudo tee "$path_2" > /dev/null || {
-        echo "ERROR: cannot create file $path_2"
+    fi
+    if ! echo "$file_2" | sudo tee "$path_2" > /dev/null; then
+        color "$RED"
+        echo "cannot create file $path_2"
         exit 6
-    }
+    fi
 else
     # Remove files
     if [ ! -e "$path_1" ] && [ ! -e "$path_1" ]; then
-        echo
-        echo 'WARNING: no files to remove!'
+        color "$GREEN"
+        echo '** already uninstalled **'
         exit 0
     fi
     if [ -e "$path_1" ]; then
-        sudo rm "$path_1" || {
-            echo "ERROR: cannot remove file $path_1"
+        if ! sudo rm "$path_1" > /dev/null; then
+            color "$RED"
+            echo "cannot remove file $path_1"
             exit 7
-        }
+        fi
     fi
     if [ -e "$path_2" ]; then
-        sudo rm "$path_2" || {
-            echo "ERROR: cannot remove file $path_2"
+        if ! sudo rm "$path_2" > /dev/null; then
+            color "$RED"
+            echo "cannot remove file $path_2"
             exit 8
-        }
+        fi
     fi
 fi
 
-echo
-echo 'All good!'
-echo "NOTE: $browser needs to be restarted for changes to be applied"
-echo "NOTE: to apply to new *windows* as well, change this setting:"
-echo "    about:preferences > Home > Homepage and new windows > Custom URLS"
-echo "    to: $filepath"
+color "$GREEN"
+if [ -z "$uninstall" ];
+    then echo '** successfully installed **'
+    else echo '** successfully uninstalled **'
+fi
+color "$YELLOW"
+echo "hint: $browser needs to be restarted for changes to be applied"
+if [ -z "$uninstall" ]; then
+    echo "hint: to apply to new *windows* as well, change this setting:"
+    color "$BLUE"
+    echo "    about:preferences > Home > Homepage and new windows > Custom URLS"
+    echo "    to: $filepath"
+fi
 
