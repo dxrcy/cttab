@@ -157,7 +157,7 @@ class bg {
                     const text = await fetch(
                         `https://api.nasa.gov/planetary/apod?date=${bg.getYesterday()}&api_key=${bg.api_key}`,
                     );
-                    const { url, explanation: info } = await text.json();
+                    const { hdurl: url, explanation: info } = await text.json();
 
                     // Not an image -- don't override data from last successful request
                     if (url == undefined) {
