@@ -1,6 +1,8 @@
 //* Background
 
 class bg {
+    static api_key = "quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh";
+
     // Default background color
     static default = "#202038";
     // Current background color (if defined)
@@ -58,8 +60,8 @@ class bg {
                 !colors || colors.length === 0
                     ? null
                     : colors.length === 1
-                    ? colors[0]
-                    : randomChoice(colors);
+                        ? colors[0]
+                        : randomChoice(colors);
             // Select default color with dollar
             if (color === "$") {
                 color = bg.default;
@@ -68,13 +70,13 @@ class bg {
             // Parse random color
             if (isRandom) {
                 var settings = {
-                        h0: 0,
-                        h1: 360,
-                        s0: 0,
-                        s1: 100,
-                        v0: 0,
-                        v1: 100,
-                    },
+                    h0: 0,
+                    h1: 360,
+                    s0: 0,
+                    s1: 100,
+                    v0: 0,
+                    v1: 100,
+                },
                     weight = 1,
                     isAbsoluteWeight = false;
                 for (var i in random) {
@@ -152,11 +154,15 @@ class bg {
                     forceReload
                 ) {
                     // Fetch url
-                    const { url, explanation: info } = await (
-                        await fetch(
-                            `https://api.nasa.gov/planetary/apod?date=${bg.getYesterday()}&api_key=quLlK0afxZFg8YQX7FlfafLlgd5L46oAFyJA7EGh`,
-                        )
-                    ).json();
+                    const text = await fetch(
+                        `https://api.nasa.gov/planetary/apod?date=${bg.getYesterday()}&api_key=${bg.api_key}`,
+                    );
+                    const { url, explanation: info } = await text.json();
+
+                    // Not an image -- don't override data from last successful request
+                    if (url == undefined) {
+                        return;
+                    }
 
                     // Store cache
                     ls.set((all) => {
@@ -188,8 +194,8 @@ class bg {
         alert(
             ls.all.cache?.nasa?.info
                 ? language.get("bg_info_alert", {
-                      info: ls.all.cache.nasa.info,
-                  })
+                    info: ls.all.cache.nasa.info,
+                })
                 : language.get("bg_info_none"),
         );
     }
@@ -226,7 +232,7 @@ class bg {
             value = prompt(
                 language.get("bg_image"),
                 ls.all.bg.image ||
-                    "https://example.com/image.jpeg C:/path/image.jpeg nasa",
+                "https://example.com/image.jpeg C:/path/image.jpeg nasa",
             );
         } else {
             return;
