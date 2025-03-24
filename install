@@ -16,8 +16,29 @@ GREEN=32
 YELLOW=33
 BLUE=34
 
+EXIT_CLI=1  # Invalid CLI arguments
+EXIT_FILE=2 # Invalid file path
+EXIT_FAIL=3 # Failed on a fs operation
+
 cleanup() { color "$RESET"; }
 trap cleanup EXIT
+
+explain_filename_arg() {
+    color $YELLOW
+    echo "    please enter the full filepath to the 'index.html' file:"
+    color $BLUE
+    echo "        $progname <BROWSER> ~/Documents/cttab/index.html"
+    color $YELLOW
+    echo "    or run this script from inside the 'cttab' directory:"
+    color $BLUE
+    echo "        cd ~/Documents/cttab && $progname <BROWSER> ."
+}
+explain_uninstall_arg() {
+    color $YELLOW
+    echo '    or to uninstall for a browser:'
+    color $BLUE
+    echo "        $progname firefox --uninstall"
+}
 
 browser="$1"
 path=''
@@ -29,29 +50,36 @@ case "$browser" in
     floorp)    path='/opt/floorp' ;;
     # Invalid - empty or unsupported browser
     *)
+        color $RED
         case "$browser" in # if (browser == "" or browser[0] == '-')
-            ''|-*)
-                color "$RED"
-                echo 'missing browser name'
-                ;;
-            *)
-                color "$RED"
-                echo "unsupported browser: '$browser'"
-            ;;
+            ''|-*) echo 'missing browser name' ;;
+            *) echo "unsupported browser: '$browser'" ;;
         esac
-        color "$YELLOW"
+        color $YELLOW
         echo '    please enter the name of the browser for which to install:'
-        color "$BLUE"
+        color $BLUE
         echo '        supported browsers: firefox, librewolf, zen, floorp'
-        color "$BLUE"
+        color $BLUE
         echo "        $progname firefox <FILEPATH>"
-        color "$YELLOW"
-        echo '    or to uninstall for a browser:'
-        color "$BLUE"
-        echo "        $progname firefox --uninstall"
-        exit 1
+        explain_uninstall_arg
+        exit $EXIT_CLI
         ;;
 esac
+
+if [ -z "$2" ]; then
+    color $RED
+    echo 'missing filepath or `--uninstall` option'
+    explain_filename_arg
+    explain_uninstall_arg
+    exit $EXIT_CLI
+fi
+if [ -n "$3" ]; then
+    color $RED
+    echo 'too many arguments'
+    color $YELLOW
+    echo '    expected 2 arguments'
+    exit $EXIT_CLI
+fi
 
 # Uninstall for a browser
 if [ "$2" = '--uninstall' ]; then
@@ -73,52 +101,41 @@ else
 
     # Check index file exists
     if [ ! "$filepath" ] || [ ! -f "$filepath" ]; then
-        color "$RED"
-        if [ ! "$filepath" ];
-            then echo "missing filepath"
-            else echo "cannot find file at $filepath"
-        fi
-        color "$YELLOW"
-        echo "    please enter the full filepath to the 'index.html' file:"
-        color "$BLUE"
-        echo "        $progname <BROWSER> ~/Documents/cttab/index.html"
-        color "$YELLOW"
-        echo "    or run this script from inside the 'cttab' directory:"
-        color "$BLUE"
-        echo "        cd ~/Documents/cttab && $progname <BROWSER> ."
-        if [ ! "$filepath" ];
-            then exit 2
-            else exit 3
-        fi
+        color $RED
+        echo "cannot find file at $filepath"
+        explain_filename_arg
+        exit $EXIT_FILE
     fi
 
-    color "$YELLOW"
+    color $YELLOW
     echo "using absolute filepath: $filepath"
-    color "$RESET"
+    color $RESET
 fi
 
 # Path to create all files in
 # Check path exists
 if [ ! -d "$path" ]; then
-    color "$RED"
+    color $RED
     echo "cannot find install directory $path"
-    color "$BLUE"
+    color $BLUE
     echo '    please make sure that is the correct filepath'
     echo '    maybe the selected browser is not installed on your system, or installed in'
     echo '        a different directory?'
     echo '    note that not all Firefox-based browsers use the same install directory'
-    exit 4
+    exit $EXIT_FILE
 fi
 
 # Files to create
 # autoconfig.cfg
 path_1="$path/autoconfig.cfg"
 file_1="// First line must be comment! Do not delete this line!
-var {classes:Cc,interfaces:Ci,utils:Cu} = Components;
-try { Cu.import(\"resource:///modules/AboutNewTab.jsm\");
-var newTabURL = \"file://$filepath\";
-AboutNewTab.newTabURL = newTabURL;
-} catch(e){Cu.reportError(e);} // report errors in the Browser Console"
+var { utils } = Components;
+try {
+    ChromeUtils.defineESModuleGetters(this, {
+        AboutNewTab: \"resource:///modules/AboutNewTab.sys.mjs\",
+    });
+    AboutNewTab.newTabURL = \"file://$filepath\";
+} catch (e) { utils.reportError(e); }"
 # defaults/pref/autoconfig.cfg
 path_2="$path/defaults/pref/autoconfig.js"
 file_2='// First line must be comment! Do not delete this line!
@@ -128,63 +145,65 @@ pref("general.config.sandbox_enabled", false);'
 
 action='create'
 [ -n "$uninstall" ] && action='remove'
-color "$YELLOW"
+color $YELLOW
 echo "root access is required to $action 2 files:"
-color "$BLUE"
+color $BLUE
 echo "    $path_1"
 echo "    $path_2"
-color "$RESET"
+color $RESET
 
 if [ -z "$uninstall" ]; then
     # Create files
     if [ -e "$path_1" ] || [ -e "$path_1" ]; then
-        color "$YELLOW"
+        color $YELLOW
         echo 'overwriting existing files'
+        color $RESET
     fi
     if ! echo "$file_1" | sudo tee "$path_1" > /dev/null; then
-        color "$RED"
+        color $RED
         echo "cannot create file $path_1"
-        exit 5
+        exit $EXIT_FAIL
     fi
     if ! echo "$file_2" | sudo tee "$path_2" > /dev/null; then
-        color "$RED"
+        color $RED
         echo "cannot create file $path_2"
-        exit 6
+        exit $EXIT_FAIL
     fi
 else
     # Remove files
     if [ ! -e "$path_1" ] && [ ! -e "$path_1" ]; then
-        color "$GREEN"
+        color $GREEN
         echo '** already uninstalled **'
-        exit 0
+        exit $EXIT_FAIL
     fi
     if [ -e "$path_1" ]; then
         if ! sudo rm "$path_1" > /dev/null; then
-            color "$RED"
+            color $RED
             echo "cannot remove file $path_1"
-            exit 7
+            exit $EXIT_FAIL
         fi
     fi
     if [ -e "$path_2" ]; then
         if ! sudo rm "$path_2" > /dev/null; then
-            color "$RED"
+            color $RED
             echo "cannot remove file $path_2"
-            exit 8
+            exit $EXIT_FAIL
         fi
     fi
 fi
 
-color "$GREEN"
+color $GREEN
 if [ -z "$uninstall" ];
     then echo '** successfully installed **'
     else echo '** successfully uninstalled **'
 fi
-color "$YELLOW"
+color $YELLOW
 echo "hint: $browser needs to be restarted for changes to be applied"
 if [ -z "$uninstall" ]; then
     echo "hint: to apply to new *windows* as well, change this setting:"
-    color "$BLUE"
+    color $BLUE
     echo "    about:preferences > Home > Homepage and new windows > Custom URLS"
     echo "    to: $filepath"
 fi
+
 
